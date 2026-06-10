@@ -7,8 +7,8 @@ export class MessageStore {
   messages = observable.map<number, message>();
   draft = observable.box<string>("");
 
-  sendMessages = (text: string) => {
-    const trimmedText = text.trim();
+  sendMessages = () => {
+    const trimmedText = this.draft.get().trim();
     if (!trimmedText) return;
 
     runInAction(() => {

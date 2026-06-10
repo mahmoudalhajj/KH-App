@@ -17,15 +17,6 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
     const totalItems = cartStore.getTotalItems();
     const totalPrice = cartStore.getTotalPrice();
 
-    const handleAddItem = () => {
-        cartStore.setCartItem({
-            id: Date.now(),
-            name: cartStore.itemName.get(),
-            price: Number(cartStore.itemPrice.get()),
-            quantity: Number(cartStore.itemQuantity.get()),
-        });
-    };
-
     return (
         <View style={styles.container}>
             <Text style={styles.label}>
@@ -71,7 +62,7 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
             <View style={styles.buttonRow}>
                 <Pressable
                     style={styles.button}
-                    onPress={handleAddItem}
+                    onPress={cartStore.addItem}
                 >
                     <Text style={styles.buttonText}>
                         Add Item

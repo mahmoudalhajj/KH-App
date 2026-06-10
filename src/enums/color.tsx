@@ -1,10 +1,10 @@
 export enum Colors {
-  primary = "#0070f3",
-  secondary = "#1a1a1a",
-  background = "#ffffff",
-  error = "#ff0000",
-  success = "#00ff00",
-  warning = "#ffa500",
+  PRIMARY = "#0070f3",
+  SECONDARY = "#1a1a1a",
+  BACKGROUND = "#ffffff",
+  ERROR = "#ff0000",
+  SUCCESS = "#00ff00",
+  WARNING = "#ffa500",
 }
 
 

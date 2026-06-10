@@ -27,9 +27,7 @@ const Chatting = observer(() => {
     }
   }, [messages.length]);
 
-  const handleSend = () => {
-    messageStore.sendMessages(messageStore.getDraft());
-  };
+
 
   return (
     <View style={styles.container}>
@@ -86,9 +84,9 @@ const Chatting = observer(() => {
             value={draft}
             onChangeText={(text) => messageStore.setDraft(text)}
             multiline
-            onSubmitEditing={handleSend}
+            onSubmitEditing={messageStore.sendMessages}
           />
-          <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
+          <TouchableOpacity style={styles.sendButton} onPress={messageStore.sendMessages}>
             <Text style={styles.sendButtonText}>Send</Text>
           </TouchableOpacity>
         </View>

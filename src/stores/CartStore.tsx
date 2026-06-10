@@ -106,6 +106,48 @@ loadStoredCart() {
   });
 }
 
+addItem = () => {
+    const name = this.itemName.get().trim();
+    const price = Number(this.itemPrice.get());
+    const quantity = Number(this.itemQuantity.get());
+
+    if (!name || !price || !quantity) {
+        this.setError("All values required.");
+        return;
+    }
+
+    if (price <= 0 || quantity <= 0) {
+        this.setError(
+            "Price and quantity must be greater than zero."
+        );
+        return;
+    }
+
+    runInAction(() => {
+        const existingItem = Array.from(
+            this.cart.values()
+        ).find((item) => item.name === name);
+
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            this.cart.set(Date.now(), {
+                id: Date.now(),
+                name,
+                price,
+                quantity,
+            });
+        }
+
+        this.itemName.set("");
+        this.itemPrice.set("");
+        this.itemQuantity.set("");
+        this.error.set("");
+
+        this.storeCart();
+    });
+};
+
 }
 
 export const cartStore = new CartStore();
