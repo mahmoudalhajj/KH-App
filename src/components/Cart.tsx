@@ -3,55 +3,46 @@ import type { CartStore } from "../stores/CartStore";
 import {
     View,
     Text,
-    TextInput,
     StyleSheet,
-    Pressable,
-    TouchableOpacity,
 } from "react-native";
+import AppTextInput from "./common/AppTextInput";
+import AppButton from "./common/AppButton";
+
 
 interface CartProps {
     cartStore: CartStore;
 }
 
 const CartSummary = observer(({ cartStore }: CartProps) => {
-    const totalItems = cartStore.getTotalItems();
-    const totalPrice = cartStore.getTotalPrice();
 
     return (
         <View style={styles.container}>
             <Text style={styles.label}>
-                Total Items: {totalItems}
+                Total Items: {cartStore.getTotalItems()}
             </Text>
 
             <Text style={styles.label}>
-                Total Price: ${totalPrice}
+                Total Price: ${cartStore.getTotalPrice()}
             </Text>
 
-            <TextInput
-                style={styles.input}
-                value={cartStore.itemName.get()}
-                onChangeText={cartStore.setItemName}
-                placeholder="Item Name"
-                placeholderTextColor="#888"
-            />
-
-            <TextInput
-                style={styles.input}
-                value={cartStore.itemPrice.get()}
-                onChangeText={cartStore.setItemPrice}
-                placeholder="Price"
-                keyboardType="numeric"
-                placeholderTextColor="#888"
-            />
-
-            <TextInput
-                style={styles.input}
-                value={cartStore.itemQuantity.get()}
-                onChangeText={cartStore.setItemQuantity}
-                placeholder="Quantity"
-                keyboardType="numeric"
-                placeholderTextColor="#888"
-            />
+ 
+            <AppTextInput
+                    value={cartStore.itemName.get()}
+                    onChangeText={cartStore.setItemName}
+                    placeholder="Item Name"
+                />
+                <AppTextInput
+                    value={cartStore.itemPrice.get()}
+                    onChangeText={cartStore.setItemPrice}
+                    placeholder="Price"
+                    keyboardType="numeric"
+                /> 
+                <AppTextInput
+                    value={cartStore.itemQuantity.get()}
+                    onChangeText={cartStore.setItemQuantity}
+                    placeholder="Quantity"
+                    keyboardType="numeric"
+                />
 
             {!!cartStore.error.get() && (
                 <Text style={styles.error}>
@@ -60,23 +51,10 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
             )}
 
             <View style={styles.buttonRow}>
-                <Pressable
-                    style={styles.button}
-                    onPress={cartStore.addItem}
-                >
-                    <Text style={styles.buttonText}>
-                        Add Item
-                    </Text>
-                </Pressable>
-
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={cartStore.clearCart}
-                >
-                    <Text style={styles.buttonText}>
-                        Clear Cart
-                    </Text>
-                </TouchableOpacity>
+                        <AppButton
+                        title="Clear Cart"
+                        onPress={cartStore.clearCart}
+                    />
             </View>
         </View>
     );
@@ -89,43 +67,23 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         alignItems: "center",
     },
+
     label: {
         fontSize: 18,
         fontWeight: "600",
         marginBottom: 12,
     },
-    input: {
-        width: "100%",
-        backgroundColor: "#fff",
-        borderRadius: 12,
-        paddingVertical: 12,
-        paddingHorizontal: 46,
-        marginBottom: 10,
-        fontSize: 16,
-        borderWidth: 1,
-        borderColor: "#ddd",
-    },
+
     error: {
         color: "red",
         marginBottom: 12,
     },
+
     buttonRow: {
         flexDirection: "row",
         justifyContent: "space-between",
         width: "100%",
         marginTop: 12,
-    },
-    button: {
-        backgroundColor: "#007AFF",
-        borderRadius: 20,
-        paddingVertical: 10,
-        flex: 1,
-        alignItems: "center",
-        marginHorizontal: 4,
-    },
-    buttonText: {
-        color: "#fff",
-        fontWeight: "600",
     },
 });
 
