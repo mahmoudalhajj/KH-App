@@ -44,11 +44,8 @@ const Chatting = observer(() => {
                     ref={flatListRef}
                     data={messages}
                     keyExtractor={(item) =>
-                        item.id.toString()
-                    }
-                    contentContainerStyle={
-                        styles.messageList
-                    }
+                        item.id.toString() }
+                    contentContainerStyle={styles.messageList}
                     renderItem={({ item }) => (
                         <MessageBubble
                             message={item}

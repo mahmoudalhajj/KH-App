@@ -26,7 +26,6 @@ export const HomeScreen = observer(() => {
       
       <View style={styles.content}>
         <View style={styles.grid}>
-          {/* Cart Card */}
           <TouchableOpacity 
             style={[styles.card, { backgroundColor: "#f8f9fa" }]}
             onPress={() => navigation.navigate("Cart")}
@@ -34,7 +33,6 @@ export const HomeScreen = observer(() => {
             <Text style={styles.cardTitle}>Cart</Text>
           </TouchableOpacity>
 
-          {/* Chat Card */}
           <TouchableOpacity 
             style={[styles.card, { backgroundColor: "#f8f9fa" }]}
             onPress={() => navigation.navigate("Chat")}

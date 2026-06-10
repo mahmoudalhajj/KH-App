@@ -7,7 +7,6 @@ import { ChatScreen } from "./src/screens/ChatScreen";
 import { AuthScreen } from "./src/screens/AuthScreen";
 import { cartStore } from "./src/stores/CartStore";
 import { authStore } from "./src/stores/AuthStore";
-import { messageStore } from "../stores/MessageStore";
 
 
 const Stack = createNativeStackNavigator();
@@ -16,7 +15,6 @@ export default function App() {
     useEffect(() => {
         authStore.loadStoredUser();
         cartStore.loadStoredCart();
-        messageStore.loadStoredMessages();
         
     }, []);
 

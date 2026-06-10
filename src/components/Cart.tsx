@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import AppTextInput from "./common/AppTextInput";
 import AppButton from "./common/AppButton";
+import { useTranslation } from "react-i18next";
 
 
 interface CartProps {
@@ -15,15 +16,17 @@ interface CartProps {
 
 const CartSummary = observer(({ cartStore }: CartProps) => {
 
+  const { t } = useTranslation();
+
     return (
         <View style={styles.container}>
             <Text style={styles.label}>
-                Total Items: {cartStore.getTotalItems()}
-            </Text>
+            {t("totalItems")} {cartStore.getTotalItems()}
+                </Text>
 
             <Text style={styles.label}>
-                Total Price: ${cartStore.getTotalPrice()}
-            </Text>
+            {t("totalPrice")} ${cartStore.getTotalPrice()}
+                </Text>
 
  
             <AppTextInput
@@ -53,6 +56,10 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
             <View style={styles.buttonRow}>
                         <AppButton
                         title="Clear Cart"
+                        onPress={cartStore.clearCart}
+                    />
+                    <AppButton
+                        title="switch language to french"
                         onPress={cartStore.clearCart}
                     />
             </View>
