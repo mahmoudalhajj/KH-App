@@ -12,8 +12,14 @@ export class AuthStore {
     name = observable.box("");
     isRegistering = observable.box<boolean>(false);
 
+   handleAuth = () => {
+    if (this.isRegistering.get()) {
+      this.register();
+    } else {
+      this.login();
+    }
+  };
 
-    
 login = () => {
     const email = this.getEmail();
     const password = this.getPassword();

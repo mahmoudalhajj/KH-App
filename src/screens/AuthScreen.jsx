@@ -23,17 +23,7 @@ export const AuthScreen = observer(() => {
     }
   }, [authStore.status.get()]);
 
-  const handleAuth = () => {
-    if (authStore.getIsRegistering()) {
-      authStore.register(
-        authStore.name.get(),
-        authStore.email.get(),
-        authStore.password.get()
-      );
-    } else {
-      authStore.login();
-    }
-  };
+
 
   return (
     <KeyboardAvoidingView
@@ -90,7 +80,7 @@ export const AuthScreen = observer(() => {
             <Text style={styles.errorText}>{authStore.getError()}</Text>
           )}
 
-          <TouchableOpacity style={styles.button} onPress={handleAuth}>
+          <TouchableOpacity style={styles.button} onPress={authStore.handleAuth}>
             <Text style={styles.buttonText}>
               {authStore.getIsRegistering() ? "Register" : "Login"}
             </Text>
