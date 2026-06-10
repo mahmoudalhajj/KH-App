@@ -6,7 +6,7 @@ import {
     StyleSheet,
     KeyboardAvoidingView
 } from "react-native";
-
+import {Colors} from "../../enums/color";
 interface ChatInputProps {
     draft: string;
     onDraftChange: (text: string) => void;
@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
         gap: 12,
         padding: 12,
         borderTopWidth: 1,
-        borderTopColor: "#e0e0e0",
-        backgroundColor: "white",
+        borderTopColor: Colors.CHAT_INPUT,
+        backgroundColor: Colors.BACKGROUND,
     },
     input: {
         flex: 1,
         borderWidth: 1,
-        borderColor: "#ccc",
+        borderColor: Colors.BACKGROUND,
         borderRadius: 8,
         paddingHorizontal: 12,
         paddingVertical: 8,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         maxHeight: 100,
     },
     sendButton: {
-        backgroundColor: "#9c27b0",
+        backgroundColor: Colors.SECONDARY,
         paddingHorizontal: 20,
         paddingVertical: 12,
         borderRadius: 8,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     sendButtonText: {
-        color: "white",
+        color:Colors.BACKGROUND,
         fontWeight: "600",
         fontSize: 14,
     },

@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { message } from "../../types/message"
+import {Colors} from "../../enums/color"
 
 interface MessageBubbleProps {
     message: message;
@@ -32,16 +33,16 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     bubble: {
-        backgroundColor: "#212121",
+        backgroundColor: Colors.BUBBLE,
         borderRadius: 12,
         padding: 12,
     },
     text: {
-        color: "white",
+        color:Colors.BACKGROUND,
         fontSize: 14,
     },
     time: {
-        color: "rgba(255,255,255,0.6)",
+        color: Colors.HEADER_SUBTITLE,
         fontSize: 11,
         marginTop: 4,
     },

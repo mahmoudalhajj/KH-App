@@ -1,4 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {Colors} from "../../enums/color"
 
 interface ChatHeaderProps {
     onClear: () => void;
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         gap: 12,
-        backgroundColor: "#1976d2",
+        backgroundColor: Colors.HEADER,
         paddingHorizontal: 16,
         paddingVertical: 12,
     },
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 20,
-        backgroundColor: "#9c27b0",
+        backgroundColor: Colors.SECONDARY,
         justifyContent: "center",
         alignItems: "center",
     },
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     headerSubtitle: {
-        color: "rgba(255,255,255,0.7)",
+        color: Colors.HEADER_SUBTITLE,
         fontSize: 12,
     },
     clearButton: {

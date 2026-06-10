@@ -13,6 +13,7 @@ import ChatHeader from "../components/chatting/ChatHeader";
 import ChatEmptyState from "../components/chatting/ChatEmptyState";
 import ChatInput from "../components/chatting/ChatInput";
 import MessageBubble from "../components/chatting/ChatMessageBubble";
+import {Colors} from "../enums/color";
 
 const Chatting = observer(() => {
     const messages = messageStore.getAllMessages();
@@ -67,7 +68,7 @@ const Chatting = observer(() => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor:Colors.BACKGROUND,
     },
 
     messageList: {

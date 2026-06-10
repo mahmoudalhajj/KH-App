@@ -13,6 +13,7 @@ import { observer } from "mobx-react-lite";
 import { authStore } from "../stores/AuthStore";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
+import { Colors } from "../enums/color";
 
 export const AuthScreen = observer(() => {
   const navigation = useNavigation();
@@ -104,7 +105,7 @@ export const AuthScreen = observer(() => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: Colors.BACKGROUND,
   },
   scrollContent: {
     flexGrow: 1,
@@ -144,9 +145,9 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   input: {
-    backgroundColor: "#f9f9f9",
+    backgroundColor:Colors.BACKGROUND,
     borderWidth: 1,
-    borderColor: "#e0e0e0",
+    borderColor: Colors.CHAT_INPUT,
     borderRadius: 8,
     padding: 12,
     fontSize: 16,

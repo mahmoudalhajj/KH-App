@@ -3,7 +3,7 @@ import {
     Text,
     StyleSheet,
 } from "react-native";
-
+import {Colors} from "../../enums/color";
 interface AppButtonProps {
     title: string;
     onPress: () => void;
@@ -24,7 +24,7 @@ const AppButton = ({ title, onPress }: AppButtonProps) => {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: "#007AFF",
+        backgroundColor: Colors.BUTTON,
         borderRadius: 20,
         paddingVertical: 10,
         flex: 1,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: "#fff",
+        color: Colors.BACKGROUND,
         fontWeight: "600",
     },
 });

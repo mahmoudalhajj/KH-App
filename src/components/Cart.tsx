@@ -8,6 +8,7 @@ import {
 import AppTextInput from "./common/AppTextInput";
 import AppButton from "./common/AppButton";
 import { useTranslation } from "react-i18next";
+import {Colors} from "../enums/color"
 
 
 interface CartProps {
@@ -70,7 +71,7 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
 const styles = StyleSheet.create({
     container: {
         padding: 16,
-        backgroundColor: "#f8f8f8",
+        backgroundColor: Colors.BACKGROUND,
         borderRadius: 40,
         alignItems: "center",
     },
