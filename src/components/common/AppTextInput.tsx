@@ -9,6 +9,7 @@ const AppTextInput = (props: AppTextInputProps) => {
             {...props}
             style={[styles.input, props.style]}
             placeholderTextColor="#888"
+            autoCapitalize="none"
         />
     );
 };

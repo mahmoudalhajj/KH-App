@@ -9,11 +9,11 @@ import { observer } from "mobx-react-lite";
 export const ChatScreen = observer(() => {
 const navigation = useNavigation();
 
-  useEffect(() => {
-    if (!authStore.isLoggedIn()) {
-      navigation.replace("Auth");
-    }
-  }, [authStore.status.get()]);
+  // useEffect(() => {
+  //   if (!authStore.isLoggedIn()) {
+  //     navigation.replace("Auth");
+  //   }
+  // }, [authStore.status.get()]);
 
   return (
     <View style={styles.container}>

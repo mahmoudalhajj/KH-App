@@ -9,11 +9,11 @@ import { observer } from "mobx-react-lite";
 export const CartScreen = observer(() => {
 const navigation = useNavigation();
     
-      useEffect(() => {
-        if (!authStore.isLoggedIn()) {
-          navigation.replace("Auth");
-        }
-      }, [authStore.status.get()]);
+      // useEffect(() => {
+      //   if (!authStore.isLoggedIn()) {
+      //     navigation.replace("Auth");
+      //   }
+      // }, [authStore.status.get()]);
     
     return (
         <CartSummary cartStore={cartStore} />

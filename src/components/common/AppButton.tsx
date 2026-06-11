@@ -2,17 +2,21 @@ import {
     Pressable,
     Text,
     StyleSheet,
+    StyleProp,
+    ViewStyle,
 } from "react-native";
 import {Colors} from "../../enums/color";
+
 interface AppButtonProps {
     title: string;
     onPress: () => void;
+    style?: StyleProp<ViewStyle>;
 }
 
-const AppButton = ({ title, onPress }: AppButtonProps) => {
+const AppButton = ({ title, onPress, style }: AppButtonProps) => {
     return (
         <Pressable
-            style={styles.button}
+            style={[styles.button, style]}
             onPress={onPress}
         >
             <Text style={styles.text}>
@@ -26,15 +30,16 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: Colors.BUTTON,
         borderRadius: 20,
-        paddingVertical: 10,
-        flex: 1,
+        paddingVertical: 12,
+        paddingHorizontal: 16,
         alignItems: "center",
-        marginHorizontal: 4,
+        justifyContent: "center",
     },
 
     text: {
         color: Colors.BACKGROUND,
         fontWeight: "600",
+        fontSize: 16,
     },
 });
 

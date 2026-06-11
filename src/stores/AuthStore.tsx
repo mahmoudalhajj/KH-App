@@ -1,58 +1,56 @@
-import { observable, runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { User } from "../types/user";
 import { AuthStatus } from "../enums/authStatus";
 import { localStorageStore, StorageKey } from "./LocalStorageStore";
 
 export class AuthStore {
-    user = observable.box<User | null>(null);
-    status = observable.box<AuthStatus>(AuthStatus.LoggedOut);
-    error = observable.box<string>("");
-    email = observable.box("");
-    password = observable.box("");
-    name = observable.box("");
-    isRegistering = observable.box<boolean>(false);
+  user: User | null = null;
+  status: AuthStatus = AuthStatus.LoggedOut;
+  error: string = "";
+  email: string = "";
+  password: string = "";
+  name: string = "";
+  isRegistering: boolean = false;
 
-   handleAuth = () => {
-    if (this.isRegistering.get()) {
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  handleAuth = () => {
+    if (this.isRegistering) {
       this.register();
     } else {
       this.login();
     }
   };
 
-login = () => {
-    const email = this.getEmail();
-    const password = this.getPassword();
+  login = () => {
+    if (!this.email || !this.password) {
+      this.error = "Invalid Email/Password";
+      return;
+    }
 
-  if (!email || !password) {
     runInAction(() => {
-      this.error.set("Invalid Email/Password");
+      const user: User = {
+        id: Date.now(),
+        name: this.name || "User",
+        email: this.email,
+      };
+
+      this.user = user;
+      this.status = AuthStatus.LoggedIn;
+      this.error = "";
+      this.storeUser();
     });
-
-    return;
-  }
-  runInAction(() => {
-    const user: User = {
-      id: Date.now(),
-      name: this.getName(),
-      email: email,
-    };
-
-    this.user.set(user);
-    this.status.set(AuthStatus.LoggedIn);
-    this.error.set("");
-
-    this.storeUser();
-  });
-};
+  };
 
   register = () => {
-    const trimmedName = this.getName().trim();
-    const trimmedEmail = this.getEmail().trim();
-    const trimmedPassword = this.getPassword().trim();
+    const trimmedName = this.name.trim();
+    const trimmedEmail = this.email.trim();
+    const trimmedPassword = this.password.trim();
 
     if (!trimmedName || !trimmedEmail || !trimmedPassword) {
-      runInAction(() => this.error.set("All fields are required."));
+      this.error = "All fields are required.";
       return;
     }
 
@@ -62,90 +60,61 @@ login = () => {
         name: trimmedName,
         email: trimmedEmail,
       };
-      this.user.set(user);
-      this.status.set(AuthStatus.LoggedIn);
-      this.error.set("");
+      this.user = user;
+      this.status = AuthStatus.LoggedIn;
+      this.error = "";
       this.storeUser();
     });
   };
 
   logout = () => {
     runInAction(() => {
-      this.user.set(null);
-      this.status.set(AuthStatus.LoggedOut);
-      this.error.set("");
+      this.user = null;
+      this.status = AuthStatus.LoggedOut;
+      this.error = "";
+      this.email = "";
+      this.password = "";
+      this.name = "";
     });
     localStorageStore.storageClear();
   };
 
-  getIsRegistering = () => {
-    return this.isRegistering.get();
+  get isLoggedIn() {
+    return this.status === AuthStatus.LoggedIn;
   }
 
-
-  getUser = () => {
-    return this.user.get();
-  };
-
-  getStatus = () => {
-    return this.status.get();
-  };
-
-  getError = () => {
-    return this.error.get();
-  };
-
-    getEmail = () => {
-    return this.email.get();
-    };
-
-    getName = () => {
-    return this.name.get();
-     };
-
-     getPassword = () => {
-    return this.password.get();
-};
-
-  isLoggedIn = () => {
-    return this.status.get() === AuthStatus.LoggedIn;
-  };
-
   storeUser() {
-    localStorageStore.storageSet(StorageKey.User, this.getUser());
+    localStorageStore.storageSet(StorageKey.User, this.user);
   }
 
   loadStoredUser() {
-    if (this.isLoggedIn()) return;
+    if (this.isLoggedIn) return;
 
     const stored = localStorageStore.storageGet(StorageKey.User);
-
     if (!stored) return;
 
     runInAction(() => {
-      this.user.set(stored);
-      this.status.set(AuthStatus.LoggedIn);
+      this.user = stored;
+      this.status = AuthStatus.LoggedIn;
     });
   }
-    setEmail = (email: string) => {
-    this.email.set(email);
-    };
 
-    setPassword = (password: string) => {
-    this.password.set(password);
-    };
+  setEmail = (email: string) => {
+    this.email = email;
+  };
 
-    setName = (name: string) => {
-    this.name.set(name);
-};
+  setPassword = (password: string) => {
+    this.password = password;
+  };
 
-    setIsRegistering = (value: boolean) =>{
-        runInAction(()=>{
-            this.isRegistering.set(value);
-        })
+  setName = (name: string) => {
+    this.name = name;
+  };
 
-    }
-
+  setIsRegistering = (value: boolean) => {
+    this.isRegistering = value;
+    this.error = "";
+  };
 }
 
 export const authStore = new AuthStore();

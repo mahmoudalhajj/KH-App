@@ -2,103 +2,97 @@ import React from "react";
 import {
   View,
   Text,
-  TextInput,
-  TouchableOpacity,
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
 } from "react-native";
 import { observer } from "mobx-react-lite";
 import { authStore } from "../stores/AuthStore";
-import { useNavigation } from "@react-navigation/native";
-import { useEffect } from "react";
 import { Colors } from "../enums/color";
+import AppTextInput from "../components/common/AppTextInput";
+import AppButton from "../components/common/AppButton";
 
 export const AuthScreen = observer(() => {
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    if (authStore.isLoggedIn()) {
-      navigation.replace("Home");
-    }
-  }, [authStore.status.get()]);
-
-
+  const isRegistering = authStore.isRegistering;
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-    >
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.card}>
-          <Text style={styles.title}>
-            {authStore.getIsRegistering() ? "Create Account" : "Welcome Back"}
-          </Text>
-          <Text style={styles.subtitle}>
-            {authStore.getIsRegistering()
-              ? "Sign up to get started"
-              : "Login to your account"}
-          </Text>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.keyboardView}
+      >
+        <ScrollView 
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.card}>
+            <Text style={styles.title}>
+              {isRegistering ? "Create Account" : "Welcome Back"}
+            </Text>
+            <Text style={styles.subtitle}>
+              {isRegistering
+                ? "Sign up to get started"
+                : "Login to your account"}
+            </Text>
 
-          {authStore.getIsRegistering() && (
+            {isRegistering && (
+              <View style={styles.inputContainer}>
+                <Text style={styles.label}>Full Name</Text>
+                <AppTextInput
+                  placeholder="John Doe"
+                  value={authStore.name}
+                  onChangeText={(text) => authStore.setName(text)}
+                />
+              </View>
+            )}
+
             <View style={styles.inputContainer}>
-              <Text style={styles.label}>Full Name</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="John Doe"
-                value={authStore.name.get()}
-                onChangeText={(text) => authStore.setName(text)}
+              <Text style={styles.label}>Email Address</Text>
+              <AppTextInput
+                placeholder="email@example.com"
+                value={authStore.email}
+                onChangeText={(text) => authStore.setEmail(text)}
+                keyboardType="email-address"
               />
             </View>
-          )}
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Email Address</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="email@example.com"
-              value={authStore.email.get()}
-              onChangeText={(text) => authStore.setEmail(text)}
-              autoCapitalize="none"
-              keyboardType="email-address"
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Password</Text>
+              <AppTextInput
+                placeholder="••••••••"
+                value={authStore.password}
+                onChangeText={(text) => authStore.setPassword(text)}
+                secureTextEntry
+              />
+            </View>
+
+            {!!authStore.error && (
+              <Text style={styles.errorText}>{authStore.error}</Text>
+            )}
+
+            <AppButton 
+              title={isRegistering ? "Register" : "Login"}
+              onPress={authStore.handleAuth}
+              style={styles.mainButton}
             />
+
+            <TouchableOpacity
+              onPress={() => authStore.setIsRegistering(!isRegistering)}
+              style={styles.switchButton}
+            >
+              <Text style={styles.switchText}>
+                {isRegistering
+                  ? "Already have an account? Login"
+                  : "Don't have an account? Register"}
+              </Text>
+            </TouchableOpacity>
           </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Password</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="••••••••"
-              value={authStore.password.get()}
-              onChangeText={(text) => authStore.setPassword(text)}
-              secureTextEntry
-            />
-          </View>
-
-          {!!authStore.getError() && (
-            <Text style={styles.errorText}>{authStore.getError()}</Text>
-          )}
-
-          <TouchableOpacity style={styles.button} onPress={authStore.handleAuth}>
-            <Text style={styles.buttonText}>
-              {authStore.getIsRegistering() ? "Register" : "Login"}
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => authStore.setIsRegistering(!authStore.getIsRegistering())}
-            style={styles.switchButton}
-          >
-            <Text style={styles.switchText}>
-              {authStore.getIsRegistering()
-                ? "Already have an account? Login"
-                : "Don't have an account? Register"}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 });
 
@@ -106,6 +100,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.BACKGROUND,
+  },
+  keyboardView: {
+    flex: 1,
   },
   scrollContent: {
     flexGrow: 1,
@@ -125,7 +122,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "#1a1a1a",
+    color: Colors.SECONDARY,
     marginBottom: 8,
     textAlign: "center",
   },
@@ -136,7 +133,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   inputContainer: {
-    marginBottom: 20,
+    marginBottom: 16,
   },
   label: {
     fontSize: 14,
@@ -144,37 +141,22 @@ const styles = StyleSheet.create({
     color: "#444",
     marginBottom: 8,
   },
-  input: {
-    backgroundColor:Colors.BACKGROUND,
-    borderWidth: 1,
-    borderColor: Colors.CHAT_INPUT,
-    borderRadius: 8,
-    padding: 12,
-    fontSize: 16,
-    color: "#1a1a1a",
-  },
-  button: {
-    backgroundColor: "#007AFF",
-    borderRadius: 8,
-    padding: 16,
-    alignItems: "center",
+  mainButton: {
     marginTop: 10,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
+    borderRadius: 12,
   },
   switchButton: {
     marginTop: 20,
     alignItems: "center",
+    padding: 10,
   },
   switchText: {
-    color: "#007AFF",
+    color: Colors.BUTTON,
     fontSize: 14,
+    fontWeight: "600",
   },
   errorText: {
-    color: "#FF3B30",
+    color: Colors.ERROR,
     fontSize: 14,
     marginBottom: 16,
     textAlign: "center",

@@ -2,16 +2,18 @@ export enum Colors {
   PRIMARY = "#0070f3",
   SECONDARY = "#1a1a1a",
   BACKGROUND = "#ffffff",
+  SURFACE = "#f8f9fa",
+  BORDER = "#eeeeee",
   ERROR = "#ff0000",
   SUCCESS = "#00ff00",
   WARNING = "#ffa500",
   HEADER = "#1976d2",
-  HEADER_SUBTITLE="#ffffffb3",
+  HEADER_SUBTITLE = "#ffffffb3",
   CHAT_INPUT = "#e0e0e0",
   BUBBLE = "#212121",
   BUTTON = "#007AFF",
   TEXT_INPUT_BORDER = "#ddd",
+  TEXT_PRIMARY = "#212121",
+  TEXT_SECONDARY = "#999999",
+  BADGE = "#007AFF",
 }
-
-
-
