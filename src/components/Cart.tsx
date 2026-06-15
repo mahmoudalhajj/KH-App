@@ -14,13 +14,14 @@ import { Colors } from "../enums/color";
 import ScreenContainer from "./common/ScreenContainer";
 import { TranslationKey } from "../i18n/translationKeys";
 import LanguageSelector from "./common/LanguageSelector";
+import { RTLExample } from "./common/RTLExample";
 
 interface CartProps {
     cartStore: CartStore;
 }
 
 const CartSummary = observer(({ cartStore }: CartProps) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <ScreenContainer>
@@ -31,6 +32,8 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
                 <View style={styles.card}>
                     <Text style={styles.headerTitle}> {t(TranslationKey.CART_SUMMARY)}</Text>
                     
+                    <RTLExample />
+
                     <View style={styles.statsRow}>
                         <View style={styles.statItem}>
                             <Text style={styles.statLabel}> {t(TranslationKey.TOTAL_ITEMS)}</Text>                            

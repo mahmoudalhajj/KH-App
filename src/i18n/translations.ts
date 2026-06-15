@@ -1,6 +1,14 @@
 import { TranslationKey } from "./translationKeys";
 
+export type Language = "en" | "fr" | "ar";
+
 export const translations = {
+    direction: {
+        ar: "rtl",
+        en: "ltr",
+        fr: "ltr",
+    },
+
     [TranslationKey.CART_SUMMARY]: {
         en: "Cart Summary",
         fr: "Résumé du panier",

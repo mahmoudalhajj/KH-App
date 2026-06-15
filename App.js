@@ -8,6 +8,7 @@ import { AuthScreen } from "./src/screens/AuthScreen";
 import { cartStore } from "./src/stores/CartStore";
 import { authStore } from "./src/stores/AuthStore";
 import { observer } from "mobx-react-lite";
+import "./src/i18n/i18n";
 const Stack = createNativeStackNavigator();
 
 const App = observer(() => {

@@ -1,44 +1,56 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '../../enums/color';
 import { TranslationKey } from '../../i18n/translationKeys';
+import { i18nStore } from '../../stores/i18nStore'
+import {Language} from '../../i18n/translations';
 
-const LanguageSelector = () => {
-    const { t, i18n } = useTranslation();
+const LanguageSelector = observer(() => {
+    const { t } = useTranslation();
 
-    const languages = [
+    const languages: { key: Language; value: string }[] = [
         { key: 'en', value: 'English' },
         { key: 'ar', value: 'العربية' },
         { key: 'fr', value: 'Français' },
     ];
 
+    const isRTL = i18nStore.getIsRTL();
+    const currentLang = i18nStore.getLanguage();
+
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>{t(TranslationKey.CHANGE_LANGUAGE)}</Text>
+            <Text style={[
+                styles.label,
+                { textAlign: isRTL ? 'right' : 'left' }
+            ]}>
+                {t(TranslationKey.CHANGE_LANGUAGE)}
+            </Text>
             {languages.map((lang) => (
                 <Pressable
                     key={lang.key}
                     style={[
                         styles.item,
-                        i18n.language === lang.key && styles.activeItem
+                        currentLang === lang.key && styles.activeItem,
+                        { flexDirection: isRTL ? 'row-reverse' : 'row' }
                     ]}
-                    onPress={() => i18n.changeLanguage(lang.key)}
+                    onPress={() => i18nStore.setLanguage(lang.key)}
                 >
                     <Text style={[
                         styles.text,
-                        i18n.language === lang.key && styles.activeText
+                        currentLang === lang.key && styles.activeText
                     ]}>
                         {lang.value}
                     </Text>
-                    {i18n.language === lang.key && (
+                    {currentLang === lang.key && (
                         <View style={styles.checkmark} />
                     )}
                 </Pressable>
             ))}
         </View>
     );
-};
+});
 
 const styles = StyleSheet.create({
     container: {
@@ -51,7 +63,6 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     item: {
-        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingVertical: 12,
