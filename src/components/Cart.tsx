@@ -12,6 +12,8 @@ import AppButton from "../components/common/AppButton";
 import { useTranslation } from "react-i18next";
 import { Colors } from "../enums/color";
 import ScreenContainer from "./common/ScreenContainer";
+import { TranslationKey } from "../i18n/translationKeys";
+import LanguageSelector from "./common/LanguageSelector";
 
 interface CartProps {
     cartStore: CartStore;
@@ -20,11 +22,6 @@ interface CartProps {
 const CartSummary = observer(({ cartStore }: CartProps) => {
     const { t, i18n } = useTranslation();
 
-    const toggleLanguage = () => {
-        const nextLang = i18n.language === 'en' ? 'fr' : 'en';
-        i18n.changeLanguage(nextLang);
-    };
-
     return (
         <ScreenContainer>
             <ScrollView 
@@ -32,32 +29,33 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
                 keyboardShouldPersistTaps="handled"
             >
                 <View style={styles.card}>
-                    <Text style={styles.headerTitle}>Cart Summary</Text>
+                    <Text style={styles.headerTitle}> {t(TranslationKey.CART_SUMMARY)}</Text>
                     
                     <View style={styles.statsRow}>
                         <View style={styles.statItem}>
-                            <Text style={styles.statLabel}>{t("totalItems")}</Text>
+                            <Text style={styles.statLabel}> {t(TranslationKey.TOTAL_ITEMS)}</Text>                            
                             <Text style={styles.statValue}>{cartStore.getTotalItems()}</Text>
                         </View>
                         <View style={styles.statItem}>
-                            <Text style={styles.statLabel}>{t("totalPrice")}</Text>
+                            <Text style={styles.statLabel}> {t(TranslationKey.TOTAL_PRICE)} </Text>
                             <Text style={styles.statValue}>${cartStore.getTotalPrice()}</Text>
                         </View>
                     </View>
 
                     <View style={styles.form}>
-                        <Text style={styles.sectionLabel}>Add New Item</Text>
+
+                            <Text style={styles.sectionLabel}> {t(TranslationKey.ADD_NEW_ITEM)}</Text>                        
                         <AppTextInput
                             value={cartStore.itemName.get()}
                             onChangeText={cartStore.setItemName}
-                            placeholder="Item Name"
+                            placeholder={t(TranslationKey.ITEM_NAME)}
                         />
                         <View style={styles.inputRow}>
                             <View style={{ flex: 1, marginRight: 8 }}>
                                 <AppTextInput
                                     value={cartStore.itemPrice.get()}
                                     onChangeText={cartStore.setItemPrice}
-                                    placeholder="Price"
+                                    placeholder={t(TranslationKey.PRICE)}
                                     keyboardType="numeric"
                                 />
                             </View>
@@ -65,7 +63,7 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
                                 <AppTextInput
                                     value={cartStore.itemQuantity.get()}
                                     onChangeText={cartStore.setItemQuantity}
-                                    placeholder="Qty"
+                                    placeholder={t(TranslationKey.QUANTITY)}
                                     keyboardType="numeric"
                                 />
                             </View>
@@ -76,7 +74,7 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
                         )}
 
                         <AppButton
-                            title="Add to Cart"
+                            title={t(TranslationKey.ADD_TO_CART)}
                             onPress={cartStore.addItem}
                             style={styles.addButton}
                         />
@@ -85,19 +83,15 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
 
                     <View style={styles.footerButtons}>
                         <AppButton
-                            title="Clear Cart"
+                            title={t(TranslationKey.CLEAR_CART)}
                             onPress={cartStore.clearCart}
                             style={styles.clearButton}
                         />
                         
                         <View style={styles.divider} />
 
-                        <AppButton
-                            title={i18n.language === 'en' ? "Switch to French" : "Passer en Anglais"}
-                            onPress={toggleLanguage}
-                            style={styles.langButton}
-                        />
-                    </View>
+                        <LanguageSelector />
+                        </View>
                 </View>
             </ScrollView>
         </ScreenContainer>
@@ -176,10 +170,6 @@ const styles = StyleSheet.create({
     },
     clearButton: {
         backgroundColor: Colors.ERROR,
-        borderRadius: 12,
-    },
-    langButton: {
-        backgroundColor: Colors.SECONDARY,
         borderRadius: 12,
     },
     errorText: {
