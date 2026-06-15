@@ -82,7 +82,6 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
                         />
                     </View>
 
-                    <View style={styles.divider} />
 
                     <View style={styles.footerButtons}>
                         <AppButton
@@ -90,6 +89,9 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
                             onPress={cartStore.clearCart}
                             style={styles.clearButton}
                         />
+                        
+                        <View style={styles.divider} />
+
                         <AppButton
                             title={i18n.language === 'en' ? "Switch to French" : "Passer en Anglais"}
                             onPress={toggleLanguage}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, ViewStyle, StatusBar } from 'react-native';
-import { Colors } from '../../enums/color';
-
+import {Colors} from "@mahmoudalhajj/designer-library";
 interface ScreenContainerProps {
   children: React.ReactNode;
   style?: ViewStyle;
@@ -9,7 +8,7 @@ interface ScreenContainerProps {
 
 const ScreenContainer = ({ children, style }: ScreenContainerProps) => (
   <SafeAreaView style={[styles.container, style]}>
-    <StatusBar barStyle="dark-content" backgroundColor={Colors.BACKGROUND} />
+    <StatusBar barStyle="dark-content" backgroundColor={Colors.WHITE} />
     {children}
   </SafeAreaView>
 );
@@ -17,7 +16,7 @@ const ScreenContainer = ({ children, style }: ScreenContainerProps) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.BACKGROUND,
+    backgroundColor: Colors.WHITE,
   },
 });
 
