@@ -2,7 +2,7 @@ import React from "react";
 import { TextInput, TextInputProps, StyleSheet } from "react-native";
 import { Colors } from "../../enums/color";
 import { observer } from "mobx-react-lite";
-import { uiStore } from "../../stores/UIStore";
+import { uiStore } from "../../stores/ThemeStore";
 
 interface AppTextInputProps extends TextInputProps {}
 
@@ -10,11 +10,7 @@ const AppTextInput = observer((props: AppTextInputProps) => {
   return (
     <TextInput
       {...props}
-      style={[
-        styles.input,
-        uiStore.inputStyle,
-        props.style,
-      ]}
+      style={[styles.input, uiStore.inputStyle, props.style]}
       placeholderTextColor="#888"
       autoCapitalize="none"
     />
@@ -35,4 +31,3 @@ const styles = StyleSheet.create({
   },
 });
 export default AppTextInput;
-

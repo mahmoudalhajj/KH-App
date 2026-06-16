@@ -9,7 +9,7 @@ import AppTextInput from "../common/AppTextInput";
 import AppButton from "../common/AppButton";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
-import { uiStore } from "../../stores/UIStore";
+import { uiStore } from "../../stores/ThemeStore";
 
 interface CartFormProps {
   cartStore: CartStore;

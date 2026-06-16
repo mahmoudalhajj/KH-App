@@ -8,7 +8,7 @@ import { i18nStore } from "../../stores/i18nStore";
 import { Language } from "../../i18n/translations";
 import { DynamicView } from "./DynamicView";
 import { DynamicText } from "./DynamicText";
-import { uiStore } from "../../stores/UIStore";
+import { uiStore } from "../../stores/ThemeStore";
 
 const LanguageSelector = observer(() => {
   const { t } = useTranslation();

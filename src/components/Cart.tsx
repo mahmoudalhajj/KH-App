@@ -7,7 +7,7 @@ import { Colors } from "../enums/color";
 import ScreenContainer from "./common/ScreenContainer";
 import { TranslationKey } from "../i18n/translationKeys";
 import { DynamicText } from "./common/DynamicText";
-import { uiStore } from "../stores/UIStore";
+import { uiStore } from "../stores/ThemeStore";
 import { CartStats } from "./cart/CartStats";
 import { CartForm } from "./cart/CartForm";
 import { CartFooter } from "./cart/CartFooter";
