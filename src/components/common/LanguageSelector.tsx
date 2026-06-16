@@ -6,6 +6,7 @@ import { Colors } from '../../enums/color';
 import { TranslationKey } from '../../i18n/translationKeys';
 import { i18nStore } from '../../stores/i18nStore'
 import {Language} from '../../i18n/translations';
+import { DynamicView } from './DynamicView';
 
 const LanguageSelector = observer(() => {
     const { t } = useTranslation();
@@ -32,20 +33,20 @@ const LanguageSelector = observer(() => {
                     key={lang.key}
                     style={[
                         styles.item,
-                        currentLang === lang.key && styles.activeItem,
-                        { flexDirection: isRTL ? 'row-reverse' : 'row' }
+                        currentLang === lang.key && styles.activeItem
                     ]}
-                    onPress={() => i18nStore.setLanguage(lang.key)}
-                >
-                    <Text style={[
-                        styles.text,
-                        currentLang === lang.key && styles.activeText
-                    ]}>
-                        {lang.value}
-                    </Text>
-                    {currentLang === lang.key && (
-                        <View style={styles.checkmark} />
-                    )}
+                    onPress={() => i18nStore.setLanguage(lang.key)} >
+                        
+                    <DynamicView row style={styles.itemContent}>
+                        <Text style={[
+                            styles.text,
+                            currentLang === lang.key && styles.activeText ]}>
+                            {lang.value}
+                        </Text>
+                        {currentLang === lang.key && (
+                            <View style={styles.checkmark} />
+                        )}
+                    </DynamicView>
                 </Pressable>
             ))}
         </View>
@@ -63,15 +64,17 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     item: {
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingVertical: 12,
-        paddingHorizontal: 16,
         borderRadius: 12,
         marginBottom: 8,
         backgroundColor: Colors.SURFACE,
         borderWidth: 1,
         borderColor: Colors.BORDER,
+    },
+    itemContent: {
+        paddingVertical: 12,
+        paddingHorizontal: 16,
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
     activeItem: {
         borderColor: Colors.BUTTON,

@@ -3,6 +3,7 @@ import { TranslationKey } from "./translationKeys";
 export type Language = "en" | "fr" | "ar";
 
 export const translations = {
+    
     direction: {
         ar: "rtl",
         en: "ltr",

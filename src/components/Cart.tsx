@@ -15,6 +15,7 @@ import ScreenContainer from "./common/ScreenContainer";
 import { TranslationKey } from "../i18n/translationKeys";
 import LanguageSelector from "./common/LanguageSelector";
 import { RTLExample } from "./common/RTLExample";
+import {DynamicView } from "./common/DynamicView";
 
 interface CartProps {
     cartStore: CartStore;
@@ -31,30 +32,30 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
             >
                 <View style={styles.card}>
                     <Text style={styles.headerTitle}> {t(TranslationKey.CART_SUMMARY)}</Text>
-                    
                     <RTLExample />
 
-                    <View style={styles.statsRow}>
-                        <View style={styles.statItem}>
+                    <DynamicView row style={styles.statsRow}>
+                        <DynamicView style={styles.statItem}>
                             <Text style={styles.statLabel}> {t(TranslationKey.TOTAL_ITEMS)}</Text>                            
                             <Text style={styles.statValue}>{cartStore.getTotalItems()}</Text>
-                        </View>
-                        <View style={styles.statItem}>
+                        </DynamicView>
+                        <DynamicView style={styles.statItem}>
                             <Text style={styles.statLabel}> {t(TranslationKey.TOTAL_PRICE)} </Text>
                             <Text style={styles.statValue}>${cartStore.getTotalPrice()}</Text>
-                        </View>
-                    </View>
+                        </DynamicView>
+                    </DynamicView>
 
                     <View style={styles.form}>
-
-                            <Text style={styles.sectionLabel}> {t(TranslationKey.ADD_NEW_ITEM)}</Text>                        
+                        <DynamicView row>
+                            <Text style={styles.sectionLabel}> {t(TranslationKey.ADD_NEW_ITEM)}</Text>
+                        </DynamicView>
                         <AppTextInput
                             value={cartStore.itemName.get()}
                             onChangeText={cartStore.setItemName}
                             placeholder={t(TranslationKey.ITEM_NAME)}
                         />
-                        <View style={styles.inputRow}>
-                            <View style={{ flex: 1, marginRight: 8 }}>
+                        <DynamicView row style={styles.inputRow}>
+                            <View style={{ flex: 1, marginEnd: 8 }}>
                                 <AppTextInput
                                     value={cartStore.itemPrice.get()}
                                     onChangeText={cartStore.setItemPrice}
@@ -62,7 +63,7 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
                                     keyboardType="numeric"
                                 />
                             </View>
-                            <View style={{ flex: 1, marginLeft: 8 }}>
+                            <View style={{ flex: 1, marginStart: 8 }}>
                                 <AppTextInput
                                     value={cartStore.itemQuantity.get()}
                                     onChangeText={cartStore.setItemQuantity}
@@ -70,7 +71,8 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
                                     keyboardType="numeric"
                                 />
                             </View>
-                        </View>
+                        </DynamicView>
+
 
                         {!!cartStore.error.get() && (
                             <Text style={styles.errorText}>{cartStore.error.get()}</Text>
@@ -125,7 +127,6 @@ const styles = StyleSheet.create({
         marginBottom: 24,
     },
     statsRow: {
-        flexDirection: 'row',
         justifyContent: 'space-around',
         marginBottom: 32,
         backgroundColor: Colors.SURFACE,
@@ -156,7 +157,6 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     inputRow: {
-        flexDirection: 'row',
         justifyContent: 'space-between',
     },
     addButton: {
@@ -182,5 +182,4 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
 });
-
 export default CartSummary;

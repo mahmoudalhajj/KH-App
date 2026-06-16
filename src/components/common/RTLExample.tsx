@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { observer } from 'mobx-react-lite';
 import { Colors } from '../../enums/color';
 import { i18nStore } from "../../stores/i18nStore";
+import {DynamicView} from "./DynamicView";
 
 export const RTLExample = observer(() => {
     const isRTL = i18nStore.getIsRTL();
@@ -12,16 +13,10 @@ export const RTLExample = observer(() => {
         <View style={styles.container}>
             <View style={[
                 styles.wrapper, 
-                { flexDirection: isRTL ? 'row-reverse' : 'row' }
-            ]}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Button</Text>
-                </TouchableOpacity>
-                
+                { flexDirection: isRTL ? 'row-reverse' : 'row' }]}> 
                 <Text style={[
                     styles.label, 
-                    { textAlign: isRTL ? 'right' : 'left' }
-                ]}>
+                    { textAlign: isRTL ? 'right' : 'left' }]}>
                     Language: {currentLang}
                 </Text>
             </View>
