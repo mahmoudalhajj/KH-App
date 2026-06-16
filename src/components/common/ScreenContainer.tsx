@@ -1,6 +1,6 @@
-import React from 'react';
-import { SafeAreaView, StyleSheet, ViewStyle, StatusBar } from 'react-native';
-import {Colors} from "@mahmoudalhajj/designer-library";
+import React from "react";
+import { SafeAreaView, StyleSheet, ViewStyle, StatusBar } from "react-native";
+import { Colors } from "@mahmoudalhajj/designer-library";
 interface ScreenContainerProps {
   children: React.ReactNode;
   style?: ViewStyle;

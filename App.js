@@ -12,41 +12,38 @@ import "./src/i18n/i18n";
 const Stack = createNativeStackNavigator();
 
 const App = observer(() => {
-    useEffect(() => {
-        authStore.loadStoredUser();
-        cartStore.loadStoredCart();
-    }, []);
+  useEffect(() => {
+    authStore.loadStoredUser();
+    cartStore.loadStoredCart();
+  }, []);
 
-    return (
-        <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-                {!authStore.isLoggedIn ? (
-                    <Stack.Screen
-                        name="Auth"
-                        component={AuthScreen}
-                    />
-                ) : (
-                    <>
-                        <Stack.Screen
-                            name="Home"
-                            component={HomeScreen}
-                            options={{ headerShown: true, title: "Khattabat" }}
-                        />
-                        <Stack.Screen
-                            name="Cart"
-                            component={CartScreen}
-                            options={{ headerShown: true }}
-                        />
-                        <Stack.Screen
-                            name="Chat"
-                            component={ChatScreen}
-                            options={{ headerShown: true }}
-                        />
-                    </>
-                )}
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {!authStore.isLoggedIn ? (
+          <Stack.Screen name="Auth" component={AuthScreen} />
+        ) : (
+          <>
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ headerShown: true, title: "Khattabat" }}
+            />
+            <Stack.Screen
+              name="Cart"
+              component={CartScreen}
+              options={{ headerShown: true }}
+            />
+            <Stack.Screen
+              name="Chat"
+              component={ChatScreen}
+              options={{ headerShown: true }}
+            />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 });
 
 export default App;
