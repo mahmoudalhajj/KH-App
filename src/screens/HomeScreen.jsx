@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { TranslationKey } from "../i18n/translationKeys";
 import { DynamicText } from "../components/common/DynamicText";
 import { DynamicView } from "../components/common/DynamicView";
+import LanguageSelector from "../components/common/LanguageSelector";
 
 const HomeScreenComponent = () => {
   const navigation = useNavigation();
@@ -17,41 +18,64 @@ const HomeScreenComponent = () => {
 
   return (
     <ScreenContainer style={styles.content}>
-      <DynamicView row style={styles.grid}>
+      <DynamicView row style={styles.header}>
         <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.card}
-          onPress={() => navigation.navigate("Cart")}
+          style={styles.logoutButtonTop}
+          onPress={() => authStore.logout()}
         >
-          <DynamicView style={styles.iconCircle}>
-            <DynamicText style={styles.iconText}>🛒</DynamicText>
-          </DynamicView>
-          <DynamicText style={styles.cardTitle}>{t(TranslationKey.HOME_CART)}</DynamicText>
-          {cartStore.getTotalItems() > 0 && (
-            <DynamicView style={styles.badge}>
-              <DynamicText style={styles.badgeText}>{cartStore.getTotalItems()}</DynamicText>
-            </DynamicView>
-          )}
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.card}
-          onPress={() => navigation.navigate("Chat")}
-        >
-          <DynamicView style={styles.iconCircle}>
-            <DynamicText style={styles.iconText}>💬</DynamicText>
-          </DynamicView>
-          <DynamicText style={styles.cardTitle}>{t(TranslationKey.HOME_CHAT)}</DynamicText>
+          <DynamicText style={styles.logoutText}>
+            {t(TranslationKey.LOGOUT)}
+          </DynamicText>
         </TouchableOpacity>
       </DynamicView>
 
-      <TouchableOpacity
-        style={styles.logoutButton}
-        onPress={() => authStore.logout()}
-      >
-        <DynamicText style={styles.logoutText}>{t(TranslationKey.LOGOUT)}</DynamicText>
-      </TouchableOpacity>
+      <DynamicView style={{ flex: 1, justifyContent: "center" }}>
+        <DynamicView row style={styles.grid}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.card}
+            onPress={() => navigation.navigate("Cart")}
+          >
+            <DynamicView style={styles.iconCircle}>
+              <DynamicText style={styles.iconText}>🛒</DynamicText>
+            </DynamicView>
+            <DynamicText style={styles.cardTitle}>
+              {t(TranslationKey.HOME_CART)}
+            </DynamicText>
+            {cartStore.getTotalItems() > 0 && (
+              <DynamicView style={styles.badge}>
+                <DynamicText style={styles.badgeText}>
+                  {cartStore.getTotalItems()}
+                </DynamicText>
+              </DynamicView>
+            )}
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.card}
+            onPress={() => navigation.navigate("Chat")}
+          >
+            <DynamicView style={styles.iconCircle}>
+              <DynamicText style={styles.iconText}>💬</DynamicText>
+            </DynamicView>
+            <DynamicText style={styles.cardTitle}>
+              {t(TranslationKey.HOME_CHAT)}
+            </DynamicText>
+          </TouchableOpacity>
+        </DynamicView>
+
+        <LanguageSelector />
+
+        <TouchableOpacity
+          style={styles.logoutButton}
+          onPress={() => authStore.logout()}
+        >
+          <DynamicText style={styles.logoutText}>
+            {t(TranslationKey.LOGOUT)}
+          </DynamicText>
+        </TouchableOpacity>
+      </DynamicView>
     </ScreenContainer>
   );
 };
@@ -82,15 +106,15 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 10,
-    position: 'relative',
+    position: "relative",
   },
   iconCircle: {
     width: 50,
     height: 50,
     borderRadius: 25,
     backgroundColor: Colors.BACKGROUND,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 12,
   },
   iconText: {
@@ -102,23 +126,30 @@ const styles = StyleSheet.create({
     color: Colors.TEXT_PRIMARY,
   },
   badge: {
-    position: 'absolute',
+    position: "absolute",
     top: 12,
     right: 12,
     backgroundColor: Colors.BADGE,
     borderRadius: 12,
     minWidth: 24,
     height: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 6,
     borderWidth: 2,
     borderColor: Colors.SURFACE,
   },
   badgeText: {
-    color: 'white',
+    color: "white",
     fontSize: 11,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+  },
+  header: {
+    justifyContent: "flex-end",
+    padding: 12,
+  },
+  logoutButtonTop: {
+    padding: 12,
   },
   logoutButton: {
     alignSelf: "center",
