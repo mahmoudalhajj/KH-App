@@ -9,7 +9,6 @@ import { Colors } from "../enums/color";
 import ScreenContainer from "./common/ScreenContainer";
 import { TranslationKey } from "../i18n/translationKeys";
 import LanguageSelector from "./common/LanguageSelector";
-import { RTLExample } from "./common/RTLExample";
 import { DynamicView } from "./common/DynamicView";
 import { DynamicText } from "./common/DynamicText";
 
@@ -26,89 +25,81 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
       >
-        <View style={styles.card}>
-          <DynamicText style={styles.headerTitle}>
-            {" "}
-            {t(TranslationKey.CART_SUMMARY)}
-          </DynamicText>
-          <RTLExample />
+        <DynamicText style={styles.headerTitle}>
+          {t(TranslationKey.CART_SUMMARY)}
+        </DynamicText>
 
-          <DynamicView row style={styles.statsRow}>
-            <DynamicView style={styles.statItem}>
-              <DynamicText style={styles.statLabel}>
-                {" "}
-                {t(TranslationKey.TOTAL_ITEMS)}
-              </DynamicText>
-              <DynamicText style={styles.statValue}>
-                {cartStore.getTotalItems()}
-              </DynamicText>
-            </DynamicView>
-            <DynamicView style={styles.statItem}>
-              <DynamicText style={styles.statLabel}>
-                {" "}
-                {t(TranslationKey.TOTAL_PRICE)}{" "}
-              </DynamicText>
-              <DynamicText style={styles.statValue}>
-                ${cartStore.getTotalPrice()}
-              </DynamicText>
-            </DynamicView>
+        <DynamicView row style={styles.statsRow}>
+          <DynamicView style={styles.statItem}>
+            <DynamicText style={styles.statLabel}>
+              {t(TranslationKey.TOTAL_ITEMS)}
+            </DynamicText>
+            <DynamicText style={styles.statValue}>
+              {cartStore.getTotalItems()}
+            </DynamicText>
+          </DynamicView>
+          <DynamicView style={styles.statItem}>
+            <DynamicText style={styles.statLabel}>
+              {t(TranslationKey.TOTAL_PRICE)}
+            </DynamicText>
+            <DynamicText style={styles.statValue}>
+              ${cartStore.getTotalPrice()}
+            </DynamicText>
+          </DynamicView>
+        </DynamicView>
+
+        <View style={styles.form}>
+          <DynamicView row style={{}}>
+            <DynamicText style={styles.sectionLabel}>
+              {t(TranslationKey.ADD_NEW_ITEM)}
+            </DynamicText>
+          </DynamicView>
+          <AppTextInput
+            value={cartStore.itemName.get()}
+            onChangeText={cartStore.setItemName}
+            placeholder={t(TranslationKey.ITEM_NAME)}
+          />
+          <DynamicView row style={styles.inputRow}>
+            <View style={{ flex: 1, marginEnd: 8 }}>
+              <AppTextInput
+                value={cartStore.itemPrice.get()}
+                onChangeText={cartStore.setItemPrice}
+                placeholder={t(TranslationKey.PRICE)}
+                keyboardType="numeric"
+              />
+            </View>
+            <View style={{ flex: 1, marginStart: 8 }}>
+              <AppTextInput
+                value={cartStore.itemQuantity.get()}
+                onChangeText={cartStore.setItemQuantity}
+                placeholder={t(TranslationKey.QUANTITY)}
+                keyboardType="numeric"
+              />
+            </View>
           </DynamicView>
 
-          <View style={styles.form}>
-            <DynamicView row style={{}}>
-              <DynamicText style={styles.sectionLabel}>
-                {" "}
-                {t(TranslationKey.ADD_NEW_ITEM)}
-              </DynamicText>
-            </DynamicView>
-            <AppTextInput
-              value={cartStore.itemName.get()}
-              onChangeText={cartStore.setItemName}
-              placeholder={t(TranslationKey.ITEM_NAME)}
-            />
-            <DynamicView row style={styles.inputRow}>
-              <View style={{ flex: 1, marginEnd: 8 }}>
-                <AppTextInput
-                  value={cartStore.itemPrice.get()}
-                  onChangeText={cartStore.setItemPrice}
-                  placeholder={t(TranslationKey.PRICE)}
-                  keyboardType="numeric"
-                />
-              </View>
-              <View style={{ flex: 1, marginStart: 8 }}>
-                <AppTextInput
-                  value={cartStore.itemQuantity.get()}
-                  onChangeText={cartStore.setItemQuantity}
-                  placeholder={t(TranslationKey.QUANTITY)}
-                  keyboardType="numeric"
-                />
-              </View>
-            </DynamicView>
+          {!!cartStore.error.get() && (
+            <DynamicText style={styles.errorText}>
+              {cartStore.error.get()}
+            </DynamicText>
+          )}
 
-            {!!cartStore.error.get() && (
-              <DynamicText style={styles.errorText}>
-                {cartStore.error.get()}
-              </DynamicText>
-            )}
+          <AppButton
+            title={t(TranslationKey.ADD_TO_CART)}
+            onPress={cartStore.addItem}
+            style={styles.addButton}
+          />
+        </View>
 
-            <AppButton
-              title={t(TranslationKey.ADD_TO_CART)}
-              onPress={cartStore.addItem}
-              style={styles.addButton}
-            />
-          </View>
+        <View style={styles.footerButtons}>
+          <AppButton
+            title={t(TranslationKey.CLEAR_CART)}
+            onPress={cartStore.clearCart}
+            style={styles.clearButton}
+          />
 
-          <View style={styles.footerButtons}>
-            <AppButton
-              title={t(TranslationKey.CLEAR_CART)}
-              onPress={cartStore.clearCart}
-              style={styles.clearButton}
-            />
-
-            <View style={styles.divider} />
-
-            <LanguageSelector />
-          </View>
+          <View style={styles.divider} />
+          <LanguageSelector />
         </View>
       </ScrollView>
     </ScreenContainer>
@@ -118,80 +109,74 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
 const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
-    padding: 20,
-    justifyContent: "center",
-  },
-  card: {
-    backgroundColor: Colors.BACKGROUND,
-    borderRadius: 24,
-    padding: 24,
-    elevation: 4,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
+    paddingHorizontal: 24,
+    paddingVertical: 32,
   },
   headerTitle: {
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: "bold",
     color: Colors.TEXT_PRIMARY,
     textAlign: "center",
-    marginBottom: 24,
+    marginBottom: 32,
   },
   statsRow: {
     justifyContent: "space-around",
-    marginBottom: 32,
+    marginBottom: 40,
     backgroundColor: Colors.SURFACE,
-    padding: 16,
-    borderRadius: 16,
+    padding: 20,
+    borderRadius: 20,
   },
   statItem: {
     alignItems: "center",
+    paddingVertical: 10,
   },
   statLabel: {
-    fontSize: 12,
+    fontSize: 14,
     color: Colors.TEXT_SECONDARY,
-    marginBottom: 4,
+    marginBottom: 8,
     textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
   statValue: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 24,
+    fontWeight: "800",
     color: Colors.BUTTON,
   },
   form: {
-    marginBottom: 24,
+    marginBottom: 40,
   },
   sectionLabel: {
-    fontSize: 14,
-    fontWeight: "600",
+    fontSize: 16,
+    fontWeight: "700",
     color: Colors.SECONDARY,
-    marginBottom: 12,
+    marginBottom: 16,
   },
   inputRow: {
     justifyContent: "space-between",
+    marginBottom: 8,
   },
   addButton: {
-    marginTop: 8,
-    borderRadius: 12,
+    marginTop: 16,
   },
   divider: {
     height: 1,
     backgroundColor: Colors.BORDER,
-    marginVertical: 24,
+    marginVertical: 32,
   },
   footerButtons: {
-    gap: 12,
+    gap: 16,
+    paddingBottom: 24,
   },
   clearButton: {
     backgroundColor: Colors.ERROR,
-    borderRadius: 12,
   },
   errorText: {
     color: Colors.ERROR,
-    fontSize: 13,
+    fontSize: 14,
     textAlign: "center",
-    marginBottom: 12,
+    marginBottom: 16,
+    fontWeight: 500,
   },
 });
+
 export default CartSummary;

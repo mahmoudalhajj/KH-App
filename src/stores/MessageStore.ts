@@ -39,19 +39,19 @@ export class MessageStore {
   }
 
   setDraft = (draft: string) => {
-    runInAction(()=> {
-        this.draft.set(draft);
-    })
-  }
+    runInAction(() => {
+      this.draft.set(draft);
+    });
+  };
 
   getDraft = () => {
     return this.draft.get();
-  }
+  };
 
   clearMessages = () => {
-if (this.messages.size === 0) return;    
+    if (this.messages.size === 0) return;
 
-  runInAction(() => {
+    runInAction(() => {
       this.messages.clear();
       this.storeMessages();
     });
@@ -62,14 +62,13 @@ if (this.messages.size === 0) return;
   }
 
   loadStoredMessages() {
-   const stored = localStorageStore.storageGet(StorageKey.Messages);
-   if(!stored) return;
-   runInAction(() => {
-    stored.forEach((message: message) => {
-      this.messages.set(message.id, message);
+    const stored = localStorageStore.storageGet(StorageKey.Messages);
+    if (!stored) return;
+    runInAction(() => {
+      stored.forEach((message: message) => {
+        this.messages.set(message.id, message);
+      });
     });
-  });
+  }
 }
-
-    }   
 export const messageStore = new MessageStore();

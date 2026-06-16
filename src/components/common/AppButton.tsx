@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Pressable,
   Text,
@@ -22,20 +23,20 @@ const AppButton = ({ title, onPress, style }: AppButtonProps) => {
 };
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: Colors.BUTTON,
-    borderRadius: 20,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+    button: {
+        backgroundColor: Colors.BUTTON,
+        borderRadius: 14,
+        paddingVertical: 14,
+        paddingHorizontal: 20,
+        alignItems: "center",
+        justifyContent: "center",
+        marginVertical: 8,
+    },
 
-  text: {
-    color: Colors.BACKGROUND,
-    fontWeight: "600",
-    fontSize: 16,
-  },
+    text: {
+        color: Colors.BACKGROUND,
+        fontWeight: "700",
+        fontSize: 17,
+    },
 });
-
 export default AppButton;

@@ -7,7 +7,7 @@ import Chatting from "../components/Chatting";
 import { observer } from "mobx-react-lite";
 
 export const ChatScreen = observer(() => {
-const navigation = useNavigation();
+  const navigation = useNavigation();
 
   // useEffect(() => {
   //   if (!authStore.isLoggedIn()) {
@@ -25,9 +25,5 @@ const navigation = useNavigation();
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    paddingVertical: 32,
   },
 });

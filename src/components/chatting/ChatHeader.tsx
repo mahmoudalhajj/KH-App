@@ -1,35 +1,45 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React from "react";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { Colors } from "../../enums/color";
+import { useTranslation } from "react-i18next";
+import { TranslationKey } from "../../i18n/translationKeys";
+import { DynamicView } from "../common/DynamicView";
+import { DynamicText } from "../common/DynamicText";
 
 interface ChatHeaderProps {
   onClear: () => void;
 }
 
 const ChatHeader = ({ onClear }: ChatHeaderProps) => {
+  const { t } = useTranslation();
+
   return (
-    <View style={styles.header}>
+    <DynamicView row style={styles.header}>
       <View style={styles.avatar}>
-        <Text style={styles.avatarText}>C</Text>
+        <DynamicText style={styles.avatarText}>C</DynamicText>
       </View>
 
-      <View>
-        <Text style={styles.headerTitle}>Chat</Text>
+      <View style={{ flex: 1 }}>
+        <DynamicText style={styles.headerTitle}>
+          {t(TranslationKey.CHAT_TITLE)}
+        </DynamicText>
 
-        <Text style={styles.headerSubtitle}>
-          Type a message and press send.
-        </Text>
+        <DynamicText style={styles.headerSubtitle}>
+          {t(TranslationKey.CHAT_SUBTITLE)}
+        </DynamicText>
       </View>
 
       <TouchableOpacity style={styles.clearButton} onPress={onClear}>
-        <Text style={styles.clearButtonText}>Clear</Text>
+        <DynamicText style={styles.clearButtonText}>
+          {t(TranslationKey.CHAT_CLEAR)}
+        </DynamicText>
       </TouchableOpacity>
-    </View>
+    </DynamicView>
   );
 };
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: "row",
     alignItems: "center",
     gap: 12,
     backgroundColor: Colors.HEADER,

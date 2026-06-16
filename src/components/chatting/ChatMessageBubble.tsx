@@ -1,43 +1,60 @@
-import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { View, StyleSheet } from "react-native";
 import { message } from "../../types/message";
 import { Colors } from "../../enums/color";
+import { DynamicText } from "../common/DynamicText";
+import { observer } from "mobx-react-lite";
+import { DynamicView } from "../common/DynamicView";
+import { i18nStore } from "../../stores/i18nStore";
+
+// import { MessageSender } from "../../enums/MessageSender";
 
 interface MessageBubbleProps {
   message: message;
   formattedTime: string;
 }
 
-const MessageBubble = ({ message, formattedTime }: MessageBubbleProps) => {
-  return (
-    <View style={styles.wrapper}>
-      <View style={styles.bubble}>
-        <Text style={styles.text}>{message.text}</Text>
+const MessageBubble = observer(
+  ({ message, formattedTime }: MessageBubbleProps) => {
+    const isRTL = i18nStore.getIsRTL();
 
-        <Text style={styles.time}>{formattedTime}</Text>
+    return (
+      <View style={styles.wrapper}>
+        <View
+          style={[
+            styles.bubble,
+            { alignSelf: isRTL ? "flex-end" : "flex-start" },
+          ]}
+        >
+          <DynamicText style={styles.text}>{message.text}</DynamicText>
+          <DynamicText style={styles.time}>{formattedTime}</DynamicText>
+        </View>
       </View>
-    </View>
-  );
-};
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   wrapper: {
-    alignSelf: "flex-end",
-    maxWidth: "85%",
-    marginBottom: 8,
+    width: "100%",
+    marginBottom: 12,
   },
   bubble: {
     backgroundColor: Colors.BUBBLE,
-    borderRadius: 12,
     padding: 12,
+    borderRadius: 16,
+    maxWidth: "85%",
+    alignSelf: "flex-end",
   },
   text: {
+    fontSize: 15,
+    lineHeight: 20,
     color: Colors.BACKGROUND,
-    fontSize: 14,
   },
   time: {
-    color: Colors.HEADER_SUBTITLE,
     fontSize: 11,
     marginTop: 4,
+    color: Colors.HEADER_SUBTITLE,
   },
 });
 

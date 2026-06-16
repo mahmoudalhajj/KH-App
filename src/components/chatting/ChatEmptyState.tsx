@@ -1,10 +1,18 @@
-import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
+import { TranslationKey } from "../../i18n/translationKeys";
+import { DynamicText } from "../common/DynamicText";
 
 const ChatEmptyState = () => {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.emptyContainer}>
       <View style={styles.emptyChip}>
-        <Text style={styles.emptyText}>No messages yet, start chatting!</Text>
+        <DynamicText style={styles.emptyText}>
+          {t(TranslationKey.CHAT_EMPTY)}
+        </DynamicText>
       </View>
     </View>
   );

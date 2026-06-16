@@ -1,44 +1,62 @@
+import React from "react";
 import {
   View,
   TextInput,
   TouchableOpacity,
-  Text,
   StyleSheet,
   KeyboardAvoidingView,
 } from "react-native";
 import { Colors } from "../../enums/color";
+import { useTranslation } from "react-i18next";
+import { TranslationKey } from "../../i18n/translationKeys";
+import { DynamicView } from "../common/DynamicView";
+import { DynamicText } from "../common/DynamicText";
+import { observer } from "mobx-react-lite";
+import { i18nStore } from "../../stores/i18nStore";
+
 interface ChatInputProps {
   draft: string;
   onDraftChange: (text: string) => void;
   onSend: () => void;
 }
 
-const ChatInput = ({ draft, onDraftChange, onSend }: ChatInputProps) => {
+const ChatInput = observer(({ draft, onDraftChange, onSend }: ChatInputProps) => {
+  const { t } = useTranslation();
+  const isRTL = i18nStore.getIsRTL();
+
   return (
     <KeyboardAvoidingView>
-      <View style={styles.inputRow}>
+      <DynamicView row style={styles.inputRow}>
         <TextInput
-          style={styles.input}
-          placeholder="Write a message..."
+          style={[styles.input, { textAlign: isRTL ? "right" : "left" }]}
+          placeholder={t(TranslationKey.CHAT_PLACEHOLDER)}
           value={draft}
           onChangeText={onDraftChange}
           multiline
         />
 
-        <TouchableOpacity style={styles.sendButton} onPress={onSend}>
-          <Text style={styles.sendButtonText}>Send</Text>
+        <TouchableOpacity 
+          style={styles.sendButton} 
+          onPress={(e) => {
+            e?.preventDefault?.();
+            onSend();
+          }}
+        >
+          <DynamicText style={styles.sendButtonText}>
+            {t(TranslationKey.CHAT_SEND)}
+          </DynamicText>
         </TouchableOpacity>
-      </View>
+      </DynamicView>
     </KeyboardAvoidingView>
   );
-};
+});
 
 const styles = StyleSheet.create({
   inputRow: {
-    flexDirection: "row",
     alignItems: "center",
     gap: 12,
-    padding: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
     borderTopWidth: 1,
     borderTopColor: Colors.CHAT_INPUT,
     backgroundColor: Colors.BACKGROUND,
@@ -46,26 +64,27 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     borderWidth: 1,
-    borderColor: Colors.BACKGROUND,
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    fontSize: 14,
-    backgroundColor: "white",
-    maxHeight: 100,
+    borderColor: Colors.BORDER,
+    borderRadius: 24,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    fontSize: 16,
+    backgroundColor: "#F9F9F9",
+    maxHeight: 120,
   },
   sendButton: {
     backgroundColor: Colors.SECONDARY,
-    paddingHorizontal: 20,
+    paddingHorizontal: 22,
     paddingVertical: 12,
-    borderRadius: 8,
-    minWidth: 80,
+    borderRadius: 20,
+    minWidth: 90,
     alignItems: "center",
+    justifyContent: "center",
   },
   sendButtonText: {
     color: Colors.BACKGROUND,
-    fontWeight: "600",
-    fontSize: 14,
+    fontWeight: "700",
+    fontSize: 15,
   },
 });
 
