@@ -1,18 +1,27 @@
 
 import { TextInput, TextInputProps, StyleSheet } from "react-native";
 import {Colors} from "../../enums/color";
+import { observer } from "mobx-react-lite";
+import { i18nStore } from "../../stores/i18nStore";
+
 interface AppTextInputProps extends TextInputProps {}
 
-const AppTextInput = (props: AppTextInputProps) => {
+const AppTextInput = observer((props: AppTextInputProps) => {
+    const isRTL = i18nStore.getIsRTL();
+    
     return (
         <TextInput
             {...props}
-            style={[styles.input, props.style]}
+            style={[
+                styles.input, 
+                { textAlign: isRTL ? 'right' : 'left' },
+                props.style
+            ]}
             placeholderTextColor="#888"
             autoCapitalize="none"
         />
     );
-};
+});
 
 const styles = StyleSheet.create({
     input: {

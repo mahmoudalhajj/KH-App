@@ -7,7 +7,6 @@ interface Props extends ViewProps{
   row?: boolean;
 }
 
-
   export const DynamicView = observer(({ style, row, children, ...props }: Props) => {
   const isRTL = i18nStore.getIsRTL();
 

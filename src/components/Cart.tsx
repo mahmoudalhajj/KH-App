@@ -3,7 +3,6 @@ import { observer } from "mobx-react-lite";
 import type { CartStore } from "../stores/CartStore";
 import {
     View,
-    Text,
     StyleSheet,
     ScrollView,
 } from "react-native";
@@ -16,6 +15,7 @@ import { TranslationKey } from "../i18n/translationKeys";
 import LanguageSelector from "./common/LanguageSelector";
 import { RTLExample } from "./common/RTLExample";
 import {DynamicView } from "./common/DynamicView";
+import {DynamicText } from "./common/DynamicText";
 
 interface CartProps {
     cartStore: CartStore;
@@ -31,23 +31,23 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
                 keyboardShouldPersistTaps="handled"
             >
                 <View style={styles.card}>
-                    <Text style={styles.headerTitle}> {t(TranslationKey.CART_SUMMARY)}</Text>
+                    <DynamicText style={styles.headerTitle}> {t(TranslationKey.CART_SUMMARY)}</DynamicText>
                     <RTLExample />
 
                     <DynamicView row style={styles.statsRow}>
                         <DynamicView style={styles.statItem}>
-                            <Text style={styles.statLabel}> {t(TranslationKey.TOTAL_ITEMS)}</Text>                            
-                            <Text style={styles.statValue}>{cartStore.getTotalItems()}</Text>
+                            <DynamicText style={styles.statLabel}> {t(TranslationKey.TOTAL_ITEMS)}</DynamicText>                            
+                            <DynamicText style={styles.statValue}>{cartStore.getTotalItems()}</DynamicText>
                         </DynamicView>
                         <DynamicView style={styles.statItem}>
-                            <Text style={styles.statLabel}> {t(TranslationKey.TOTAL_PRICE)} </Text>
-                            <Text style={styles.statValue}>${cartStore.getTotalPrice()}</Text>
+                            <DynamicText style={styles.statLabel}> {t(TranslationKey.TOTAL_PRICE)} </DynamicText>
+                            <DynamicText style={styles.statValue}>${cartStore.getTotalPrice()}</DynamicText>
                         </DynamicView>
                     </DynamicView>
 
                     <View style={styles.form}>
                         <DynamicView row>
-                            <Text style={styles.sectionLabel}> {t(TranslationKey.ADD_NEW_ITEM)}</Text>
+                            <DynamicText style={styles.sectionLabel}> {t(TranslationKey.ADD_NEW_ITEM)}</DynamicText>
                         </DynamicView>
                         <AppTextInput
                             value={cartStore.itemName.get()}
@@ -75,7 +75,7 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
 
 
                         {!!cartStore.error.get() && (
-                            <Text style={styles.errorText}>{cartStore.error.get()}</Text>
+                            <DynamicText style={styles.errorText}>{cartStore.error.get()}</DynamicText>
                         )}
 
                         <AppButton
