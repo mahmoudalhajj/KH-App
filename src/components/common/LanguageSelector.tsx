@@ -23,7 +23,7 @@ const LanguageSelector = observer(() => {
 
   return (
     <View style={styles.container}>
-      <DynamicText style={uiStore.getLabelStyle()}>
+      <DynamicText style={uiStore.labelStyle}>
         {t(TranslationKey.CHANGE_LANGUAGE)}
       </DynamicText>
 
