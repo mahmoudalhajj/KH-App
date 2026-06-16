@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Pressable, StyleSheet } from "react-native";
 import { observer } from "mobx-react-lite";
 import { useTranslation } from "react-i18next";
 import { Colors } from "../../enums/color";
@@ -7,6 +7,8 @@ import { TranslationKey } from "../../i18n/translationKeys";
 import { i18nStore } from "../../stores/i18nStore";
 import { Language } from "../../i18n/translations";
 import { DynamicView } from "./DynamicView";
+import { DynamicText } from "./DynamicText";
+import { uiStore } from "../../stores/UIStore";
 
 const LanguageSelector = observer(() => {
   const { t } = useTranslation();
@@ -17,14 +19,14 @@ const LanguageSelector = observer(() => {
     { key: "fr", value: "Français" },
   ];
 
-  const isRTL = i18nStore.getIsRTL();
   const currentLang = i18nStore.getLanguage();
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.label, { textAlign: isRTL ? "right" : "left" }]}>
+      <DynamicText style={uiStore.getLabelStyle()}>
         {t(TranslationKey.CHANGE_LANGUAGE)}
-      </Text>
+      </DynamicText>
+
       {languages.map((lang) => (
         <Pressable
           key={lang.key}
@@ -32,14 +34,14 @@ const LanguageSelector = observer(() => {
           onPress={() => i18nStore.setLanguage(lang.key)}
         >
           <DynamicView row style={styles.itemContent}>
-            <Text
+            <DynamicText
               style={[
                 styles.text,
                 currentLang === lang.key && styles.activeText,
               ]}
             >
               {lang.value}
-            </Text>
+            </DynamicText>
             {currentLang === lang.key && <View style={styles.checkmark} />}
           </DynamicView>
         </Pressable>
@@ -51,12 +53,6 @@ const LanguageSelector = observer(() => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 16,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: Colors.SECONDARY,
-    marginBottom: 12,
   },
   item: {
     borderRadius: 12,

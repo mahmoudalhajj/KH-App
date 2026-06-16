@@ -1,56 +1,56 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { authStore } from "../stores/AuthStore";
 import { cartStore } from "../stores/CartStore";
 import { observer } from "mobx-react-lite";
 import { Colors } from "../enums/color";
 import ScreenContainer from "../components/common/ScreenContainer";
+import { useTranslation } from "react-i18next";
+import { TranslationKey } from "../i18n/translationKeys";
+import { DynamicText } from "../components/common/DynamicText";
+import { DynamicView } from "../components/common/DynamicView";
 
 const HomeScreenComponent = () => {
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   return (
     <ScreenContainer style={styles.content}>
-      <View style={styles.grid}>
-        <TouchableOpacity 
+      <DynamicView row style={styles.grid}>
+        <TouchableOpacity
           activeOpacity={0.7}
           style={styles.card}
           onPress={() => navigation.navigate("Cart")}
         >
-          <View style={styles.iconCircle}>
-            <Text style={styles.iconText}>🛒</Text>
-          </View>
-          <Text style={styles.cardTitle}>Cart</Text>
+          <DynamicView style={styles.iconCircle}>
+            <DynamicText style={styles.iconText}>🛒</DynamicText>
+          </DynamicView>
+          <DynamicText style={styles.cardTitle}>{t(TranslationKey.HOME_CART)}</DynamicText>
           {cartStore.getTotalItems() > 0 && (
-            <View style={styles.badge}>
-              <Text style={styles.badgeText}>{cartStore.getTotalItems()}</Text>
-            </View>
+            <DynamicView style={styles.badge}>
+              <DynamicText style={styles.badgeText}>{cartStore.getTotalItems()}</DynamicText>
+            </DynamicView>
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity 
+        <TouchableOpacity
           activeOpacity={0.7}
           style={styles.card}
           onPress={() => navigation.navigate("Chat")}
         >
-          <View style={styles.iconCircle}>
-            <Text style={styles.iconText}>💬</Text>
-          </View>
-          <Text style={styles.cardTitle}>Chat</Text>
+          <DynamicView style={styles.iconCircle}>
+            <DynamicText style={styles.iconText}>💬</DynamicText>
+          </DynamicView>
+          <DynamicText style={styles.cardTitle}>{t(TranslationKey.HOME_CHAT)}</DynamicText>
         </TouchableOpacity>
-      </View>
+      </DynamicView>
 
-      <TouchableOpacity 
-        style={styles.logoutButton} 
+      <TouchableOpacity
+        style={styles.logoutButton}
         onPress={() => authStore.logout()}
       >
-        <Text style={styles.logoutText}>Logout</Text>
+        <DynamicText style={styles.logoutText}>{t(TranslationKey.LOGOUT)}</DynamicText>
       </TouchableOpacity>
     </ScreenContainer>
   );
@@ -60,11 +60,11 @@ export const HomeScreen = observer(HomeScreenComponent);
 
 const styles = StyleSheet.create({
   content: {
+    flex: 1,
     padding: 24,
     justifyContent: "center",
   },
   grid: {
-    flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 48,
   },

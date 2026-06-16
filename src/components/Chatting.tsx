@@ -1,10 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
 import { View, FlatList, StyleSheet } from "react-native";
-
 import { messageStore } from "../stores/MessageStore";
 import { message } from "../types/message";
-
 import ChatHeader from "../components/chatting/ChatHeader";
 import ChatEmptyState from "../components/chatting/ChatEmptyState";
 import ChatInput from "../components/chatting/ChatInput";
@@ -16,7 +14,7 @@ const Chatting = observer(() => {
   const messages = messageStore.getAllMessages();
   const draft = messageStore.getDraft();
 
-  const flatListRef = useRef<FlatList<message>>(null);
+  const endRef = useRef<FlatList<message>>(null);
 
   useEffect(() => {
     messageStore.loadStoredMessages();
@@ -24,7 +22,7 @@ const Chatting = observer(() => {
 
   useEffect(() => {
     if (messages.length > 0) {
-      flatListRef.current?.scrollToEnd({
+      endRef.current?.scrollToEnd({
         animated: true,
       });
     }
@@ -39,7 +37,7 @@ const Chatting = observer(() => {
           <ChatEmptyState />
         ) : (
           <FlatList
-            ref={flatListRef}
+            ref={endRef}
             data={messages}
             keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={styles.messageList}

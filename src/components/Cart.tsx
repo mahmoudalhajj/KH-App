@@ -16,6 +16,78 @@ interface CartProps {
   cartStore: CartStore;
 }
 
+const CartStats = observer(({ cartStore }: CartProps) => {
+  const { t } = useTranslation();
+  return (
+    <DynamicView row style={styles.statsRow}>
+      <DynamicView style={styles.statItem}>
+        <DynamicText style={styles.statLabel}>
+          {t(TranslationKey.TOTAL_ITEMS)}
+        </DynamicText>
+        <DynamicText style={styles.statValue}>
+          {cartStore.getTotalItems()}
+        </DynamicText>
+      </DynamicView>
+      <DynamicView style={styles.statItem}>
+        <DynamicText style={styles.statLabel}>
+          {t(TranslationKey.TOTAL_PRICE)}
+        </DynamicText>
+        <DynamicText style={styles.statValue}>
+          ${cartStore.getTotalPrice()}
+        </DynamicText>
+      </DynamicView>
+    </DynamicView>
+  );
+});
+
+const CartForm = observer(({ cartStore }: CartProps) => {
+  const { t } = useTranslation();
+  return (
+    <View style={styles.form}>
+      <DynamicView row>
+        <DynamicText style={styles.sectionLabel}>
+          {t(TranslationKey.ADD_NEW_ITEM)}
+        </DynamicText>
+      </DynamicView>
+      <AppTextInput
+        value={cartStore.itemName.get()}
+        onChangeText={cartStore.setItemName}
+        placeholder={t(TranslationKey.ITEM_NAME)}
+      />
+      <DynamicView row style={styles.inputRow}>
+        <View style={{ flex: 1, marginEnd: 8 }}>
+          <AppTextInput
+            value={cartStore.itemPrice.get()}
+            onChangeText={cartStore.setItemPrice}
+            placeholder={t(TranslationKey.PRICE)}
+            keyboardType="numeric"
+          />
+        </View>
+        <View style={{ flex: 1, marginStart: 8 }}>
+          <AppTextInput
+            value={cartStore.itemQuantity.get()}
+            onChangeText={cartStore.setItemQuantity}
+            placeholder={t(TranslationKey.QUANTITY)}
+            keyboardType="numeric"
+          />
+        </View>
+      </DynamicView>
+
+      {!!cartStore.error.get() && (
+        <DynamicText style={styles.errorText}>
+          {cartStore.error.get()}
+        </DynamicText>
+      )}
+
+      <AppButton
+        title={t(TranslationKey.ADD_TO_CART)}
+        onPress={cartStore.addItem}
+        style={styles.addButton}
+      />
+    </View>
+  );
+});
+
 const CartSummary = observer(({ cartStore }: CartProps) => {
   const { t } = useTranslation();
 
@@ -29,67 +101,8 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
           {t(TranslationKey.CART_SUMMARY)}
         </DynamicText>
 
-        <DynamicView row style={styles.statsRow}>
-          <DynamicView style={styles.statItem}>
-            <DynamicText style={styles.statLabel}>
-              {t(TranslationKey.TOTAL_ITEMS)}
-            </DynamicText>
-            <DynamicText style={styles.statValue}>
-              {cartStore.getTotalItems()}
-            </DynamicText>
-          </DynamicView>
-          <DynamicView style={styles.statItem}>
-            <DynamicText style={styles.statLabel}>
-              {t(TranslationKey.TOTAL_PRICE)}
-            </DynamicText>
-            <DynamicText style={styles.statValue}>
-              ${cartStore.getTotalPrice()}
-            </DynamicText>
-          </DynamicView>
-        </DynamicView>
-
-        <View style={styles.form}>
-          <DynamicView row style={{}}>
-            <DynamicText style={styles.sectionLabel}>
-              {t(TranslationKey.ADD_NEW_ITEM)}
-            </DynamicText>
-          </DynamicView>
-          <AppTextInput
-            value={cartStore.itemName.get()}
-            onChangeText={cartStore.setItemName}
-            placeholder={t(TranslationKey.ITEM_NAME)}
-          />
-          <DynamicView row style={styles.inputRow}>
-            <View style={{ flex: 1, marginEnd: 8 }}>
-              <AppTextInput
-                value={cartStore.itemPrice.get()}
-                onChangeText={cartStore.setItemPrice}
-                placeholder={t(TranslationKey.PRICE)}
-                keyboardType="numeric"
-              />
-            </View>
-            <View style={{ flex: 1, marginStart: 8 }}>
-              <AppTextInput
-                value={cartStore.itemQuantity.get()}
-                onChangeText={cartStore.setItemQuantity}
-                placeholder={t(TranslationKey.QUANTITY)}
-                keyboardType="numeric"
-              />
-            </View>
-          </DynamicView>
-
-          {!!cartStore.error.get() && (
-            <DynamicText style={styles.errorText}>
-              {cartStore.error.get()}
-            </DynamicText>
-          )}
-
-          <AppButton
-            title={t(TranslationKey.ADD_TO_CART)}
-            onPress={cartStore.addItem}
-            style={styles.addButton}
-          />
-        </View>
+        <CartStats cartStore={cartStore} />
+        <CartForm cartStore={cartStore} />
 
         <View style={styles.footerButtons}>
           <AppButton
@@ -97,7 +110,6 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
             onPress={cartStore.clearCart}
             style={styles.clearButton}
           />
-
           <View style={styles.divider} />
           <LanguageSelector />
         </View>
