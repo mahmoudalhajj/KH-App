@@ -1,7 +1,8 @@
 import { observable, runInAction } from "mobx";
 import { message } from "../types/message";
 import { E_MESSAGE_SENDER } from "../enums/MessageSender";
-import { localStorageStore, StorageKey } from "./LocalStorageStore";
+import { localStorageStore } from "./LocalStorageStore";
+import { E_STORAGE_KEY } from "../enums/StorageKeys";
 
 export class MessageStore {
   messages = observable.map<number, message>();
@@ -58,11 +59,11 @@ export class MessageStore {
   };
 
   storeMessages() {
-    localStorageStore.storageSet(StorageKey.Messages, this.getAllMessages());
+    localStorageStore.storageSet(E_STORAGE_KEY.MESSAGES, this.getAllMessages());
   }
 
   loadStoredMessages() {
-    const stored = localStorageStore.storageGet(StorageKey.Messages);
+    const stored = localStorageStore.storageGet(E_STORAGE_KEY.MESSAGES);
     if (!stored) return;
     runInAction(() => {
       stored.forEach((message: message) => {

@@ -1,7 +1,7 @@
 import { CartItem } from "../types/cartItem";
 import { observable, runInAction } from "mobx";
-import { localStorageStore, StorageKey } from "./LocalStorageStore";
-
+import { localStorageStore } from "./LocalStorageStore";
+import { E_STORAGE_KEY } from "../enums/StorageKeys";
 export class CartStore {
   cart = observable.map<number, CartItem>();
   itemName = observable.box<string>("");
@@ -57,7 +57,7 @@ export class CartStore {
 
   storeCart() {
     localStorageStore.storageSet(
-      StorageKey.Cart,
+      E_STORAGE_KEY.CART,
       Array.from(this.cart.values()),
     );
   }
@@ -104,7 +104,7 @@ export class CartStore {
   }
 
   loadStoredCart() {
-    const stored = localStorageStore.storageGet(StorageKey.Cart);
+    const stored = localStorageStore.storageGet(E_STORAGE_KEY.CART);
     if (!Array.isArray(stored)) {
       return;
     }

@@ -13,6 +13,7 @@ import { DynamicText } from "../common/DynamicText";
 import { observer } from "mobx-react-lite";
 import { i18nStore } from "../../stores/i18nStore";
 import { messageStore } from "../../stores/MessageStore";
+import { uiStore } from "../../stores/ThemeStore";
 
 const ChatInput = observer(() => {
   const { t } = useTranslation();
@@ -22,7 +23,7 @@ const ChatInput = observer(() => {
     <KeyboardAvoidingView>
       <DynamicView row style={styles.inputRow}>
         <TextInput
-          style={[styles.input, { textAlign: isRTL ? "right" : "left" }]}
+          style={[styles.input, uiStore.getTextAlign()]}
           placeholder={t(TranslationKey.CHAT_PLACEHOLDER)}
           value={messageStore.getDraft()}
           onChangeText={messageStore.setDraft}

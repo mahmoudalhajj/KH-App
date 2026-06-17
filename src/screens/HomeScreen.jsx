@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { authStore } from "../stores/AuthStore";
 import { cartStore } from "../stores/CartStore";
 import { observer } from "mobx-react-lite";
-import { Colors } from "../enums/color";
+import { E_COLORS } from "../enums/color";
 import ScreenContainer from "../components/common/ScreenContainer";
 import { useTranslation } from "react-i18next";
 import { TranslationKey } from "../i18n/translationKeys";
@@ -18,17 +18,6 @@ const HomeScreenComponent = () => {
 
   return (
     <ScreenContainer style={styles.content}>
-      <DynamicView row style={styles.header}>
-        <TouchableOpacity
-          style={styles.logoutButtonTop}
-          onPress={() => authStore.logout()}
-        >
-          <DynamicText style={styles.logoutText}>
-            {t(TranslationKey.LOGOUT)}
-          </DynamicText>
-        </TouchableOpacity>
-      </DynamicView>
-
       <DynamicView style={{ flex: 1, justifyContent: "center" }}>
         <DynamicView row style={styles.grid}>
           <TouchableOpacity
@@ -98,9 +87,9 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.SURFACE,
+    backgroundColor: E_COLORS.SURFACE,
     borderWidth: 1,
-    borderColor: Colors.BORDER,
+    borderColor: E_COLORS.BORDER,
     elevation: 2,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -112,7 +101,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: Colors.BACKGROUND,
+    backgroundColor: E_COLORS.BACKGROUND,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 12,
@@ -123,13 +112,13 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 16,
     fontWeight: "600",
-    color: Colors.TEXT_PRIMARY,
+    color: E_COLORS.TEXT_PRIMARY,
   },
   badge: {
     position: "absolute",
     top: 12,
     right: 12,
-    backgroundColor: Colors.BADGE,
+    backgroundColor: E_COLORS.BADGE,
     borderRadius: 12,
     minWidth: 24,
     height: 24,
@@ -137,7 +126,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 6,
     borderWidth: 2,
-    borderColor: Colors.SURFACE,
+    borderColor: E_COLORS.SURFACE,
   },
   badgeText: {
     color: "white",
@@ -156,7 +145,7 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   logoutText: {
-    color: Colors.TEXT_SECONDARY,
+    color: E_COLORS.TEXT_SECONDARY,
     fontWeight: "500",
     fontSize: 14,
   },

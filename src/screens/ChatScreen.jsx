@@ -5,13 +5,6 @@ import Chatting from "../components/Chatting";
 import { observer } from "mobx-react-lite";
 
 export const ChatScreen = observer(() => {
-  const navigation = useNavigation();
-
-  // if (!authStore.getIsLoggedIn()) {
-  //   navigation.replace("Auth");
-  //   return null;
-  // }
-
   return (
     <View style={styles.container}>
       <Chatting />

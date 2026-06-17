@@ -2,12 +2,6 @@ import { createMMKV } from "react-native-mmkv";
 
 export const storage = createMMKV();
 
-export enum StorageKey {
-  Cart = "cart",
-  Messages = "messages",
-  User = "user",
-}
-
 class LocalStorageStore {
   storageGet = (key: string) => {
     try {

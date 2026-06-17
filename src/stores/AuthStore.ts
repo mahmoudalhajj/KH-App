@@ -1,7 +1,8 @@
 import { computed, observable, runInAction } from "mobx";
 import { User } from "../types/user";
-import { localStorageStore, StorageKey } from "./LocalStorageStore";
+import { localStorageStore } from "./LocalStorageStore";
 import { E_AUTH_STATUS } from "../enums/authStatus";
+import { E_STORAGE_KEY } from "../enums/StorageKeys";
 
 export class AuthStore {
   user = observable.box<User | null>(null);
@@ -87,13 +88,13 @@ export class AuthStore {
   };
 
   storeUser() {
-    localStorageStore.storageSet(StorageKey.User, this.user.get());
+    localStorageStore.storageSet(E_STORAGE_KEY.USER, this.user.get());
   }
 
   loadStoredUser() {
     if (this.getIsLoggedIn()) return;
 
-    const stored = localStorageStore.storageGet(StorageKey.User);
+    const stored = localStorageStore.storageGet(E_STORAGE_KEY.USER);
     if (!stored) return;
 
     runInAction(() => {

@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { observer } from "mobx-react-lite";
 import { authStore } from "../stores/AuthStore";
-import { Colors } from "../enums/color";
+import { E_COLORS } from "../enums/color";
 import AppTextInput from "../components/common/AppTextInput";
 import AppButton from "../components/common/AppButton";
 
@@ -95,7 +95,7 @@ export const AuthScreen = observer(() => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.BACKGROUND,
+    backgroundColor: E_COLORS.BACKGROUND,
   },
   keyboardView: {
     flex: 1,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "bold",
-    color: Colors.SECONDARY,
+    color: E_COLORS.SECONDARY,
     marginBottom: 8,
     textAlign: "center",
   },
@@ -147,12 +147,12 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   switchText: {
-    color: Colors.BUTTON,
+    color: E_COLORS.BUTTON,
     fontSize: 14,
     fontWeight: "600",
   },
   errorText: {
-    color: Colors.ERROR,
+    color: E_COLORS.ERROR,
     fontSize: 14,
     marginBottom: 16,
     textAlign: "center",
