@@ -7,7 +7,7 @@ import { i18nStore } from "../../stores/i18nStore";
 import { Language } from "../../i18n/translations";
 import { DynamicView } from "./DynamicView";
 import { DynamicText } from "./DynamicText";
-import { uiStore } from "../../stores/ThemeStore";
+import { themeStore } from "../../stores/ThemeStore";
 
 const LanguageSelector = observer(() => {
   const languages: { key: Language; value: string }[] = [
@@ -20,7 +20,7 @@ const LanguageSelector = observer(() => {
 
   return (
     <View style={styles.container}>
-      <DynamicText style={uiStore.getLabelStyle()}>
+      <DynamicText style={themeStore.getLabelStyle()}>
         {i18nStore.translate(TranslationKey.CHANGE_LANGUAGE)}
       </DynamicText>
 

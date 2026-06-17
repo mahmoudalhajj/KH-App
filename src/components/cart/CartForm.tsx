@@ -9,13 +9,13 @@ import AppTextInput from "../common/AppTextInput";
 import AppButton from "../common/AppButton";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
-import { uiStore } from "../../stores/ThemeStore";
+import { themeStore } from "../../stores/ThemeStore";
 
 export const CartForm = observer(() => {
   return (
     <View style={styles.form}>
       <DynamicView row>
-        <DynamicText style={uiStore.getLabelStyle()}>
+        <DynamicText style={themeStore.getLabelStyle()}>
           {i18nStore.translate(TranslationKey.ADD_NEW_ITEM)}
         </DynamicText>
       </DynamicView>

@@ -7,13 +7,13 @@ import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
-import { uiStore } from "../../stores/ThemeStore";
+import { themeStore } from "../../stores/ThemeStore";
 
 export const CartStats = observer(() => {
   return (
     <DynamicView row style={styles.statsRow}>
       <DynamicView style={styles.statItem}>
-        <DynamicText style={uiStore.getLabelStyle()}>
+        <DynamicText style={themeStore.getLabelStyle()}>
           {i18nStore.translate(TranslationKey.TOTAL_ITEMS)}
         </DynamicText>
         <DynamicText style={styles.statValue}>
@@ -21,7 +21,7 @@ export const CartStats = observer(() => {
         </DynamicText>
       </DynamicView>
       <DynamicView style={styles.statItem}>
-        <DynamicText style={uiStore.getLabelStyle()}>
+        <DynamicText style={themeStore.getLabelStyle()}>
           {i18nStore.translate(TranslationKey.TOTAL_PRICE)}
         </DynamicText>
         <DynamicText style={styles.statValue}>

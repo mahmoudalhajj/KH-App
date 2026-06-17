@@ -2,7 +2,7 @@ import { i18nStore } from "./i18nStore";
 import { E_COLORS } from "../enums/color";
 import { TextStyle } from "react-native";
 
-class UIStore {
+class ThemeStore {
   getTextAlign = (): TextStyle => {
     return { textAlign: i18nStore.getIsRTL() ? "right" : "left" };
   };
@@ -17,4 +17,4 @@ class UIStore {
   };
 }
 
-export const uiStore = new UIStore();
+export const themeStore = new ThemeStore();

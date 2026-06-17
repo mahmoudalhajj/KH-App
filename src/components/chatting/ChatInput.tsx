@@ -12,14 +12,14 @@ import { DynamicText } from "../common/DynamicText";
 import { observer } from "mobx-react-lite";
 import { i18nStore } from "../../stores/i18nStore";
 import { messageStore } from "../../stores/MessageStore";
-import { uiStore } from "../../stores/ThemeStore";
+import { themeStore } from "../../stores/ThemeStore";
 
 const ChatInput = observer(() => {
   return (
     <KeyboardAvoidingView>
       <DynamicView row style={styles.inputRow}>
         <TextInput
-          style={[styles.input, uiStore.getTextAlign()]}
+          style={[styles.input, themeStore.getTextAlign()]}
           placeholder={i18nStore.translate(TranslationKey.CHAT_PLACEHOLDER)}
           value={messageStore.getDraft()}
           onChangeText={messageStore.setDraft}
