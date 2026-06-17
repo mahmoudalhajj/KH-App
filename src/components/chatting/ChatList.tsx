@@ -6,24 +6,27 @@ import { messageStore } from "../../stores/MessageStore";
 import MessageBubble from "./ChatMessageBubble";
 
 interface ChatListProps {
-  messages: message[];
   listRef: React.RefObject<FlatList<message> | null>;
 }
 
-const ChatList = observer(({ messages, listRef }: ChatListProps) => (
-  <FlatList
-    ref={listRef}
-    data={messages}
-    keyExtractor={(item) => item.id.toString()}
-    contentContainerStyle={styles.messageList}
-    renderItem={({ item }) => (
-      <MessageBubble
-        message={item}
-        formattedTime={messageStore.formatCreatedAt(item.createdAt)}
-      />
-    )}
-  />
-));
+const ChatList = observer(({ listRef }: ChatListProps) => {
+  const messages = messageStore.getAllMessages();
+
+  return (
+    <FlatList
+      ref={listRef}
+      data={messages}
+      keyExtractor={(item) => item.id.toString()}
+      contentContainerStyle={styles.messageList}
+      renderItem={({ item }) => (
+        <MessageBubble
+          message={item}
+          formattedTime={messageStore.formatCreatedAt(item.createdAt)}
+        />
+      )}
+    />
+  );
+});
 
 const styles = StyleSheet.create({
   messageList: {

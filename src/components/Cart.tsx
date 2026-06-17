@@ -1,9 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import type { CartStore } from "../stores/CartStore";
 import { ScrollView, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
-import { Colors } from "../enums/color";
 import ScreenContainer from "./common/ScreenContainer";
 import { TranslationKey } from "../i18n/translationKeys";
 import { DynamicText } from "./common/DynamicText";
@@ -11,12 +9,9 @@ import { uiStore } from "../stores/ThemeStore";
 import { CartStats } from "./cart/CartStats";
 import { CartForm } from "./cart/CartForm";
 import { CartFooter } from "./cart/CartFooter";
+import { E_COLORS } from "../enums/color";
 
-interface CartProps {
-  cartStore: CartStore;
-}
-
-const CartSummary = observer(({ cartStore }: CartProps) => {
+const CartSummary = observer(() => {
   const { t } = useTranslation();
 
   return (
@@ -25,13 +20,13 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
       >
-        <DynamicText style={uiStore.getHeaderStyle()}>
+        <DynamicText style={styles.header}>
           {t(TranslationKey.CART_SUMMARY)}
         </DynamicText>
 
-        <CartStats cartStore={cartStore} />
-        <CartForm cartStore={cartStore} />
-        <CartFooter cartStore={cartStore} />
+        <CartStats />
+        <CartForm />
+        <CartFooter />
       </ScrollView>
     </ScreenContainer>
   );
@@ -42,6 +37,11 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingHorizontal: 24,
     paddingVertical: 32,
+  },
+  header: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: E_COLORS.TEXT_PRIMARY,
   },
 });
 

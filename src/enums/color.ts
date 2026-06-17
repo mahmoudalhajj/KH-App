@@ -1,4 +1,4 @@
-export enum Colors {
+export enum E_COLORS {
   PRIMARY = "#0070f3",
   SECONDARY = "#1a1a1a",
   BACKGROUND = "#ffffff",

@@ -1,6 +1,6 @@
 import { observable, runInAction } from "mobx";
 import { message } from "../types/message";
-import { MessageSender } from "../enums/MessageSender";
+import { E_MESSAGE_SENDER } from "../enums/MessageSender";
 import { localStorageStore, StorageKey } from "./LocalStorageStore";
 
 export class MessageStore {
@@ -15,7 +15,7 @@ export class MessageStore {
       const message: message = {
         id: Date.now() * Math.random(),
         text: trimmedText,
-        sender: MessageSender.CLIENT,
+        sender: E_MESSAGE_SENDER.CLIENT,
         createdAt: new Date(),
       };
 

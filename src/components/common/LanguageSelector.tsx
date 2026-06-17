@@ -2,7 +2,7 @@ import React from "react";
 import { View, Pressable, StyleSheet } from "react-native";
 import { observer } from "mobx-react-lite";
 import { useTranslation } from "react-i18next";
-import { Colors } from "../../enums/color";
+import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
 import { i18nStore } from "../../stores/i18nStore";
 import { Language } from "../../i18n/translations";
@@ -57,9 +57,9 @@ const styles = StyleSheet.create({
   item: {
     borderRadius: 12,
     marginBottom: 8,
-    backgroundColor: Colors.SURFACE,
+    backgroundColor: E_COLORS.SURFACE,
     borderWidth: 1,
-    borderColor: Colors.BORDER,
+    borderColor: E_COLORS.BORDER,
   },
   itemContent: {
     paddingVertical: 12,
@@ -68,21 +68,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   activeItem: {
-    borderColor: Colors.BUTTON,
+    borderColor: E_COLORS.BUTTON,
   },
   text: {
     fontSize: 16,
-    color: Colors.TEXT_PRIMARY,
+    color: E_COLORS.TEXT_PRIMARY,
   },
   activeText: {
-    color: Colors.BUTTON,
+    color: E_COLORS.BUTTON,
     fontWeight: "bold",
   },
   checkmark: {
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: Colors.BUTTON,
+    backgroundColor: E_COLORS.BUTTON,
   },
 });
 

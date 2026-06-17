@@ -1,8 +1,8 @@
-import { MessageSender } from "../enums/MessageSender";
+import { E_MESSAGE_SENDER } from "../enums/MessageSender";
 
-export interface message {
+export type message = {
   id: number;
   text: string;
-  sender: MessageSender;
+  sender: E_MESSAGE_SENDER;
   createdAt: Date;
-}
+};

@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   KeyboardAvoidingView,
-  Platform,
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
@@ -21,7 +20,7 @@ export const AuthScreen = observer(() => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.keyboardView}>
-        <ScrollView 
+        <ScrollView
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
         >
@@ -70,7 +69,7 @@ export const AuthScreen = observer(() => {
               <Text style={styles.errorText}>{authStore.error.get()}</Text>
             )}
 
-            <AppButton 
+            <AppButton
               title={isRegistering ? "Register" : "Login"}
               onPress={authStore.handleAuth}
               style={styles.mainButton}

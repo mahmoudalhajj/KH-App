@@ -5,7 +5,7 @@ import { E_AUTH_STATUS } from "../enums/authStatus";
 
 export class AuthStore {
   user = observable.box<User | null>(null);
-  status = observable.box<string>("");
+  status = observable.box<E_AUTH_STATUS>(E_AUTH_STATUS.LOGGED_OUT);
   error = observable.box<string>("");
   email = observable.box<string>("");
   password = observable.box<string>("");

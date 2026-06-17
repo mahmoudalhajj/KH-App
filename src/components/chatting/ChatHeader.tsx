@@ -1,16 +1,14 @@
 import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
-import { Colors } from "../../enums/color";
+import { E_COLORS } from "../../enums/color";
 import { useTranslation } from "react-i18next";
 import { TranslationKey } from "../../i18n/translationKeys";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
+import { messageStore } from "../../stores/MessageStore";
+import { observer } from "mobx-react-lite";
 
-interface ChatHeaderProps {
-  onClear: () => void;
-}
-
-const ChatHeader = ({ onClear }: ChatHeaderProps) => {
+const ChatHeader = observer(() => {
   const { t } = useTranslation();
 
   return (
@@ -29,20 +27,23 @@ const ChatHeader = ({ onClear }: ChatHeaderProps) => {
         </DynamicText>
       </View>
 
-      <TouchableOpacity style={styles.clearButton} onPress={onClear}>
+      <TouchableOpacity
+        style={styles.clearButton}
+        onPress={messageStore.clearMessages}
+      >
         <DynamicText style={styles.clearButtonText}>
           {t(TranslationKey.CHAT_CLEAR)}
         </DynamicText>
       </TouchableOpacity>
     </DynamicView>
   );
-};
+});
 
 const styles = StyleSheet.create({
   header: {
     alignItems: "center",
     gap: 12,
-    backgroundColor: Colors.HEADER,
+    backgroundColor: E_COLORS.HEADER,
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: Colors.SECONDARY,
+    backgroundColor: E_COLORS.SECONDARY,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   headerSubtitle: {
-    color: Colors.HEADER_SUBTITLE,
+    color: E_COLORS.HEADER_SUBTITLE,
     fontSize: 12,
   },
   clearButton: {

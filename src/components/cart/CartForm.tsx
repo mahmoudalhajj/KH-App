@@ -1,9 +1,9 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { observer } from "mobx-react-lite";
-import type { CartStore } from "../../stores/CartStore";
+import { cartStore } from "../../stores/CartStore";
 import { useTranslation } from "react-i18next";
-import { Colors } from "../../enums/color";
+import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
 import AppTextInput from "../common/AppTextInput";
 import AppButton from "../common/AppButton";
@@ -11,11 +11,7 @@ import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
 import { uiStore } from "../../stores/ThemeStore";
 
-interface CartFormProps {
-  cartStore: CartStore;
-}
-
-export const CartForm = observer(({ cartStore }: CartFormProps) => {
+export const CartForm = observer(() => {
   const { t } = useTranslation();
   return (
     <View style={styles.form}>
@@ -75,7 +71,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   errorText: {
-    color: Colors.ERROR,
+    color: E_COLORS.ERROR,
     fontSize: 14,
     textAlign: "center",
     marginBottom: 16,

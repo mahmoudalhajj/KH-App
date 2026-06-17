@@ -1,19 +1,15 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { observer } from "mobx-react-lite";
-import type { CartStore } from "../../stores/CartStore";
+import { cartStore } from "../../stores/CartStore";
 import { useTranslation } from "react-i18next";
-import { Colors } from "../../enums/color";
+import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
 import { uiStore } from "../../stores/ThemeStore";
 
-interface CartStatsProps {
-  cartStore: CartStore;
-}
-
-export const CartStats = observer(({ cartStore }: CartStatsProps) => {
+export const CartStats = observer(() => {
   const { t } = useTranslation();
 
   return (
@@ -42,7 +38,7 @@ const styles = StyleSheet.create({
   statsRow: {
     justifyContent: "space-around",
     marginBottom: 40,
-    backgroundColor: Colors.SURFACE,
+    backgroundColor: E_COLORS.SURFACE,
     padding: 20,
     borderRadius: 20,
   },
@@ -53,6 +49,6 @@ const styles = StyleSheet.create({
   statValue: {
     fontSize: 24,
     fontWeight: "800",
-    color: Colors.BUTTON,
+    color: E_COLORS.BUTTON,
   },
 });

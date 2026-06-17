@@ -1,26 +1,20 @@
 import React from "react";
 import {
-  View,
   TextInput,
   TouchableOpacity,
   StyleSheet,
   KeyboardAvoidingView,
 } from "react-native";
-import { Colors } from "../../enums/color";
+import { E_COLORS } from "../../enums/color";
 import { useTranslation } from "react-i18next";
 import { TranslationKey } from "../../i18n/translationKeys";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
 import { observer } from "mobx-react-lite";
 import { i18nStore } from "../../stores/i18nStore";
+import { messageStore } from "../../stores/MessageStore";
 
-interface ChatInputProps {
-  draft: string;
-  onDraftChange: (text: string) => void;
-  onSend: () => void;
-}
-
-const ChatInput = observer(({ draft, onDraftChange, onSend }: ChatInputProps) => {
+const ChatInput = observer(() => {
   const { t } = useTranslation();
   const isRTL = i18nStore.getIsRTL();
 
@@ -30,16 +24,16 @@ const ChatInput = observer(({ draft, onDraftChange, onSend }: ChatInputProps) =>
         <TextInput
           style={[styles.input, { textAlign: isRTL ? "right" : "left" }]}
           placeholder={t(TranslationKey.CHAT_PLACEHOLDER)}
-          value={draft}
-          onChangeText={onDraftChange}
+          value={messageStore.getDraft()}
+          onChangeText={messageStore.setDraft}
           multiline
         />
 
-        <TouchableOpacity 
-          style={styles.sendButton} 
+        <TouchableOpacity
+          style={styles.sendButton}
           onPress={(e) => {
             e?.preventDefault?.();
-            onSend();
+            messageStore.sendMessages();
           }}
         >
           <DynamicText style={styles.sendButtonText}>
@@ -58,13 +52,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
     borderTopWidth: 1,
-    borderTopColor: Colors.CHAT_INPUT,
-    backgroundColor: Colors.BACKGROUND,
+    borderTopColor: E_COLORS.CHAT_INPUT,
+    backgroundColor: E_COLORS.BACKGROUND,
   },
   input: {
     flex: 1,
     borderWidth: 1,
-    borderColor: Colors.BORDER,
+    borderColor: E_COLORS.BORDER,
     borderRadius: 24,
     paddingHorizontal: 16,
     paddingVertical: 10,
@@ -73,7 +67,7 @@ const styles = StyleSheet.create({
     maxHeight: 120,
   },
   sendButton: {
-    backgroundColor: Colors.SECONDARY,
+    backgroundColor: E_COLORS.SECONDARY,
     paddingHorizontal: 22,
     paddingVertical: 12,
     borderRadius: 20,
@@ -82,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   sendButtonText: {
-    color: Colors.BACKGROUND,
+    color: E_COLORS.BACKGROUND,
     fontWeight: "700",
     fontSize: 15,
   },

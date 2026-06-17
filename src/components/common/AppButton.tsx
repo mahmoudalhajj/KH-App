@@ -6,7 +6,7 @@ import {
   StyleProp,
   ViewStyle,
 } from "react-native";
-import { Colors } from "../../enums/color";
+import { E_COLORS } from "../../enums/color";
 
 interface AppButtonProps {
   title: string;
@@ -23,20 +23,20 @@ const AppButton = ({ title, onPress, style }: AppButtonProps) => {
 };
 
 const styles = StyleSheet.create({
-    button: {
-        backgroundColor: Colors.BUTTON,
-        borderRadius: 14,
-        paddingVertical: 14,
-        paddingHorizontal: 20,
-        alignItems: "center",
-        justifyContent: "center",
-        marginVertical: 8,
-    },
+  button: {
+    backgroundColor: E_COLORS.BUTTON,
+    borderRadius: 14,
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 8,
+  },
 
-    text: {
-        color: Colors.BACKGROUND,
-        fontWeight: "700",
-        fontSize: 17,
-    },
+  text: {
+    color: E_COLORS.BACKGROUND,
+    fontWeight: "700",
+    fontSize: 17,
+  },
 });
 export default AppButton;

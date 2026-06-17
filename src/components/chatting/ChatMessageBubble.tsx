@@ -1,13 +1,11 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { message } from "../../types/message";
-import { Colors } from "../../enums/color";
+import { E_COLORS } from "../../enums/color";
 import { DynamicText } from "../common/DynamicText";
 import { observer } from "mobx-react-lite";
 import { DynamicView } from "../common/DynamicView";
 import { i18nStore } from "../../stores/i18nStore";
-
-// import { MessageSender } from "../../enums/MessageSender";
 
 interface MessageBubbleProps {
   message: message;
@@ -40,7 +38,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   bubble: {
-    backgroundColor: Colors.BUBBLE,
+    backgroundColor: E_COLORS.BUBBLE,
     padding: 12,
     borderRadius: 16,
     maxWidth: "85%",
@@ -49,12 +47,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
     lineHeight: 20,
-    color: Colors.BACKGROUND,
+    color: E_COLORS.BACKGROUND,
   },
   time: {
     fontSize: 11,
     marginTop: 4,
-    color: Colors.HEADER_SUBTITLE,
+    color: E_COLORS.HEADER_SUBTITLE,
   },
 });
 
