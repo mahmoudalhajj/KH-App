@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { observer } from "mobx-react-lite";
 import { cartStore } from "../../stores/CartStore";
-import { useTranslation } from "react-i18next";
+import { i18nStore } from "../../stores/i18nStore";
 import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
 import AppTextInput from "../common/AppTextInput";
@@ -12,25 +12,24 @@ import { DynamicText } from "../common/DynamicText";
 import { uiStore } from "../../stores/ThemeStore";
 
 export const CartForm = observer(() => {
-  const { t } = useTranslation();
   return (
     <View style={styles.form}>
       <DynamicView row>
         <DynamicText style={uiStore.getLabelStyle()}>
-          {t(TranslationKey.ADD_NEW_ITEM)}
+          {i18nStore.translate(TranslationKey.ADD_NEW_ITEM)}
         </DynamicText>
       </DynamicView>
       <AppTextInput
         value={cartStore.itemName.get()}
         onChangeText={cartStore.setItemName}
-        placeholder={t(TranslationKey.ITEM_NAME)}
+        placeholder={i18nStore.translate(TranslationKey.ITEM_NAME)}
       />
       <DynamicView row style={styles.inputRow}>
         <View style={{ flex: 1, marginEnd: 8 }}>
           <AppTextInput
             value={cartStore.itemPrice.get()}
             onChangeText={cartStore.setItemPrice}
-            placeholder={t(TranslationKey.PRICE)}
+            placeholder={i18nStore.translate(TranslationKey.PRICE)}
             keyboardType="numeric"
           />
         </View>
@@ -38,7 +37,7 @@ export const CartForm = observer(() => {
           <AppTextInput
             value={cartStore.itemQuantity.get()}
             onChangeText={cartStore.setItemQuantity}
-            placeholder={t(TranslationKey.QUANTITY)}
+            placeholder={i18nStore.translate(TranslationKey.QUANTITY)}
             keyboardType="numeric"
           />
         </View>
@@ -51,7 +50,7 @@ export const CartForm = observer(() => {
       )}
 
       <AppButton
-        title={t(TranslationKey.ADD_TO_CART)}
+        title={i18nStore.translate(TranslationKey.ADD_TO_CART)}
         onPress={cartStore.addItem}
         style={styles.addButton}
       />

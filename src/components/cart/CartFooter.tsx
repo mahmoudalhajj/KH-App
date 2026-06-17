@@ -2,17 +2,16 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { observer } from "mobx-react-lite";
 import { cartStore } from "../../stores/CartStore";
-import { useTranslation } from "react-i18next";
+import { i18nStore } from "../../stores/i18nStore";
 import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
 import AppButton from "../common/AppButton";
 
 export const CartFooter = observer(() => {
-  const { t } = useTranslation();
   return (
     <View style={styles.footerButtons}>
       <AppButton
-        title={t(TranslationKey.CLEAR_CART)}
+        title={i18nStore.translate(TranslationKey.CLEAR_CART)}
         onPress={cartStore.clearCart}
         style={styles.clearButton}
       />

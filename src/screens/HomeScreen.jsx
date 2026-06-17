@@ -6,7 +6,7 @@ import { cartStore } from "../stores/CartStore";
 import { observer } from "mobx-react-lite";
 import { E_COLORS } from "../enums/color";
 import ScreenContainer from "../components/common/ScreenContainer";
-import { useTranslation } from "react-i18next";
+import { i18nStore } from "../stores/i18nStore";
 import { TranslationKey } from "../i18n/translationKeys";
 import { DynamicText } from "../components/common/DynamicText";
 import { DynamicView } from "../components/common/DynamicView";
@@ -14,7 +14,6 @@ import LanguageSelector from "../components/common/LanguageSelector";
 
 const HomeScreenComponent = () => {
   const navigation = useNavigation();
-  const { t } = useTranslation();
 
   return (
     <ScreenContainer style={styles.content}>
@@ -29,12 +28,12 @@ const HomeScreenComponent = () => {
               <DynamicText style={styles.iconText}>🛒</DynamicText>
             </DynamicView>
             <DynamicText style={styles.cardTitle}>
-              {t(TranslationKey.HOME_CART)}
+              {i18nStore.translate(TranslationKey.HOME_CART)}
             </DynamicText>
-            {cartStore.getTotalItems() > 0 && (
+            {cartStore.getTotalItems.get() > 0 && (
               <DynamicView style={styles.badge}>
                 <DynamicText style={styles.badgeText}>
-                  {cartStore.getTotalItems()}
+                  {cartStore.getTotalItems.get()}
                 </DynamicText>
               </DynamicView>
             )}
@@ -49,11 +48,13 @@ const HomeScreenComponent = () => {
               <DynamicText style={styles.iconText}>💬</DynamicText>
             </DynamicView>
             <DynamicText style={styles.cardTitle}>
-              {t(TranslationKey.HOME_CHAT)}
+              {i18nStore.translate(TranslationKey.HOME_CHAT)}
             </DynamicText>
           </TouchableOpacity>
         </DynamicView>
-
+        <DynamicText style={styles.cardTitle}>
+          {i18nStore.translate(TranslationKey.HOME_DESCRIPTION)}
+        </DynamicText>
         <LanguageSelector />
 
         <TouchableOpacity
@@ -61,7 +62,7 @@ const HomeScreenComponent = () => {
           onPress={() => authStore.logout()}
         >
           <DynamicText style={styles.logoutText}>
-            {t(TranslationKey.LOGOUT)}
+            {i18nStore.translate(TranslationKey.LOGOUT)}
           </DynamicText>
         </TouchableOpacity>
       </DynamicView>

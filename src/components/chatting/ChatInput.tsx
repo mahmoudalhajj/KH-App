@@ -6,7 +6,6 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { E_COLORS } from "../../enums/color";
-import { useTranslation } from "react-i18next";
 import { TranslationKey } from "../../i18n/translationKeys";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
@@ -16,7 +15,6 @@ import { messageStore } from "../../stores/MessageStore";
 import { uiStore } from "../../stores/ThemeStore";
 
 const ChatInput = observer(() => {
-  const { t } = useTranslation();
   const isRTL = i18nStore.getIsRTL();
 
   return (
@@ -24,7 +22,7 @@ const ChatInput = observer(() => {
       <DynamicView row style={styles.inputRow}>
         <TextInput
           style={[styles.input, uiStore.getTextAlign()]}
-          placeholder={t(TranslationKey.CHAT_PLACEHOLDER)}
+          placeholder={i18nStore.translate(TranslationKey.CHAT_PLACEHOLDER)}
           value={messageStore.getDraft()}
           onChangeText={messageStore.setDraft}
           multiline
@@ -38,7 +36,7 @@ const ChatInput = observer(() => {
           }}
         >
           <DynamicText style={styles.sendButtonText}>
-            {t(TranslationKey.CHAT_SEND)}
+            {i18nStore.translate(TranslationKey.CHAT_SEND)}
           </DynamicText>
         </TouchableOpacity>
       </DynamicView>

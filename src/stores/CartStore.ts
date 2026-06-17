@@ -1,5 +1,5 @@
 import { CartItem } from "../types/cartItem";
-import { observable, runInAction } from "mobx";
+import { computed, observable, runInAction } from "mobx";
 import { localStorageStore } from "./LocalStorageStore";
 import { E_STORAGE_KEY } from "../enums/StorageKeys";
 export class CartStore {
@@ -15,23 +15,23 @@ export class CartStore {
     });
   };
 
-  getTotalPrice = () => {
+  getTotalPrice = computed(() => {
     const CartValues = Array.from(this.cart.values());
     const reducedValues = CartValues.reduce(
       (total, item) => total + item.price * item.quantity,
       0,
     );
     return reducedValues;
-  };
+  });
 
-  getTotalItems = () => {
+  getTotalItems = computed(() => {
     const CartValues = Array.from(this.cart.values());
     const reducedValues = CartValues.reduce(
       (total, item) => total + item.quantity,
       0,
     );
     return reducedValues;
-  };
+  });
 
   setItemPrice = (price: string) => {
     runInAction(() => {
@@ -81,12 +81,12 @@ export class CartStore {
     });
   }
 
-  removeItem(itemId: number) {
+  removeItem = (itemId: number) => {
     runInAction(() => {
       this.cart.delete(itemId);
       this.storeCart();
     });
-  }
+  };
 
   clearCart = () => {
     if (this.cart.size === 0) {
@@ -99,11 +99,11 @@ export class CartStore {
     });
   };
 
-  showAllItems() {
+  showAllItems = () => {
     return Array.from(this.cart.values());
-  }
+  };
 
-  loadStoredCart() {
+  loadStoredCart = () => {
     const stored = localStorageStore.storageGet(E_STORAGE_KEY.CART);
     if (!Array.isArray(stored)) {
       return;
@@ -114,7 +114,7 @@ export class CartStore {
         this.cart.set(entry.id, entry);
       });
     });
-  }
+  };
 
   addItem = () => {
     const name = this.itemName.get().trim();

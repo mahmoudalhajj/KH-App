@@ -1,6 +1,6 @@
 import { observable, runInAction } from "mobx";
-import i18n from "../i18n/i18n";
-import { translations,Language } from "../i18n/translations";
+import { translations, Language } from "../i18n/translations";
+import { TranslationKey } from "../i18n/translationKeys";
 
 export class I18nStore {
   currentLanguage = observable.box<Language>("en");
@@ -20,8 +20,12 @@ export class I18nStore {
   setLanguage = (lang: Language) => {
     runInAction(() => {
       this.currentLanguage.set(lang);
-      i18n.changeLanguage(lang);
     });
+  };
+
+  translate = (key: TranslationKey) => {
+    const lang = this.getLanguage();
+    return translations[key][lang];
   };
 }
 

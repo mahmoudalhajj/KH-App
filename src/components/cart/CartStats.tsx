@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { observer } from "mobx-react-lite";
 import { cartStore } from "../../stores/CartStore";
-import { useTranslation } from "react-i18next";
+import { i18nStore } from "../../stores/i18nStore";
 import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
 import { DynamicView } from "../common/DynamicView";
@@ -10,24 +10,22 @@ import { DynamicText } from "../common/DynamicText";
 import { uiStore } from "../../stores/ThemeStore";
 
 export const CartStats = observer(() => {
-  const { t } = useTranslation();
-
   return (
     <DynamicView row style={styles.statsRow}>
       <DynamicView style={styles.statItem}>
         <DynamicText style={uiStore.getLabelStyle()}>
-          {t(TranslationKey.TOTAL_ITEMS)}
+          {i18nStore.translate(TranslationKey.TOTAL_ITEMS)}
         </DynamicText>
         <DynamicText style={styles.statValue}>
-          {cartStore.getTotalItems()}
+          {cartStore.getTotalItems.get()}
         </DynamicText>
       </DynamicView>
       <DynamicView style={styles.statItem}>
         <DynamicText style={uiStore.getLabelStyle()}>
-          {t(TranslationKey.TOTAL_PRICE)}
+          {i18nStore.translate(TranslationKey.TOTAL_PRICE)}
         </DynamicText>
         <DynamicText style={styles.statValue}>
-          ${cartStore.getTotalPrice()}
+          ${cartStore.getTotalPrice.get()}
         </DynamicText>
       </DynamicView>
     </DynamicView>

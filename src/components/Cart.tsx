@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { ScrollView, StyleSheet } from "react-native";
-import { useTranslation } from "react-i18next";
+import { i18nStore } from "../stores/i18nStore";
 import ScreenContainer from "./common/ScreenContainer";
 import { TranslationKey } from "../i18n/translationKeys";
 import { DynamicText } from "./common/DynamicText";
@@ -11,8 +11,6 @@ import { CartFooter } from "./cart/CartFooter";
 import { E_COLORS } from "../enums/color";
 
 const CartSummary = observer(() => {
-  const { t } = useTranslation();
-
   return (
     <ScreenContainer>
       <ScrollView
@@ -20,7 +18,7 @@ const CartSummary = observer(() => {
         keyboardShouldPersistTaps="handled"
       >
         <DynamicText style={styles.header}>
-          {t(TranslationKey.CART_SUMMARY)}
+          {i18nStore.translate(TranslationKey.CART_SUMMARY)}
         </DynamicText>
 
         <CartStats />

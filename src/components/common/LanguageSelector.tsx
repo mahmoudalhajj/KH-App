@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Pressable, StyleSheet } from "react-native";
 import { observer } from "mobx-react-lite";
-import { useTranslation } from "react-i18next";
 import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
 import { i18nStore } from "../../stores/i18nStore";
@@ -11,8 +10,6 @@ import { DynamicText } from "./DynamicText";
 import { uiStore } from "../../stores/ThemeStore";
 
 const LanguageSelector = observer(() => {
-  const { t } = useTranslation();
-
   const languages: { key: Language; value: string }[] = [
     { key: "en", value: "English" },
     { key: "ar", value: "العربية" },
@@ -24,7 +21,7 @@ const LanguageSelector = observer(() => {
   return (
     <View style={styles.container}>
       <DynamicText style={uiStore.getLabelStyle()}>
-        {t(TranslationKey.CHANGE_LANGUAGE)}
+        {i18nStore.translate(TranslationKey.CHANGE_LANGUAGE)}
       </DynamicText>
 
       {languages.map((lang) => (

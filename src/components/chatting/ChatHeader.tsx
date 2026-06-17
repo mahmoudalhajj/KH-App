@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { E_COLORS } from "../../enums/color";
-import { useTranslation } from "react-i18next";
+import { i18nStore } from "../../stores/i18nStore";
 import { TranslationKey } from "../../i18n/translationKeys";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
@@ -9,8 +9,6 @@ import { messageStore } from "../../stores/MessageStore";
 import { observer } from "mobx-react-lite";
 
 const ChatHeader = observer(() => {
-  const { t } = useTranslation();
-
   return (
     <DynamicView row style={styles.header}>
       <View style={styles.avatar}>
@@ -19,11 +17,11 @@ const ChatHeader = observer(() => {
 
       <View style={{ flex: 1 }}>
         <DynamicText style={styles.headerTitle}>
-          {t(TranslationKey.CHAT_TITLE)}
+          {i18nStore.translate(TranslationKey.CHAT_TITLE)}
         </DynamicText>
 
         <DynamicText style={styles.headerSubtitle}>
-          {t(TranslationKey.CHAT_SUBTITLE)}
+          {i18nStore.translate(TranslationKey.CHAT_SUBTITLE)}
         </DynamicText>
       </View>
 
@@ -32,7 +30,7 @@ const ChatHeader = observer(() => {
         onPress={messageStore.clearMessages}
       >
         <DynamicText style={styles.clearButtonText}>
-          {t(TranslationKey.CHAT_CLEAR)}
+          {i18nStore.translate(TranslationKey.CHAT_CLEAR)}
         </DynamicText>
       </TouchableOpacity>
     </DynamicView>
