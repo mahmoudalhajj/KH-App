@@ -43,7 +43,7 @@ export const CartForm = observer(() => {
         </View>
       </DynamicView>
 
-      {!!cartStore.error.get() && (
+      {cartStore.error.get() && (
         <DynamicText style={styles.errorText}>
           {cartStore.error.get()}
         </DynamicText>

@@ -15,8 +15,6 @@ import { messageStore } from "../../stores/MessageStore";
 import { uiStore } from "../../stores/ThemeStore";
 
 const ChatInput = observer(() => {
-  const isRTL = i18nStore.getIsRTL();
-
   return (
     <KeyboardAvoidingView>
       <DynamicView row style={styles.inputRow}>
