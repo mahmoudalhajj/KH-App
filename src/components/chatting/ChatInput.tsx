@@ -29,7 +29,7 @@ const ChatInput = observer(() => {
         <TouchableOpacity
           style={styles.sendButton}
           onPress={(e) => {
-            e?.preventDefault?.();
+            e.preventDefault();
             messageStore.sendMessages();
           }}
         >
