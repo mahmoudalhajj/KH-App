@@ -3,35 +3,35 @@ import { Colors } from "../enums/color";
 import { TextStyle } from "react-native";
 
 class UIStore {
-  getTextAlign(): TextStyle {
+  getTextAlign = (): TextStyle => {
     return { textAlign: i18nStore.getIsRTL() ? "right" : "left" };
-  }
+  };
 
-  get labelStyle(): TextStyle {
+  getLabelStyle = (): TextStyle => {
     return {
-      textAlign: i18nStore.getIsRTL() ? "right" : "left",
+      ...this.getTextAlign(),
       fontSize: 14,
       fontWeight: "600",
       color: Colors.SECONDARY,
     };
-  }
+  };
 
-  get headerStyle(): TextStyle {
+  getHeaderStyle = (): TextStyle => {
     return {
-      textAlign: i18nStore.getIsRTL() ? "right" : "left",
+      ...this.getTextAlign(),
       fontSize: 22,
       fontWeight: "bold",
       color: Colors.TEXT_PRIMARY,
     };
-  }
+  };
 
-  get inputStyle(): TextStyle {
+  getInputStyle = (): TextStyle => {
     return {
-      textAlign: i18nStore.getIsRTL() ? "right" : "left",
       fontSize: 16,
       color: Colors.TEXT_PRIMARY,
+      ...this.getTextAlign(),
     };
-  }
+  };
 }
 
 export const uiStore = new UIStore();

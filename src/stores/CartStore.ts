@@ -17,40 +17,49 @@ export class CartStore {
 
   getTotalPrice = () => {
     const CartValues = Array.from(this.cart.values());
-    const reducedValues = CartValues.reduce((total, item) => total + item.price * item.quantity, 0);
+    const reducedValues = CartValues.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0,
+    );
     return reducedValues;
   };
 
   getTotalItems = () => {
     const CartValues = Array.from(this.cart.values());
-    const reducedValues = CartValues.reduce((total, item) => total + item.quantity, 0);
+    const reducedValues = CartValues.reduce(
+      (total, item) => total + item.quantity,
+      0,
+    );
     return reducedValues;
   };
 
-  setItemPrice =(price: string) => {
+  setItemPrice = (price: string) => {
     runInAction(() => {
       this.itemPrice.set(price);
     });
-  }
+  };
 
-  setItemName= (name: string) => {
+  setItemName = (name: string) => {
     runInAction(() => {
       this.itemName.set(name);
     });
-  }
+  };
 
-  setItemQuantity= (quantity: string)=> {
+  setItemQuantity = (quantity: string) => {
     runInAction(() => {
       this.itemQuantity.set(quantity);
     });
-  }
+  };
 
-  setCartItemQuantity=(item: CartItem, amount: number) => {
+  setCartItemQuantity = (item: CartItem, amount: number) => {
     item.quantity += amount;
-  }
+  };
 
   storeCart() {
-    localStorageStore.storageSet(StorageKey.Cart, Array.from(this.cart.values()));
+    localStorageStore.storageSet(
+      StorageKey.Cart,
+      Array.from(this.cart.values()),
+    );
   }
 
   setCartItem(item: CartItem) {
@@ -58,7 +67,7 @@ export class CartStore {
       const existingItem = this.cart.get(item.id);
 
       if (existingItem) {
-        this.setCartItemQuantity(existingItem, item.quantity); 
+        this.setCartItemQuantity(existingItem, item.quantity);
         this.storeCart();
         return;
       }
@@ -79,75 +88,73 @@ export class CartStore {
     });
   }
 
- clearCart = () => {
-    if (this.cart.size === 0) return;
+  clearCart = () => {
+    if (this.cart.size === 0) {
+      return;
+    }
 
     runInAction(() => {
-        this.cart.clear();
-        this.storeCart();
+      this.cart.clear();
+      this.storeCart();
     });
-};
+  };
 
   showAllItems() {
     return Array.from(this.cart.values());
   }
 
-loadStoredCart() {
+  loadStoredCart() {
+    const stored = localStorageStore.storageGet(StorageKey.Cart);
+    if (!Array.isArray(stored)) {
+      return;
+    }
 
-  const stored = localStorageStore.storageGet(StorageKey.Cart);
-  if (!Array.isArray(stored)) {
-    return;
+    runInAction(() => {
+      stored.forEach((entry) => {
+        this.cart.set(entry.id, entry);
+      });
+    });
   }
 
-  runInAction(() => {
-    stored.forEach((entry) => {
-      this.cart.set(entry.id, entry);
-    });
-  });
-}
-
-addItem = () => {
+  addItem = () => {
     const name = this.itemName.get().trim();
     const price = Number(this.itemPrice.get());
     const quantity = Number(this.itemQuantity.get());
 
     if (!name || !price || !quantity) {
-        this.setError("All values required.");
-        return;
+      this.setError("All values required.");
+      return;
     }
 
     if (price <= 0 || quantity <= 0) {
-        this.setError(
-            "Price and quantity must be greater than zero."
-        );
-        return;
+      this.setError("Price and quantity must be greater than zero.");
+      return;
     }
 
     runInAction(() => {
-        const existingItem = Array.from(
-            this.cart.values()
-        ).find((item) => item.name === name);
+      const existingItem = Array.from(this.cart.values()).find(
+        (item) => item.name === name,
+      );
 
-        if (existingItem) {
-            existingItem.quantity += quantity;
-        } else {
-            this.cart.set(Date.now(), {
-                id: Date.now(),
-                name,
-                price,
-                quantity,
-            });
-        }
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        this.cart.set(Date.now(), {
+          id: Date.now(),
+          name,
+          price,
+          quantity,
+        });
+      }
 
-        this.itemName.set("");
-        this.itemPrice.set("");
-        this.itemQuantity.set("");
-        this.error.set("");
+      this.itemName.set("");
+      this.itemPrice.set("");
+      this.itemQuantity.set("");
+      this.error.set("");
 
-        this.storeCart();
+      this.storeCart();
     });
-};
-
+  };
 }
 
 export const cartStore = new CartStore();

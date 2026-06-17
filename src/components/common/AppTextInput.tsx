@@ -10,7 +10,7 @@ const AppTextInput = observer((props: AppTextInputProps) => {
   return (
     <TextInput
       {...props}
-      style={[styles.input, uiStore.inputStyle, props.style]}
+      style={[styles.input, uiStore.getInputStyle(), props.style]}
       placeholderTextColor="#888"
       autoCapitalize="none"
     />

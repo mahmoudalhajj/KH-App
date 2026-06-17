@@ -20,7 +20,7 @@ export const CartForm = observer(({ cartStore }: CartFormProps) => {
   return (
     <View style={styles.form}>
       <DynamicView row>
-        <DynamicText style={uiStore.labelStyle}>
+        <DynamicText style={uiStore.getLabelStyle()}>
           {t(TranslationKey.ADD_NEW_ITEM)}
         </DynamicText>
       </DynamicView>

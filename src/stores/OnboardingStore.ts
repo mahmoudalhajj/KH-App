@@ -6,28 +6,38 @@ export class OnboardingStore {
   searchText = observable.box("");
   itemsById = observable.map<number, string>();
 
-  set setLoading(loading: boolean) {
-    this.loading.set(loading);
-  }
-  set setSelectedId(id: number) {
-    this.selectedId.set(id);
-  }
-  set setSearchText(text: string) {
-    this.searchText.set(text);
-  }
+  setLoading = (loading: boolean) => {
+    runInAction(() => {
+      this.loading.set(loading);
+    });
+  };
 
-  get isLoading() {
+  setSelectedId = (id: number) => {
+    runInAction(() => {
+      this.selectedId.set(id);
+    });
+  };
+
+  setSearchText = (text: string) => {
+    runInAction(() => {
+      this.searchText.set(text);
+    });
+  };
+
+  getIsLoading = () => {
     return this.loading.get();
-  }
-  get getSelectedId() {
-    return this.selectedId.get();
-  }
-  get getSearchText() {
-    return this.searchText.get();
-  }
+  };
 
-  async updateItems() {
-    this.setLoading = true;
+  getSelectedId = () => {
+    return this.selectedId.get();
+  };
+
+  getSearchText = () => {
+    return this.searchText.get();
+  };
+
+  updateItems = async () => {
+    this.setLoading(true);
     try {
       const data = await Promise.resolve([
         { id: 1, name: "Item1" },
@@ -44,8 +54,8 @@ export class OnboardingStore {
         console.error("Failed to fetch items", error);
       });
     }
-    this.setLoading = false;
-  }
+    this.setLoading(false);
+  };
 }
 
 export const onboardingStore = new OnboardingStore();

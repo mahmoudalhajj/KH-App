@@ -15,10 +15,11 @@ interface CartStatsProps {
 
 export const CartStats = observer(({ cartStore }: CartStatsProps) => {
   const { t } = useTranslation();
+
   return (
     <DynamicView row style={styles.statsRow}>
       <DynamicView style={styles.statItem}>
-        <DynamicText style={uiStore.labelStyle}>
+        <DynamicText style={uiStore.getLabelStyle()}>
           {t(TranslationKey.TOTAL_ITEMS)}
         </DynamicText>
         <DynamicText style={styles.statValue}>
@@ -26,7 +27,7 @@ export const CartStats = observer(({ cartStore }: CartStatsProps) => {
         </DynamicText>
       </DynamicView>
       <DynamicView style={styles.statItem}>
-        <DynamicText style={uiStore.labelStyle}>
+        <DynamicText style={uiStore.getLabelStyle()}>
           {t(TranslationKey.TOTAL_PRICE)}
         </DynamicText>
         <DynamicText style={styles.statValue}>

@@ -16,7 +16,7 @@ import AppTextInput from "../components/common/AppTextInput";
 import AppButton from "../components/common/AppButton";
 
 export const AuthScreen = observer(() => {
-  const isRegistering = authStore.isRegistering;
+  const isRegistering = authStore.isRegistering.get();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -40,7 +40,7 @@ export const AuthScreen = observer(() => {
                 <Text style={styles.label}>Full Name</Text>
                 <AppTextInput
                   placeholder="John Doe"
-                  value={authStore.name}
+                  value={authStore.name.get()}
                   onChangeText={(text) => authStore.setName(text)}
                 />
               </View>
@@ -50,7 +50,7 @@ export const AuthScreen = observer(() => {
               <Text style={styles.label}>Email Address</Text>
               <AppTextInput
                 placeholder="email@example.com"
-                value={authStore.email}
+                value={authStore.email.get()}
                 onChangeText={(text) => authStore.setEmail(text)}
                 keyboardType="email-address"
               />
@@ -60,14 +60,14 @@ export const AuthScreen = observer(() => {
               <Text style={styles.label}>Password</Text>
               <AppTextInput
                 placeholder="••••••••"
-                value={authStore.password}
+                value={authStore.password.get()}
                 onChangeText={(text) => authStore.setPassword(text)}
                 secureTextEntry
               />
             </View>
 
-            {!!authStore.error && (
-              <Text style={styles.errorText}>{authStore.error}</Text>
+            {!!authStore.error.get() && (
+              <Text style={styles.errorText}>{authStore.error.get()}</Text>
             )}
 
             <AppButton 

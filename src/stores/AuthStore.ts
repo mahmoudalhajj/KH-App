@@ -1,23 +1,19 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { computed, observable, runInAction } from "mobx";
 import { User } from "../types/user";
-import { AuthStatus } from "../enums/authStatus";
 import { localStorageStore, StorageKey } from "./LocalStorageStore";
+import { E_AUTH_STATUS } from "../enums/authStatus";
 
 export class AuthStore {
-  user: User | null = null;
-  status: AuthStatus = AuthStatus.LoggedOut;
-  error: string = "";
-  email: string = "";
-  password: string = "";
-  name: string = "";
-  isRegistering: boolean = false;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
+  user = observable.box<User | null>(null);
+  status = observable.box<string>("");
+  error = observable.box<string>("");
+  email = observable.box<string>("");
+  password = observable.box<string>("");
+  name = observable.box<string>("");
+  isRegistering = observable.box<boolean>(false);
 
   handleAuth = () => {
-    if (this.isRegistering) {
+    if (this.isRegistering.get()) {
       this.register();
     } else {
       this.login();
@@ -25,32 +21,39 @@ export class AuthStore {
   };
 
   login = () => {
-    if (!this.email || !this.password) {
-      this.error = "Invalid Email/Password";
+    const email = this.email.get();
+    const password = this.password.get();
+
+    if (!email || !password) {
+      runInAction(() => {
+        this.error.set("Invalid Email/Password");
+      });
       return;
     }
 
     runInAction(() => {
       const user: User = {
         id: Date.now(),
-        name: this.name || "User",
-        email: this.email,
+        name: this.name.get() || "User",
+        email: email,
       };
 
-      this.user = user;
-      this.status = AuthStatus.LoggedIn;
-      this.error = "";
+      this.user.set(user);
+      this.status.set(E_AUTH_STATUS.LOGGED_IN);
+      this.error.set("");
       this.storeUser();
     });
   };
 
   register = () => {
-    const trimmedName = this.name.trim();
-    const trimmedEmail = this.email.trim();
-    const trimmedPassword = this.password.trim();
+    const trimmedName = this.name.get().trim();
+    const trimmedEmail = this.email.get().trim();
+    const trimmedPassword = this.password.get().trim();
 
     if (!trimmedName || !trimmedEmail || !trimmedPassword) {
-      this.error = "All fields are required.";
+      runInAction(() => {
+        this.error.set("All fields are required.");
+      });
       return;
     }
 
@@ -60,60 +63,68 @@ export class AuthStore {
         name: trimmedName,
         email: trimmedEmail,
       };
-      this.user = user;
-      this.status = AuthStatus.LoggedIn;
-      this.error = "";
+      this.user.set(user);
+      this.status.set(E_AUTH_STATUS.LOGGED_IN);
+      this.error.set("");
       this.storeUser();
     });
   };
 
   logout = () => {
     runInAction(() => {
-      this.user = null;
-      this.status = AuthStatus.LoggedOut;
-      this.error = "";
-      this.email = "";
-      this.password = "";
-      this.name = "";
+      this.user.set(null);
+      this.status.set(E_AUTH_STATUS.LOGGED_OUT);
+      this.error.set("");
+      this.email.set("");
+      this.password.set("");
+      this.name.set("");
     });
     localStorageStore.storageClear();
   };
 
-  get isLoggedIn() {
-    return this.status === AuthStatus.LoggedIn;
-  }
+  getIsLoggedIn = () => {
+    return this.status.get() === E_AUTH_STATUS.LOGGED_IN;
+  };
 
   storeUser() {
-    localStorageStore.storageSet(StorageKey.User, this.user);
+    localStorageStore.storageSet(StorageKey.User, this.user.get());
   }
 
   loadStoredUser() {
-    if (this.isLoggedIn) return;
+    if (this.getIsLoggedIn()) return;
 
     const stored = localStorageStore.storageGet(StorageKey.User);
     if (!stored) return;
 
     runInAction(() => {
-      this.user = stored;
-      this.status = AuthStatus.LoggedIn;
+      this.user.set(stored);
+      this.status.set(E_AUTH_STATUS.LOGGED_IN);
     });
   }
 
   setEmail = (email: string) => {
-    this.email = email;
+    runInAction(() => {
+      this.email.set(email);
+    });
   };
 
   setPassword = (password: string) => {
-    this.password = password;
+    runInAction(() => {
+      this.password.set(password);
+    });
   };
 
   setName = (name: string) => {
-    this.name = name;
+    runInAction(() => {
+      this.name.set(name);
+    });
   };
 
   setIsRegistering = (value: boolean) => {
-    this.isRegistering = value;
-    this.error = "";
+    runInAction(() => {
+      this.isRegistering.set(value);
+      this.error.set("");
+    });
   };
 }
 

@@ -20,7 +20,7 @@ const App = observer(() => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {!authStore.isLoggedIn ? (
+        {!authStore.getIsLoggedIn() ? (
           <Stack.Screen name="Auth" component={AuthScreen} />
         ) : (
           <>

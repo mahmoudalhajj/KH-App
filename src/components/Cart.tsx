@@ -25,7 +25,7 @@ const CartSummary = observer(({ cartStore }: CartProps) => {
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
       >
-        <DynamicText style={uiStore.headerStyle}>
+        <DynamicText style={uiStore.getHeaderStyle()}>
           {t(TranslationKey.CART_SUMMARY)}
         </DynamicText>
 
