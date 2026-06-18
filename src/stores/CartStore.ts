@@ -52,7 +52,9 @@ export class CartStore {
   };
 
   setCartItemQuantity = (item: CartItem, amount: number) => {
-    item.quantity += amount;
+    runInAction(() => {
+      item.quantity += amount;
+    });
   };
 
   storeCart() {

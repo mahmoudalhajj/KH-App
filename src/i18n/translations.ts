@@ -123,8 +123,8 @@ export const translations = {
     ar: "المحادثة",
   },
   [TranslationKey.HOME_DESCRIPTION]: {
-    en: "Use the navigation bar to access the cart, chat, and profile.",
-    fr: "Naviguez à l’aide de la barre de navigation pour consulter le panier, le chat ainsi que votre profil.",
-    ar: "تنقّل عبر شريط التنقل للاطلاع على السلة والدردشة وكذلك الملف الشخصي.",
+    en: "Use the navigation bar to access the cart, chat.",
+    fr: "Naviguez à l’aide de la barre de navigation pour consulter le panier, le chat.",
+    ar: "تنقّل عبر شريط التنقل للاطلاع على السلة والدردشة.",
   },
 };

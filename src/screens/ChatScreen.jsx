@@ -1,6 +1,4 @@
 import { View, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { authStore } from "../stores/AuthStore";
 import Chatting from "../components/Chatting";
 import { observer } from "mobx-react-lite";
 
