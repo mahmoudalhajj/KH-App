@@ -115,6 +115,10 @@ export class AuthStore {
     return this.status.get() === E_AUTH_STATUS.LOGGED_IN;
   };
 
+  getUserId = () => {
+    return this.user.get()!.id;
+  };
+
   storeUser() {
     localStorageStore.storageSet(E_STORAGE_KEY.USER, this.user.get());
   }

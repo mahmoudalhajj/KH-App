@@ -1,12 +1,13 @@
 import { TranslationKey } from "./translationKeys";
+import { E_TEXT_DIRECTION } from "../enums/direction";
 
 export type Language = "en" | "fr" | "ar";
 
 export const translations = {
   direction: {
-    ar: "rtl",
-    en: "ltr",
-    fr: "ltr",
+    ar: E_TEXT_DIRECTION.RTL,
+    en: E_TEXT_DIRECTION.LTR,
+    fr: E_TEXT_DIRECTION.LTR,
   },
 
   [TranslationKey.CART_SUMMARY]: {

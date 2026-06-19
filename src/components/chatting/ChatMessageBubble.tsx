@@ -6,6 +6,13 @@ import { DynamicText } from "../common/DynamicText";
 import { observer } from "mobx-react-lite";
 import { DynamicView } from "../common/DynamicView";
 import { i18nStore } from "../../stores/i18nStore";
+import {
+  E_FONT_SIZE,
+  E_SPACING,
+  E_BORDER_RADIUS,
+  E_UI,
+  E_UI_STRING,
+} from "../../enums/designTokens";
 
 interface MessageBubbleProps {
   message: message;
@@ -35,23 +42,23 @@ const MessageBubble = observer(
 const styles = StyleSheet.create({
   wrapper: {
     width: "100%",
-    marginBottom: 12,
+    marginBottom: E_SPACING.M,
   },
   bubble: {
     backgroundColor: E_COLORS.BUBBLE,
-    padding: 12,
-    borderRadius: 16,
-    maxWidth: "85%",
+    padding: E_SPACING.M,
+    borderRadius: E_BORDER_RADIUS.XXL,
+    maxWidth: E_UI_STRING.BUBBLE_MAX_WIDTH_PERCENT,
     alignSelf: "flex-end",
   },
   text: {
-    fontSize: 15,
-    lineHeight: 20,
+    fontSize: E_FONT_SIZE.M - 1,
+    lineHeight: E_UI.LINE_HEIGHT,
     color: E_COLORS.BACKGROUND,
   },
   time: {
-    fontSize: 11,
-    marginTop: 4,
+    fontSize: E_FONT_SIZE.XS,
+    marginTop: E_SPACING.XS,
     color: E_COLORS.HEADER_SUBTITLE,
   },
 });

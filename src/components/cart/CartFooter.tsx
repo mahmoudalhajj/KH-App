@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { observer } from "mobx-react-lite";
-import { cartStore } from "../../stores/CartStore";
+import { getCartStore } from "../../stores/getCartStore";
+import { authStore } from "../../stores/AuthStore";
 import { i18nStore } from "../../stores/i18nStore";
 import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
@@ -9,6 +10,8 @@ import AppButton from "../common/AppButton";
 import { E_SPACING } from "../../enums/designTokens";
 
 export const CartFooter = observer(() => {
+  const cartStore = getCartStore(authStore.getUserId());
+
   return (
     <AppButton
       title={i18nStore.translate(TranslationKey.CLEAR_CART)}

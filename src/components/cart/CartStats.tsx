@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { observer } from "mobx-react-lite";
-import { cartStore } from "../../stores/CartStore";
+import { getCartStore } from "../../stores/getCartStore";
+import { authStore } from "../../stores/AuthStore";
 import { i18nStore } from "../../stores/i18nStore";
 import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
@@ -11,6 +12,8 @@ import { themeStore } from "../../stores/ThemeStore";
 import { E_FONT_SIZE, E_FONT_WEIGHT, E_SPACING, E_BORDER_RADIUS } from "../../enums/designTokens";
 
 export const CartStats = observer(() => {
+  const cartStore = getCartStore(authStore.getUserId());
+
   return (
     <DynamicView row style={styles.statsRow}>
       <DynamicView style={styles.statItem}>

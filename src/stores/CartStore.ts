@@ -178,5 +178,3 @@ export class CartStore {
     });
   };
 }
-
-export const cartStore = new CartStore();

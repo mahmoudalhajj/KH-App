@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import { message } from "../../types/message";
 import { messageStore } from "../../stores/MessageStore";
 import MessageBubble from "./ChatMessageBubble";
+import { E_SPACING } from "../../enums/designTokens";
 
 interface ChatListProps {
   listRef: React.RefObject<FlatList<message> | null>;
@@ -30,7 +31,7 @@ const ChatList = observer(({ listRef }: ChatListProps) => {
 
 const styles = StyleSheet.create({
   messageList: {
-    padding: 16,
+    padding: E_SPACING.L,
   },
 });
 

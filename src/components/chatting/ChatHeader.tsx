@@ -7,15 +7,24 @@ import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
 import { messageStore } from "../../stores/MessageStore";
 import { observer } from "mobx-react-lite";
+import { E_APP } from "../../enums/strings";
+import {
+  E_FONT_SIZE,
+  E_FONT_WEIGHT,
+  E_SPACING,
+  E_UI,
+} from "../../enums/designTokens";
 
 const ChatHeader = observer(() => {
   return (
     <DynamicView row style={styles.header}>
       <View style={styles.avatar}>
-        <DynamicText style={styles.avatarText}>C</DynamicText>
+        <DynamicText style={styles.avatarText}>
+          {E_APP.CHAT_AVATAR_INITIAL}
+        </DynamicText>
       </View>
 
-      <View style={{ flex: 1 }}>
+      <View style={styles.headerTextWrapper}>
         <DynamicText style={styles.headerTitle}>
           {i18nStore.translate(TranslationKey.CHAT_TITLE)}
         </DynamicText>
@@ -40,41 +49,44 @@ const ChatHeader = observer(() => {
 const styles = StyleSheet.create({
   header: {
     alignItems: "center",
-    gap: 12,
+    gap: E_SPACING.M,
     backgroundColor: E_COLORS.HEADER,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingHorizontal: E_SPACING.L,
+    paddingVertical: E_SPACING.M,
   },
   avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: E_UI.AVATAR_SIZE,
+    height: E_UI.AVATAR_SIZE,
+    borderRadius: E_UI.AVATAR_RADIUS,
     backgroundColor: E_COLORS.SECONDARY,
     justifyContent: "center",
     alignItems: "center",
   },
   avatarText: {
     color: E_COLORS.ON_DARK,
-    fontWeight: "700",
-    fontSize: 16,
+    fontWeight: E_FONT_WEIGHT.BOLD,
+    fontSize: E_FONT_SIZE.M,
+  },
+  headerTextWrapper: {
+    flex: 1,
   },
   headerTitle: {
     color: E_COLORS.ON_DARK,
-    fontWeight: "700",
-    fontSize: 16,
+    fontWeight: E_FONT_WEIGHT.BOLD,
+    fontSize: E_FONT_SIZE.M,
   },
   headerSubtitle: {
     color: E_COLORS.HEADER_SUBTITLE,
-    fontSize: 12,
+    fontSize: E_FONT_SIZE.XS,
   },
   clearButton: {
     marginLeft: "auto",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingHorizontal: E_SPACING.M,
+    paddingVertical: E_SPACING.XS + 2,
   },
   clearButtonText: {
     color: E_COLORS.ON_DARK,
-    fontSize: 14,
+    fontSize: E_FONT_SIZE.S,
   },
 });
 

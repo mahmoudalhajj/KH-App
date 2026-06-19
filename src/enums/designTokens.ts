@@ -67,7 +67,6 @@ export enum E_SHADOW {
 }
 
 export enum E_UI {
-  CARD_WIDTH_PERCENT = "46%",
   ICON_CIRCLE_SIZE = 50,
   ICON_CIRCLE_RADIUS = 25,
   AVATAR_SIZE = 40,
@@ -80,6 +79,10 @@ export enum E_UI {
   BADGE_BORDER_WIDTH = 2,
   CHAT_INPUT_MAX_HEIGHT = 120,
   SEND_BUTTON_MIN_WIDTH = 90,
-  BUBBLE_MAX_WIDTH_PERCENT = "85%",
   LINE_HEIGHT = 20,
 }
+
+export const E_UI_STRING = {
+  CARD_WIDTH_PERCENT: "46%",
+  BUBBLE_MAX_WIDTH_PERCENT: "85%",
+} as const;

@@ -1,7 +1,8 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { observer } from "mobx-react-lite";
-import { cartStore } from "../../stores/CartStore";
+import { getCartStore } from "../../stores/getCartStore";
+import { authStore } from "../../stores/AuthStore";
 import { i18nStore } from "../../stores/i18nStore";
 import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
@@ -13,6 +14,8 @@ import { themeStore } from "../../stores/ThemeStore";
 import { E_FONT_SIZE, E_SPACING } from "../../enums/designTokens";
 
 export const CartForm = observer(() => {
+  const cartStore = getCartStore(authStore.getUserId());
+
   return (
     <View style={styles.form}>
       <DynamicView row>

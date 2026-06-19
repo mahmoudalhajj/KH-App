@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { authStore } from "../stores/AuthStore";
-import { cartStore } from "../stores/CartStore";
+import { getCartStore } from "../stores/getCartStore";
 import { observer } from "mobx-react-lite";
 import { E_COLORS } from "../enums/color";
 import ScreenContainer from "../components/common/ScreenContainer";
@@ -21,10 +21,12 @@ import {
   E_BORDER_WIDTH,
   E_SHADOW,
   E_UI,
+  E_UI_STRING,
 } from "../enums/designTokens";
 
 const HomeScreenComponent = () => {
   const navigation = useNavigation();
+  const cartStore = getCartStore(authStore.getUserId());
 
   return (
     <ScreenContainer style={styles.content}>
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
     marginBottom: E_SPACING.XXXXXL,
   },
   card: {
-    width: E_UI.CARD_WIDTH_PERCENT,
+    width: E_UI_STRING.CARD_WIDTH_PERCENT,
     aspectRatio: 1,
     borderRadius: E_BORDER_RADIUS.XXXL,
     justifyContent: "center",

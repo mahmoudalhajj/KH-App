@@ -4,6 +4,12 @@ import { i18nStore } from "../../stores/i18nStore";
 import { TranslationKey } from "../../i18n/translationKeys";
 import { E_COLORS } from "../../enums/color";
 import { DynamicText } from "../common/DynamicText";
+import {
+  E_FONT_SIZE,
+  E_SPACING,
+  E_BORDER_RADIUS,
+  E_BORDER_WIDTH,
+} from "../../enums/designTokens";
 
 const ChatEmptyState = () => {
   return (
@@ -24,15 +30,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   emptyChip: {
-    borderWidth: 1,
+    borderWidth: E_BORDER_WIDTH.DEFAULT,
     borderColor: E_COLORS.BORDER_MUTED,
-    borderRadius: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    borderRadius: E_BORDER_RADIUS.XL,
+    paddingHorizontal: E_SPACING.L,
+    paddingVertical: E_SPACING.S,
   },
   emptyText: {
     color: E_COLORS.PLACEHOLDER,
-    fontSize: 14,
+    fontSize: E_FONT_SIZE.S,
   },
 });
 
