@@ -6,6 +6,7 @@ export enum E_TEXT_DIRECTION {
 export enum E_TEXT_ALIGN {
   LEFT = "left",
   RIGHT = "right",
+  CENTER = "center",
 }
 
 export enum E_FLEX_DIRECTION {

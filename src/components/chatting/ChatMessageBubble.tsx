@@ -12,6 +12,7 @@ import {
   E_BORDER_RADIUS,
   E_UI,
   E_UI_STRING,
+  E_LAYOUT,
 } from "../../enums/designTokens";
 
 interface MessageBubbleProps {
@@ -28,7 +29,7 @@ const MessageBubble = observer(
         <View
           style={[
             styles.bubble,
-            { alignSelf: isRTL ? "flex-end" : "flex-start" },
+            { alignSelf: isRTL ? E_LAYOUT.FLEX_END : E_LAYOUT.FLEX_START },
           ]}
         >
           <DynamicText style={styles.text}>{message.text}</DynamicText>
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     padding: E_SPACING.M,
     borderRadius: E_BORDER_RADIUS.XXL,
     maxWidth: E_UI_STRING.BUBBLE_MAX_WIDTH_PERCENT,
-    alignSelf: "flex-end",
+    alignSelf: E_LAYOUT.FLEX_END,
   },
   text: {
     fontSize: E_FONT_SIZE.M - 1,

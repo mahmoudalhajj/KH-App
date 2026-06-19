@@ -9,6 +9,7 @@ import {
   E_SPACING,
   E_BORDER_RADIUS,
   E_BORDER_WIDTH,
+  E_LAYOUT,
 } from "../../enums/designTokens";
 
 const ChatEmptyState = () => {
@@ -25,9 +26,9 @@ const ChatEmptyState = () => {
 
 const styles = StyleSheet.create({
   emptyContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    flex: E_LAYOUT.FLEX_1,
+    justifyContent: E_LAYOUT.CENTER,
+    alignItems: E_LAYOUT.CENTER,
   },
   emptyChip: {
     borderWidth: E_BORDER_WIDTH.DEFAULT,

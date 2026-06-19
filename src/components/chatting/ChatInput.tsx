@@ -21,40 +21,37 @@ import {
   E_BORDER_RADIUS,
   E_BORDER_WIDTH,
   E_UI,
+  E_LAYOUT,
 } from "../../enums/designTokens";
 
 const ChatInput = observer(() => {
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <DynamicView row style={styles.inputRow}>
-        <TextInput
-          style={[styles.input, themeStore.getTextAlign()]}
-          placeholder={i18nStore.translate(TranslationKey.CHAT_PLACEHOLDER)}
-          value={messageStore.getDraft()}
-          onChangeText={messageStore.setDraft}
-          multiline
-          returnKeyType="send"
-          submitBehavior="newline"
-        />
+    <DynamicView row style={styles.inputRow}>
+      <TextInput
+        style={[styles.input, themeStore.getTextAlign()]}
+        placeholder={i18nStore.translate(TranslationKey.CHAT_PLACEHOLDER)}
+        value={messageStore.getDraft()}
+        onChangeText={messageStore.setDraft}
+        multiline
+        returnKeyType="send"
+        submitBehavior="newline"
+      />
 
-        <TouchableOpacity
-          style={styles.sendButton}
-          onPress={messageStore.sendMessages}
-        >
-          <DynamicText style={styles.sendButtonText}>
-            {i18nStore.translate(TranslationKey.CHAT_SEND)}
-          </DynamicText>
-        </TouchableOpacity>
-      </DynamicView>
-    </KeyboardAvoidingView>
+      <TouchableOpacity
+        style={styles.sendButton}
+        onPress={messageStore.sendMessages}
+      >
+        <DynamicText style={styles.sendButtonText}>
+          {i18nStore.translate(TranslationKey.CHAT_SEND)}
+        </DynamicText>
+      </TouchableOpacity>
+    </DynamicView>
   );
 });
 
 const styles = StyleSheet.create({
   inputRow: {
-    alignItems: "center",
+    alignItems: E_LAYOUT.CENTER,
     gap: E_SPACING.M,
     paddingHorizontal: E_SPACING.L,
     paddingVertical: E_SPACING.S + 2,
@@ -63,7 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: E_COLORS.BACKGROUND,
   },
   input: {
-    flex: 1,
+    flex: E_LAYOUT.FLEX_1,
     borderWidth: E_BORDER_WIDTH.DEFAULT,
     borderColor: E_COLORS.BORDER,
     borderRadius: E_BORDER_RADIUS.XXL,
@@ -79,8 +76,8 @@ const styles = StyleSheet.create({
     paddingVertical: E_SPACING.M,
     borderRadius: E_BORDER_RADIUS.XL,
     minWidth: E_UI.SEND_BUTTON_MIN_WIDTH,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: E_LAYOUT.CENTER,
+    justifyContent: E_LAYOUT.CENTER,
   },
   sendButtonText: {
     color: E_COLORS.BACKGROUND,

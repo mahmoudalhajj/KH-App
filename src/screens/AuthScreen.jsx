@@ -17,6 +17,7 @@ import AppButton from "../components/common/AppButton";
 import { i18nStore } from "../stores/i18nStore";
 import { TranslationKey } from "../i18n/translationKeys";
 import { E_PLACEHOLDER } from "../enums/strings";
+import { E_TEXT_ALIGN } from "../enums/direction";
 import {
   E_FONT_SIZE,
   E_FONT_WEIGHT,
@@ -24,6 +25,7 @@ import {
   E_BORDER_RADIUS,
   E_SHADOW,
   E_ELEVATION,
+  E_LAYOUT,
 } from "../enums/designTokens";
 
 export const AuthScreen = observer(() => {
@@ -134,15 +136,15 @@ export const AuthScreen = observer(() => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: E_LAYOUT.FLEX_1,
     backgroundColor: E_COLORS.BACKGROUND,
   },
   keyboardView: {
-    flex: 1,
+    flex: E_LAYOUT.FLEX_1,
   },
   scrollContent: {
-    flexGrow: 1,
-    justifyContent: "center",
+    flexGrow: E_LAYOUT.FLEX_1,
+    justifyContent: E_LAYOUT.CENTER,
     padding: E_SPACING.XL,
   },
   card: {
@@ -160,13 +162,13 @@ const styles = StyleSheet.create({
     fontWeight: E_FONT_WEIGHT.BOLD,
     color: E_COLORS.SECONDARY,
     marginBottom: E_SPACING.S,
-    textAlign: "center",
+    textAlign: E_TEXT_ALIGN.CENTER,
   },
   subtitle: {
     fontSize: E_FONT_SIZE.M,
     color: E_COLORS.TEXT_MUTED,
     marginBottom: E_SPACING.XXL,
-    textAlign: "center",
+    textAlign: E_TEXT_ALIGN.CENTER,
   },
   inputContainer: {
     marginBottom: E_SPACING.L,
@@ -183,7 +185,7 @@ const styles = StyleSheet.create({
   },
   switchButton: {
     marginTop: E_SPACING.XL,
-    alignItems: "center",
+    alignItems: E_LAYOUT.CENTER,
     padding: E_SPACING.M - 2,
   },
   switchText: {
@@ -195,6 +197,6 @@ const styles = StyleSheet.create({
     color: E_COLORS.ERROR,
     fontSize: E_FONT_SIZE.S,
     marginBottom: E_SPACING.L,
-    textAlign: "center",
+    textAlign: E_TEXT_ALIGN.CENTER,
   },
 });

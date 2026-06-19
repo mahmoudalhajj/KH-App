@@ -13,6 +13,7 @@ import {
   E_FONT_WEIGHT,
   E_SPACING,
   E_UI,
+  E_LAYOUT,
 } from "../../enums/designTokens";
 
 const ChatHeader = observer(() => {
@@ -48,7 +49,7 @@ const ChatHeader = observer(() => {
 
 const styles = StyleSheet.create({
   header: {
-    alignItems: "center",
+    alignItems: E_LAYOUT.CENTER,
     gap: E_SPACING.M,
     backgroundColor: E_COLORS.HEADER,
     paddingHorizontal: E_SPACING.L,
@@ -59,8 +60,8 @@ const styles = StyleSheet.create({
     height: E_UI.AVATAR_SIZE,
     borderRadius: E_UI.AVATAR_RADIUS,
     backgroundColor: E_COLORS.SECONDARY,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: E_LAYOUT.CENTER,
+    alignItems: E_LAYOUT.CENTER,
   },
   avatarText: {
     color: E_COLORS.ON_DARK,
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
     fontSize: E_FONT_SIZE.M,
   },
   headerTextWrapper: {
-    flex: 1,
+    flex: E_LAYOUT.FLEX_1,
   },
   headerTitle: {
     color: E_COLORS.ON_DARK,

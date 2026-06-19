@@ -1,6 +1,7 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, ViewStyle } from "react-native";
 import { E_COLORS } from "../../enums/color";
+import { E_LAYOUT } from "../../enums/designTokens";
 
 interface ScreenContainerProps {
   children: React.ReactNode;
@@ -13,7 +14,7 @@ const ScreenContainer = ({ children, style }: ScreenContainerProps) => (
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: E_LAYOUT.FLEX_1,
     backgroundColor: E_COLORS.BACKGROUND,
   },
 });

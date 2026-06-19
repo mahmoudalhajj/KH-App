@@ -86,3 +86,17 @@ export const E_UI_STRING = {
   CARD_WIDTH_PERCENT: "46%",
   BUBBLE_MAX_WIDTH_PERCENT: "85%",
 } as const;
+
+export const E_LAYOUT = {
+  FLEX_1: 1,
+  FLEX_2: 2,
+  CENTER: "center",
+  FLEX_START: "flex-start",
+  FLEX_END: "flex-end",
+  SPACE_BETWEEN: "space-between",
+  SPACE_AROUND: "space-around",
+  SPACE_EVENLY: "space-evenly",
+  STRETCH: "stretch",
+  RELATIVE: "relative",
+  ABSOLUTE: "absolute",
+} as const;

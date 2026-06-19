@@ -11,7 +11,8 @@ import AppButton from "../common/AppButton";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
 import { themeStore } from "../../stores/ThemeStore";
-import { E_FONT_SIZE, E_SPACING } from "../../enums/designTokens";
+import { E_FONT_SIZE, E_FONT_WEIGHT, E_SPACING, E_LAYOUT } from "../../enums/designTokens";
+import { E_TEXT_ALIGN } from "../../enums/direction";
 
 export const CartForm = observer(() => {
   const cartStore = getCartStore(authStore.getUserId());
@@ -70,15 +71,15 @@ const styles = StyleSheet.create({
     marginBottom: E_SPACING.XXXXL,
   },
   inputRow: {
-    justifyContent: "space-between",
+    justifyContent: E_LAYOUT.SPACE_BETWEEN,
     marginBottom: E_SPACING.S,
   },
   priceInputWrapper: {
-    flex: 1,
+    flex: E_LAYOUT.FLEX_1,
     marginEnd: E_SPACING.S,
   },
   quantityInputWrapper: {
-    flex: 1,
+    flex: E_LAYOUT.FLEX_1,
     marginStart: E_SPACING.S,
   },
   addButton: {
@@ -87,8 +88,8 @@ const styles = StyleSheet.create({
   errorText: {
     color: E_COLORS.ERROR,
     fontSize: E_FONT_SIZE.S,
-    textAlign: "center",
+    textAlign: E_TEXT_ALIGN.CENTER,
     marginBottom: E_SPACING.L,
-    fontWeight: 500,
+    fontWeight: E_FONT_WEIGHT.MEDIUM,
   },
 });

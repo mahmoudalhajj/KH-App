@@ -11,12 +11,14 @@ import { E_SPACING } from "../../enums/designTokens";
 
 export const CartFooter = observer(() => {
   const cartStore = getCartStore(authStore.getUserId());
+  const isCartEmpty = cartStore.cart.size === 0;
 
   return (
     <AppButton
       title={i18nStore.translate(TranslationKey.CLEAR_CART)}
       onPress={cartStore.clearCart}
       style={styles.clearButton}
+      disabled={isCartEmpty}
     />
   );
 });

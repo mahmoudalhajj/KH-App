@@ -22,6 +22,7 @@ import {
   E_SHADOW,
   E_UI,
   E_UI_STRING,
+  E_LAYOUT,
 } from "../enums/designTokens";
 
 const HomeScreenComponent = () => {
@@ -87,24 +88,24 @@ export const HomeScreen = observer(HomeScreenComponent);
 
 const styles = StyleSheet.create({
   content: {
-    flex: 1,
+    flex: E_LAYOUT.FLEX_1,
     padding: E_SPACING.XXL,
-    justifyContent: "center",
+    justifyContent: E_LAYOUT.CENTER,
   },
   heroContainer: {
-    flex: 1,
-    justifyContent: "center",
+    flex: E_LAYOUT.FLEX_1,
+    justifyContent: E_LAYOUT.CENTER,
   },
   grid: {
-    justifyContent: "space-between",
+    justifyContent: E_LAYOUT.SPACE_BETWEEN,
     marginBottom: E_SPACING.XXXXXL,
   },
   card: {
     width: E_UI_STRING.CARD_WIDTH_PERCENT,
     aspectRatio: 1,
     borderRadius: E_BORDER_RADIUS.XXXL,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: E_LAYOUT.CENTER,
+    alignItems: E_LAYOUT.CENTER,
     backgroundColor: E_COLORS.SURFACE,
     borderWidth: E_BORDER_WIDTH.DEFAULT,
     borderColor: E_COLORS.BORDER,
@@ -113,15 +114,15 @@ const styles = StyleSheet.create({
     shadowOffset: { width: E_SHADOW.OFFSET_X, height: E_SHADOW.OFFSET_Y },
     shadowOpacity: E_SHADOW.OPACITY_LIGHT,
     shadowRadius: E_SHADOW.RADIUS_MD,
-    position: "relative",
+    position: E_LAYOUT.RELATIVE,
   },
   iconCircle: {
     width: E_UI.ICON_CIRCLE_SIZE,
     height: E_UI.ICON_CIRCLE_SIZE,
     borderRadius: E_UI.ICON_CIRCLE_RADIUS,
     backgroundColor: E_COLORS.BACKGROUND,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: E_LAYOUT.CENTER,
+    alignItems: E_LAYOUT.CENTER,
     marginBottom: E_SPACING.M,
   },
   iconText: {
@@ -133,15 +134,15 @@ const styles = StyleSheet.create({
     color: E_COLORS.TEXT_PRIMARY,
   },
   badge: {
-    position: "absolute",
+    position: E_LAYOUT.ABSOLUTE,
     top: E_SPACING.M,
     right: E_SPACING.M,
     backgroundColor: E_COLORS.BADGE,
     borderRadius: E_SPACING.M,
     minWidth: E_UI.BADGE_MIN_WIDTH,
     height: E_UI.BADGE_HEIGHT,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: E_LAYOUT.CENTER,
+    alignItems: E_LAYOUT.CENTER,
     paddingHorizontal: E_UI.BADGE_PADDING_X,
     borderWidth: E_UI.BADGE_BORDER_WIDTH,
     borderColor: E_COLORS.SURFACE,
@@ -151,15 +152,8 @@ const styles = StyleSheet.create({
     fontSize: E_FONT_SIZE.XS,
     fontWeight: E_FONT_WEIGHT.BOLD,
   },
-  header: {
-    justifyContent: "flex-end",
-    padding: E_SPACING.M,
-  },
-  logoutButtonTop: {
-    padding: E_SPACING.M,
-  },
   logoutButton: {
-    alignSelf: "center",
+    alignSelf: E_LAYOUT.CENTER,
     padding: E_SPACING.M,
   },
   logoutText: {

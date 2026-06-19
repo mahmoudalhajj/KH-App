@@ -1,6 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import Chatting from "../components/Chatting";
 import { observer } from "mobx-react-lite";
+import { E_LAYOUT } from "../enums/designTokens";
 
 export const ChatScreen = observer(() => {
   return (
@@ -12,6 +13,6 @@ export const ChatScreen = observer(() => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: E_LAYOUT.FLEX_1,
   },
 });

@@ -10,6 +10,7 @@ import ChatEmptyState from "../components/chatting/ChatEmptyState";
 import ChatInput from "../components/chatting/ChatInput";
 import ChatList from "../components/chatting/ChatList";
 import { E_COLORS } from "../enums/color";
+import { E_LAYOUT } from "../enums/designTokens";
 import ScreenContainer from "./common/ScreenContainer";
 
 const Chatting = observer(() => {
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: E_COLORS.BACKGROUND,
   },
   listWrapper: {
-    flex: 1,
+    flex: E_LAYOUT.FLEX_1,
   },
 });
 

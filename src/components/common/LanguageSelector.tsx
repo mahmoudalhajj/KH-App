@@ -16,6 +16,7 @@ import {
   E_BORDER_RADIUS,
   E_BORDER_WIDTH,
   E_UI,
+  E_LAYOUT,
 } from "../../enums/designTokens";
 
 const languages: { key: Language; value: string }[] = [
@@ -70,8 +71,8 @@ const styles = StyleSheet.create({
   itemContent: {
     paddingVertical: E_SPACING.M,
     paddingHorizontal: E_SPACING.L,
-    alignItems: "center",
-    justifyContent: "space-between",
+    alignItems: E_LAYOUT.CENTER,
+    justifyContent: E_LAYOUT.SPACE_BETWEEN,
   },
   activeItem: {
     borderColor: E_COLORS.BUTTON,
