@@ -3,8 +3,6 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
 } from "react-native";
 import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";

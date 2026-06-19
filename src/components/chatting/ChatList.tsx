@@ -24,6 +24,7 @@ const ChatList = observer(({ listRef }: ChatListProps) => {
       keyExtractor={(item) => item.id.toString()}
       contentContainerStyle={styles.messageList}
       onContentSizeChange={handleContentSizeChange}
+      keyboardShouldPersistTaps="handled"
       renderItem={({ item }) => (
         <MessageBubble
           message={item}
