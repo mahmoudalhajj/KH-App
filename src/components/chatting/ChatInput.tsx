@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
@@ -24,7 +25,9 @@ import {
 
 const ChatInput = observer(() => {
   return (
-    <KeyboardAvoidingView>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <DynamicView row style={styles.inputRow}>
         <TextInput
           style={[styles.input, themeStore.getTextAlign()]}
@@ -32,14 +35,13 @@ const ChatInput = observer(() => {
           value={messageStore.getDraft()}
           onChangeText={messageStore.setDraft}
           multiline
+          returnKeyType="send"
+          submitBehavior="newline"
         />
 
         <TouchableOpacity
           style={styles.sendButton}
-          onPress={(e) => {
-            e.preventDefault();
-            messageStore.sendMessages();
-          }}
+          onPress={messageStore.sendMessages}
         >
           <DynamicText style={styles.sendButtonText}>
             {i18nStore.translate(TranslationKey.CHAT_SEND)}

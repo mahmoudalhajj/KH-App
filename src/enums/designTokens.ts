@@ -8,7 +8,7 @@ export enum E_AUTH_CONSTRAINTS {
 export enum E_CART_CONSTRAINTS {
   MAX_NAME_LENGTH = 50,
   MAX_PRICE = 999999,
-  MAX_QUANTITY = 999,
+  MAX_QUANTITY = 99,
 }
 
 export enum E_FONT_SIZE {

@@ -9,7 +9,12 @@ export enum E_LANGUAGE_LABELS {
 }
 
 export enum E_DATE_FORMAT {
-  LOCALE = "en-US",
   WEEKDAY = "short",
   TIME = "2-digit",
 }
+
+export const LANGUAGE_LOCALE: Record<Language, string> = {
+  en: "en-US",
+  ar: "ar-SA",
+  fr: "fr-FR",
+};

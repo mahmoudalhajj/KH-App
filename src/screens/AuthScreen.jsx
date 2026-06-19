@@ -7,6 +7,7 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import { observer } from "mobx-react-lite";
 import { authStore } from "../stores/AuthStore";
@@ -30,7 +31,10 @@ export const AuthScreen = observer(() => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView style={styles.keyboardView}>
+      <KeyboardAvoidingView
+        style={styles.keyboardView}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
@@ -56,6 +60,10 @@ export const AuthScreen = observer(() => {
                   placeholder={E_PLACEHOLDER.NAME}
                   value={authStore.name.get()}
                   onChangeText={(text) => authStore.setName(text)}
+                  returnKeyType="next"
+                  autoComplete="name"
+                  textContentType="name"
+                  importantForAutofill="yes"
                 />
               </View>
             )}
@@ -69,6 +77,11 @@ export const AuthScreen = observer(() => {
                 value={authStore.email.get()}
                 onChangeText={(text) => authStore.setEmail(text)}
                 keyboardType="email-address"
+                returnKeyType="next"
+                autoComplete="email"
+                textContentType="emailAddress"
+                importantForAutofill="yes"
+                autoCorrect={false}
               />
             </View>
 
@@ -81,6 +94,10 @@ export const AuthScreen = observer(() => {
                 value={authStore.password.get()}
                 onChangeText={(text) => authStore.setPassword(text)}
                 secureTextEntry
+                returnKeyType="done"
+                autoComplete="password"
+                textContentType="password"
+                importantForAutofill="yes"
               />
             </View>
 

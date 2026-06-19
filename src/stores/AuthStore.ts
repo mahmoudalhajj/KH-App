@@ -116,7 +116,7 @@ export class AuthStore {
   };
 
   getUserId = () => {
-    return this.user.get()!.id;
+    return this.user.get()?.id ?? null;
   };
 
   storeUser() {

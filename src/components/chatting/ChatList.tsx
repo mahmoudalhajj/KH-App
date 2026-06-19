@@ -13,12 +13,17 @@ interface ChatListProps {
 const ChatList = observer(({ listRef }: ChatListProps) => {
   const messages = messageStore.getAllMessages();
 
+  const handleContentSizeChange = () => {
+    listRef.current?.scrollToEnd({ animated: true });
+  };
+
   return (
     <FlatList
       ref={listRef}
       data={messages}
       keyExtractor={(item) => item.id.toString()}
       contentContainerStyle={styles.messageList}
+      onContentSizeChange={handleContentSizeChange}
       renderItem={({ item }) => (
         <MessageBubble
           message={item}

@@ -1,9 +1,11 @@
 import { observable, runInAction } from "mobx";
+import { Keyboard } from "react-native";
 import { message } from "../types/message";
 import { E_MESSAGE_SENDER } from "../enums/MessageSender";
 import { localStorageStore } from "./LocalStorageStore";
 import { E_STORAGE_KEY } from "../enums/StorageKeys";
-import { E_DATE_FORMAT } from "../enums/language";
+import { E_DATE_FORMAT, LANGUAGE_LOCALE } from "../enums/language";
+import { i18nStore } from "./i18nStore";
 
 export class MessageStore {
   messages = observable.map<number, message>();
@@ -25,20 +27,23 @@ export class MessageStore {
       this.storeMessages();
       this.draft.set("");
     });
+
+    Keyboard.dismiss();
   };
 
   getAllMessages = () => {
     return Array.from(this.messages.values());
   };
 
-  formatCreatedAt(createdAt: Date | string) {
+  formatCreatedAt = (createdAt: Date | string) => {
     const date = new Date(createdAt);
-    return date.toLocaleString(E_DATE_FORMAT.LOCALE, {
+    const locale = LANGUAGE_LOCALE[i18nStore.getLanguage()];
+    return date.toLocaleString(locale, {
       weekday: E_DATE_FORMAT.WEEKDAY as "short",
       hour: E_DATE_FORMAT.TIME,
       minute: E_DATE_FORMAT.TIME,
     });
-  }
+  };
 
   setDraft = (draft: string) => {
     runInAction(() => {

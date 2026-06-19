@@ -27,6 +27,7 @@ export const CartForm = observer(() => {
         value={cartStore.itemName.get()}
         onChangeText={cartStore.setItemName}
         placeholder={i18nStore.translate(TranslationKey.ITEM_NAME)}
+        returnKeyType="next"
       />
       <DynamicView row style={styles.inputRow}>
         <View style={styles.priceInputWrapper}>
@@ -35,6 +36,7 @@ export const CartForm = observer(() => {
             onChangeText={cartStore.setItemPrice}
             placeholder={i18nStore.translate(TranslationKey.PRICE)}
             keyboardType="numeric"
+            returnKeyType="next"
           />
         </View>
         <View style={styles.quantityInputWrapper}>
@@ -43,6 +45,7 @@ export const CartForm = observer(() => {
             onChangeText={cartStore.setItemQuantity}
             placeholder={i18nStore.translate(TranslationKey.QUANTITY)}
             keyboardType="numeric"
+            returnKeyType="done"
           />
         </View>
       </DynamicView>

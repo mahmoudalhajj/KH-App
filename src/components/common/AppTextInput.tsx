@@ -1,9 +1,14 @@
 import React from "react";
-import { TextInput, TextInputProps, StyleSheet } from "react-native";
+import { Platform, TextInput, TextInputProps, StyleSheet } from "react-native";
 import { E_COLORS } from "../../enums/color";
 import { observer } from "mobx-react-lite";
 import { themeStore } from "../../stores/ThemeStore";
-import { E_FONT_SIZE, E_SPACING, E_BORDER_RADIUS, E_BORDER_WIDTH } from "../../enums/designTokens";
+import {
+  E_FONT_SIZE,
+  E_SPACING,
+  E_BORDER_RADIUS,
+  E_BORDER_WIDTH,
+} from "../../enums/designTokens";
 
 interface AppTextInputProps extends TextInputProps {}
 
@@ -14,6 +19,10 @@ const AppTextInput = observer((props: AppTextInputProps) => {
       style={[styles.input, themeStore.getTextAlign(), props.style]}
       placeholderTextColor={E_COLORS.PLACEHOLDER}
       autoCapitalize="none"
+      returnKeyType={props.returnKeyType ?? "done"}
+      textContentType={props.textContentType}
+      importantForAutofill={props.importantForAutofill}
+      autoComplete={props.autoComplete}
     />
   );
 });

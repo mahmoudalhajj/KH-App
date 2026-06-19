@@ -20,14 +20,6 @@ const Chatting = observer(() => {
     messageStore.loadStoredMessages();
   }, []);
 
-  useEffect(() => {
-    if (messages.length > 0) {
-      flatListRef.current?.scrollToEnd({
-        animated: true,
-      });
-    }
-  }, [messages.length]);
-
   return (
     <ScreenContainer style={styles.container}>
       <ChatHeader />
