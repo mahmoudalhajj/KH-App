@@ -106,10 +106,10 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   card: {
-    backgroundColor: "white",
+    backgroundColor: E_COLORS.BACKGROUND,
     borderRadius: 16,
     padding: 24,
-    shadowColor: "#000",
+    shadowColor: E_COLORS.SHADOW,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    color: "#666",
+    color: E_COLORS.TEXT_MUTED,
     marginBottom: 32,
     textAlign: "center",
   },
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#444",
+    color: E_COLORS.TEXT_LABEL,
     marginBottom: 8,
   },
   mainButton: {

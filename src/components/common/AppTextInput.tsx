@@ -11,7 +11,7 @@ const AppTextInput = observer((props: AppTextInputProps) => {
     <TextInput
       {...props}
       style={[styles.input, themeStore.getTextAlign(), props.style]}
-      placeholderTextColor="#888"
+      placeholderTextColor={E_COLORS.PLACEHOLDER}
       autoCapitalize="none"
     />
   );

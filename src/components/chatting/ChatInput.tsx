@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 10,
     fontSize: 16,
-    backgroundColor: "#F9F9F9",
+    backgroundColor: E_COLORS.INPUT_FILL,
     maxHeight: 120,
   },
   sendButton: {

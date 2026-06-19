@@ -15,5 +15,12 @@ export enum E_COLORS {
   TEXT_INPUT_BORDER = "#ddd",
   TEXT_PRIMARY = "#212121",
   TEXT_SECONDARY = "#999999",
+  TEXT_MUTED = "#666666",
+  TEXT_LABEL = "#444444",
+  PLACEHOLDER = "#888888",
+  ON_DARK = "#ffffff",
+  SHADOW = "#000000",
+  BORDER_MUTED = "#cccccc",
+  INPUT_FILL = "#F9F9F9",
   BADGE = "#007AFF",
 }

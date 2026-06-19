@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: E_COLORS.BORDER,
     elevation: 2,
-    shadowColor: "#000",
+    shadowColor: E_COLORS.SHADOW,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 10,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     borderColor: E_COLORS.SURFACE,
   },
   badgeText: {
-    color: "white",
+    color: E_COLORS.ON_DARK,
     fontSize: 11,
     fontWeight: "bold",
   },

@@ -54,12 +54,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   avatarText: {
-    color: "white",
+    color: E_COLORS.ON_DARK,
     fontWeight: "700",
     fontSize: 16,
   },
   headerTitle: {
-    color: "white",
+    color: E_COLORS.ON_DARK,
     fontWeight: "700",
     fontSize: 16,
   },
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   clearButtonText: {
-    color: "white",
+    color: E_COLORS.ON_DARK,
     fontSize: 14,
   },
 });

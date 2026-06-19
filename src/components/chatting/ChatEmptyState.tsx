@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { i18nStore } from "../../stores/i18nStore";
 import { TranslationKey } from "../../i18n/translationKeys";
+import { E_COLORS } from "../../enums/color";
 import { DynamicText } from "../common/DynamicText";
 
 const ChatEmptyState = () => {
@@ -24,13 +25,13 @@ const styles = StyleSheet.create({
   },
   emptyChip: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: E_COLORS.BORDER_MUTED,
     borderRadius: 20,
     paddingHorizontal: 16,
     paddingVertical: 8,
   },
   emptyText: {
-    color: "#888",
+    color: E_COLORS.PLACEHOLDER,
     fontSize: 14,
   },
 });
