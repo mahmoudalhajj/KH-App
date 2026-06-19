@@ -3,6 +3,13 @@ import { User } from "../types/user";
 import { localStorageStore } from "./LocalStorageStore";
 import { E_AUTH_STATUS } from "../enums/authStatus";
 import { E_STORAGE_KEY } from "../enums/StorageKeys";
+import { E_AUTH_ERROR } from "../enums/authErrors";
+import { E_APP } from "../enums/strings";
+import {
+  isValidEmail,
+  isValidPassword,
+  isValidUsername,
+} from "../helpers/validator";
 
 export class AuthStore {
   user = observable.box<User | null>(null);
@@ -27,7 +34,14 @@ export class AuthStore {
 
     if (!email || !password) {
       runInAction(() => {
-        this.error.set("Invalid Email/Password");
+        this.error.set(E_AUTH_ERROR.INVALID_CREDENTIALS);
+      });
+      return;
+    }
+
+    if (!isValidEmail(email) || !isValidPassword(password)) {
+      runInAction(() => {
+        this.error.set(E_AUTH_ERROR.INVALID_CREDENTIALS);
       });
       return;
     }
@@ -35,7 +49,7 @@ export class AuthStore {
     runInAction(() => {
       const user: User = {
         id: Date.now(),
-        name: this.name.get() || "User",
+        name: this.name.get() || E_APP.DEFAULT_USER_NAME,
         email: email,
       };
 
@@ -51,9 +65,23 @@ export class AuthStore {
     const trimmedEmail = this.email.get().trim();
     const trimmedPassword = this.password.get().trim();
 
-    if (!trimmedName || !trimmedEmail || !trimmedPassword) {
+    if (!isValidUsername(trimmedName)) {
       runInAction(() => {
-        this.error.set("All fields are required.");
+        this.error.set(E_AUTH_ERROR.ALL_FIELDS_REQUIRED);
+      });
+      return;
+    }
+
+    if (!isValidEmail(trimmedEmail)) {
+      runInAction(() => {
+        this.error.set(E_AUTH_ERROR.INVALID_EMAIL);
+      });
+      return;
+    }
+
+    if (!isValidPassword(trimmedPassword)) {
+      runInAction(() => {
+        this.error.set(E_AUTH_ERROR.PASSWORD_TOO_SHORT);
       });
       return;
     }

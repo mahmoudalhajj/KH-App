@@ -1,4 +1,5 @@
 import { createMMKV } from "react-native-mmkv";
+import { E_LOG_ERROR } from "../enums/strings";
 
 export const storage = createMMKV();
 
@@ -17,7 +18,7 @@ class LocalStorageStore {
     try {
       storage.set(key, JSON.stringify(value));
     } catch (e) {
-      console.warn("couldnt set in local storage " + e);
+      console.warn(E_LOG_ERROR.STORAGE_SET + " " + e);
     }
   };
 

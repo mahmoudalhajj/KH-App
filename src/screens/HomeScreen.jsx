@@ -11,21 +11,32 @@ import { TranslationKey } from "../i18n/translationKeys";
 import { DynamicText } from "../components/common/DynamicText";
 import { DynamicView } from "../components/common/DynamicView";
 import LanguageSelector from "../components/common/LanguageSelector";
+import { E_ROUTE } from "../enums/routes";
+import { E_ICON } from "../enums/strings";
+import {
+  E_FONT_SIZE,
+  E_FONT_WEIGHT,
+  E_SPACING,
+  E_BORDER_RADIUS,
+  E_BORDER_WIDTH,
+  E_SHADOW,
+  E_UI,
+} from "../enums/designTokens";
 
 const HomeScreenComponent = () => {
   const navigation = useNavigation();
 
   return (
     <ScreenContainer style={styles.content}>
-      <DynamicView style={{ flex: 1, justifyContent: "center" }}>
+      <DynamicView style={styles.heroContainer}>
         <DynamicView row style={styles.grid}>
           <TouchableOpacity
             activeOpacity={0.7}
             style={styles.card}
-            onPress={() => navigation.navigate("Cart")}
+            onPress={() => navigation.navigate(E_ROUTE.CART)}
           >
             <DynamicView style={styles.iconCircle}>
-              <DynamicText style={styles.iconText}>🛒</DynamicText>
+              <DynamicText style={styles.iconText}>{E_ICON.CART}</DynamicText>
             </DynamicView>
             <DynamicText style={styles.cardTitle}>
               {i18nStore.translate(TranslationKey.HOME_CART)}
@@ -42,10 +53,10 @@ const HomeScreenComponent = () => {
           <TouchableOpacity
             activeOpacity={0.7}
             style={styles.card}
-            onPress={() => navigation.navigate("Chat")}
+            onPress={() => navigation.navigate(E_ROUTE.CHAT)}
           >
             <DynamicView style={styles.iconCircle}>
-              <DynamicText style={styles.iconText}>💬</DynamicText>
+              <DynamicText style={styles.iconText}>{E_ICON.CHAT}</DynamicText>
             </DynamicView>
             <DynamicText style={styles.cardTitle}>
               {i18nStore.translate(TranslationKey.HOME_CHAT)}
@@ -75,79 +86,83 @@ export const HomeScreen = observer(HomeScreenComponent);
 const styles = StyleSheet.create({
   content: {
     flex: 1,
-    padding: 24,
+    padding: E_SPACING.XXL,
+    justifyContent: "center",
+  },
+  heroContainer: {
+    flex: 1,
     justifyContent: "center",
   },
   grid: {
     justifyContent: "space-between",
-    marginBottom: 48,
+    marginBottom: E_SPACING.XXXXXL,
   },
   card: {
-    width: "46%",
+    width: E_UI.CARD_WIDTH_PERCENT,
     aspectRatio: 1,
-    borderRadius: 32,
+    borderRadius: E_BORDER_RADIUS.XXXL,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: E_COLORS.SURFACE,
-    borderWidth: 1,
+    borderWidth: E_BORDER_WIDTH.DEFAULT,
     borderColor: E_COLORS.BORDER,
     elevation: 2,
     shadowColor: E_COLORS.SHADOW,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
+    shadowOffset: { width: E_SHADOW.OFFSET_X, height: E_SHADOW.OFFSET_Y },
+    shadowOpacity: E_SHADOW.OPACITY_LIGHT,
+    shadowRadius: E_SHADOW.RADIUS_MD,
     position: "relative",
   },
   iconCircle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: E_UI.ICON_CIRCLE_SIZE,
+    height: E_UI.ICON_CIRCLE_SIZE,
+    borderRadius: E_UI.ICON_CIRCLE_RADIUS,
     backgroundColor: E_COLORS.BACKGROUND,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 12,
+    marginBottom: E_SPACING.M,
   },
   iconText: {
-    fontSize: 24,
+    fontSize: E_FONT_SIZE.XL,
   },
   cardTitle: {
-    fontSize: 16,
-    fontWeight: "600",
+    fontSize: E_FONT_SIZE.M,
+    fontWeight: E_FONT_WEIGHT.SEMI_BOLD,
     color: E_COLORS.TEXT_PRIMARY,
   },
   badge: {
     position: "absolute",
-    top: 12,
-    right: 12,
+    top: E_SPACING.M,
+    right: E_SPACING.M,
     backgroundColor: E_COLORS.BADGE,
-    borderRadius: 12,
-    minWidth: 24,
-    height: 24,
+    borderRadius: E_SPACING.M,
+    minWidth: E_UI.BADGE_MIN_WIDTH,
+    height: E_UI.BADGE_HEIGHT,
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 6,
-    borderWidth: 2,
+    paddingHorizontal: E_UI.BADGE_PADDING_X,
+    borderWidth: E_UI.BADGE_BORDER_WIDTH,
     borderColor: E_COLORS.SURFACE,
   },
   badgeText: {
     color: E_COLORS.ON_DARK,
-    fontSize: 11,
-    fontWeight: "bold",
+    fontSize: E_FONT_SIZE.XS,
+    fontWeight: E_FONT_WEIGHT.BOLD,
   },
   header: {
     justifyContent: "flex-end",
-    padding: 12,
+    padding: E_SPACING.M,
   },
   logoutButtonTop: {
-    padding: 12,
+    padding: E_SPACING.M,
   },
   logoutButton: {
     alignSelf: "center",
-    padding: 12,
+    padding: E_SPACING.M,
   },
   logoutText: {
     color: E_COLORS.TEXT_SECONDARY,
-    fontWeight: "500",
-    fontSize: 14,
+    fontWeight: E_FONT_WEIGHT.MEDIUM,
+    fontSize: E_FONT_SIZE.S,
   },
 });

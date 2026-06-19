@@ -13,6 +13,17 @@ import { authStore } from "../stores/AuthStore";
 import { E_COLORS } from "../enums/color";
 import AppTextInput from "../components/common/AppTextInput";
 import AppButton from "../components/common/AppButton";
+import { i18nStore } from "../stores/i18nStore";
+import { TranslationKey } from "../i18n/translationKeys";
+import { E_PLACEHOLDER } from "../enums/strings";
+import {
+  E_FONT_SIZE,
+  E_FONT_WEIGHT,
+  E_SPACING,
+  E_BORDER_RADIUS,
+  E_SHADOW,
+  E_ELEVATION,
+} from "../enums/designTokens";
 
 export const AuthScreen = observer(() => {
   const isRegistering = authStore.isRegistering.get();
@@ -26,19 +37,23 @@ export const AuthScreen = observer(() => {
         >
           <View style={styles.card}>
             <Text style={styles.title}>
-              {isRegistering ? "Create Account" : "Welcome Back"}
+              {isRegistering
+                ? i18nStore.translate(TranslationKey.CREATE_ACCOUNT)
+                : i18nStore.translate(TranslationKey.WELCOME_BACK)}
             </Text>
             <Text style={styles.subtitle}>
               {isRegistering
-                ? "Sign up to get started"
-                : "Login to your account"}
+                ? i18nStore.translate(TranslationKey.SIGN_UP_SUBTITLE)
+                : i18nStore.translate(TranslationKey.LOGIN_SUBTITLE)}
             </Text>
 
             {isRegistering && (
               <View style={styles.inputContainer}>
-                <Text style={styles.label}>Full Name</Text>
+                <Text style={styles.label}>
+                  {i18nStore.translate(TranslationKey.FULL_NAME)}
+                </Text>
                 <AppTextInput
-                  placeholder="John Doe"
+                  placeholder={E_PLACEHOLDER.NAME}
                   value={authStore.name.get()}
                   onChangeText={(text) => authStore.setName(text)}
                 />
@@ -46,9 +61,11 @@ export const AuthScreen = observer(() => {
             )}
 
             <View style={styles.inputContainer}>
-              <Text style={styles.label}>Email Address</Text>
+              <Text style={styles.label}>
+                {i18nStore.translate(TranslationKey.EMAIL_ADDRESS)}
+              </Text>
               <AppTextInput
-                placeholder="email@example.com"
+                placeholder={E_PLACEHOLDER.EMAIL}
                 value={authStore.email.get()}
                 onChangeText={(text) => authStore.setEmail(text)}
                 keyboardType="email-address"
@@ -56,9 +73,11 @@ export const AuthScreen = observer(() => {
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.label}>Password</Text>
+              <Text style={styles.label}>
+                {i18nStore.translate(TranslationKey.PASSWORD_LABEL)}
+              </Text>
               <AppTextInput
-                placeholder="••••••••"
+                placeholder={E_PLACEHOLDER.PASSWORD}
                 value={authStore.password.get()}
                 onChangeText={(text) => authStore.setPassword(text)}
                 secureTextEntry
@@ -70,7 +89,11 @@ export const AuthScreen = observer(() => {
             )}
 
             <AppButton
-              title={isRegistering ? "Register" : "Login"}
+              title={
+                isRegistering
+                  ? i18nStore.translate(TranslationKey.REGISTER)
+                  : i18nStore.translate(TranslationKey.LOGIN)
+              }
               onPress={authStore.handleAuth}
               style={styles.mainButton}
             />
@@ -81,8 +104,8 @@ export const AuthScreen = observer(() => {
             >
               <Text style={styles.switchText}>
                 {isRegistering
-                  ? "Already have an account? Login"
-                  : "Don't have an account? Register"}
+                  ? i18nStore.translate(TranslationKey.SWITCH_TO_LOGIN)
+                  : i18nStore.translate(TranslationKey.SWITCH_TO_REGISTER)}
               </Text>
             </TouchableOpacity>
           </View>
@@ -103,58 +126,58 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     justifyContent: "center",
-    padding: 20,
+    padding: E_SPACING.XL,
   },
   card: {
     backgroundColor: E_COLORS.BACKGROUND,
-    borderRadius: 16,
-    padding: 24,
+    borderRadius: E_BORDER_RADIUS.XXL,
+    padding: E_SPACING.XXL,
     shadowColor: E_COLORS.SHADOW,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 5,
+    shadowOffset: { width: E_SHADOW.OFFSET_X, height: E_SHADOW.OFFSET_Y },
+    shadowOpacity: E_SHADOW.OPACITY_DEFAULT,
+    shadowRadius: E_SHADOW.RADIUS_SM,
+    elevation: E_ELEVATION.DEFAULT,
   },
   title: {
-    fontSize: 28,
-    fontWeight: "bold",
+    fontSize: E_FONT_SIZE.XXL,
+    fontWeight: E_FONT_WEIGHT.BOLD,
     color: E_COLORS.SECONDARY,
-    marginBottom: 8,
+    marginBottom: E_SPACING.S,
     textAlign: "center",
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: E_FONT_SIZE.M,
     color: E_COLORS.TEXT_MUTED,
-    marginBottom: 32,
+    marginBottom: E_SPACING.XXL,
     textAlign: "center",
   },
   inputContainer: {
-    marginBottom: 16,
+    marginBottom: E_SPACING.L,
   },
   label: {
-    fontSize: 14,
-    fontWeight: "600",
+    fontSize: E_FONT_SIZE.S,
+    fontWeight: E_FONT_WEIGHT.SEMI_BOLD,
     color: E_COLORS.TEXT_LABEL,
-    marginBottom: 8,
+    marginBottom: E_SPACING.S,
   },
   mainButton: {
-    marginTop: 10,
-    borderRadius: 12,
+    marginTop: E_SPACING.M - 2,
+    borderRadius: E_BORDER_RADIUS.M,
   },
   switchButton: {
-    marginTop: 20,
+    marginTop: E_SPACING.XL,
     alignItems: "center",
-    padding: 10,
+    padding: E_SPACING.M - 2,
   },
   switchText: {
     color: E_COLORS.BUTTON,
-    fontSize: 14,
-    fontWeight: "600",
+    fontSize: E_FONT_SIZE.S,
+    fontWeight: E_FONT_WEIGHT.SEMI_BOLD,
   },
   errorText: {
     color: E_COLORS.ERROR,
-    fontSize: 14,
-    marginBottom: 16,
+    fontSize: E_FONT_SIZE.S,
+    marginBottom: E_SPACING.L,
     textAlign: "center",
   },
 });

@@ -124,7 +124,73 @@ export const translations = {
   },
   [TranslationKey.HOME_DESCRIPTION]: {
     en: "Use the navigation bar to access the cart, chat.",
-    fr: "Naviguez à l’aide de la barre de navigation pour consulter le panier, le chat.",
+    fr: "Naviguez à l'aide de la barre de navigation pour consulter le panier, le chat.",
     ar: "تنقّل عبر شريط التنقل للاطلاع على السلة والدردشة.",
+  },
+
+  [TranslationKey.CREATE_ACCOUNT]: {
+    en: "Create Account",
+    fr: "Créer un compte",
+    ar: "إنشاء حساب",
+  },
+
+  [TranslationKey.WELCOME_BACK]: {
+    en: "Welcome Back",
+    fr: "Bon retour",
+    ar: "مرحباً بعودتك",
+  },
+
+  [TranslationKey.SIGN_UP_SUBTITLE]: {
+    en: "Sign up to get started",
+    fr: "Inscrivez-vous pour commencer",
+    ar: "سجّل للبدء",
+  },
+
+  [TranslationKey.LOGIN_SUBTITLE]: {
+    en: "Login to your account",
+    fr: "Connectez-vous à votre compte",
+    ar: "سجّل الدخول إلى حسابك",
+  },
+
+  [TranslationKey.REGISTER]: {
+    en: "Register",
+    fr: "S'inscrire",
+    ar: "تسجيل",
+  },
+
+  [TranslationKey.LOGIN]: {
+    en: "Login",
+    fr: "Connexion",
+    ar: "تسجيل الدخول",
+  },
+
+  [TranslationKey.SWITCH_TO_LOGIN]: {
+    en: "Already have an account? Login",
+    fr: "Vous avez déjà un compte? Connectez-vous",
+    ar: "لديك حساب بالفعل؟ تسجّل الدخول",
+  },
+
+  [TranslationKey.SWITCH_TO_REGISTER]: {
+    en: "Don't have an account? Register",
+    fr: "Vous n'avez pas de compte? Inscrivez-vous",
+    ar: "ليس لديك حساب؟ سجّل",
+  },
+
+  [TranslationKey.FULL_NAME]: {
+    en: "Full Name",
+    fr: "Nom complet",
+    ar: "الاسم الكامل",
+  },
+
+  [TranslationKey.EMAIL_ADDRESS]: {
+    en: "Email Address",
+    fr: "Adresse e-mail",
+    ar: "البريد الإلكتروني",
+  },
+
+  [TranslationKey.PASSWORD_LABEL]: {
+    en: "Password",
+    fr: "Mot de passe",
+    ar: "كلمة المرور",
   },
 };

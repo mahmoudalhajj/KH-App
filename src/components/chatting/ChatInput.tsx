@@ -13,6 +13,14 @@ import { observer } from "mobx-react-lite";
 import { i18nStore } from "../../stores/i18nStore";
 import { messageStore } from "../../stores/MessageStore";
 import { themeStore } from "../../stores/ThemeStore";
+import {
+  E_FONT_SIZE,
+  E_FONT_WEIGHT,
+  E_SPACING,
+  E_BORDER_RADIUS,
+  E_BORDER_WIDTH,
+  E_UI,
+} from "../../enums/designTokens";
 
 const ChatInput = observer(() => {
   return (
@@ -45,37 +53,37 @@ const ChatInput = observer(() => {
 const styles = StyleSheet.create({
   inputRow: {
     alignItems: "center",
-    gap: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    borderTopWidth: 1,
+    gap: E_SPACING.M,
+    paddingHorizontal: E_SPACING.L,
+    paddingVertical: E_SPACING.S + 2,
+    borderTopWidth: E_BORDER_WIDTH.DEFAULT,
     borderTopColor: E_COLORS.CHAT_INPUT,
     backgroundColor: E_COLORS.BACKGROUND,
   },
   input: {
     flex: 1,
-    borderWidth: 1,
+    borderWidth: E_BORDER_WIDTH.DEFAULT,
     borderColor: E_COLORS.BORDER,
-    borderRadius: 24,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    fontSize: 16,
+    borderRadius: E_BORDER_RADIUS.XXL,
+    paddingHorizontal: E_SPACING.L,
+    paddingVertical: E_SPACING.M - 2,
+    fontSize: E_FONT_SIZE.M,
     backgroundColor: E_COLORS.INPUT_FILL,
-    maxHeight: 120,
+    maxHeight: E_UI.CHAT_INPUT_MAX_HEIGHT,
   },
   sendButton: {
     backgroundColor: E_COLORS.SECONDARY,
-    paddingHorizontal: 22,
-    paddingVertical: 12,
-    borderRadius: 20,
-    minWidth: 90,
+    paddingHorizontal: E_SPACING.XL + 2,
+    paddingVertical: E_SPACING.M,
+    borderRadius: E_BORDER_RADIUS.XL,
+    minWidth: E_UI.SEND_BUTTON_MIN_WIDTH,
     alignItems: "center",
     justifyContent: "center",
   },
   sendButtonText: {
     color: E_COLORS.BACKGROUND,
-    fontWeight: "700",
-    fontSize: 15,
+    fontWeight: E_FONT_WEIGHT.BOLD,
+    fontSize: E_FONT_SIZE.M - 1,
   },
 });
 

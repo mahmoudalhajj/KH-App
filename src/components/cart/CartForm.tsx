@@ -10,6 +10,7 @@ import AppButton from "../common/AppButton";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
 import { themeStore } from "../../stores/ThemeStore";
+import { E_FONT_SIZE, E_SPACING } from "../../enums/designTokens";
 
 export const CartForm = observer(() => {
   return (
@@ -25,7 +26,7 @@ export const CartForm = observer(() => {
         placeholder={i18nStore.translate(TranslationKey.ITEM_NAME)}
       />
       <DynamicView row style={styles.inputRow}>
-        <View style={{ flex: 1, marginEnd: 8 }}>
+        <View style={styles.priceInputWrapper}>
           <AppTextInput
             value={cartStore.itemPrice.get()}
             onChangeText={cartStore.setItemPrice}
@@ -33,7 +34,7 @@ export const CartForm = observer(() => {
             keyboardType="numeric"
           />
         </View>
-        <View style={{ flex: 1, marginStart: 8 }}>
+        <View style={styles.quantityInputWrapper}>
           <AppTextInput
             value={cartStore.itemQuantity.get()}
             onChangeText={cartStore.setItemQuantity}
@@ -60,20 +61,28 @@ export const CartForm = observer(() => {
 
 const styles = StyleSheet.create({
   form: {
-    marginBottom: 40,
+    marginBottom: E_SPACING.XXXXL,
   },
   inputRow: {
     justifyContent: "space-between",
-    marginBottom: 8,
+    marginBottom: E_SPACING.S,
+  },
+  priceInputWrapper: {
+    flex: 1,
+    marginEnd: E_SPACING.S,
+  },
+  quantityInputWrapper: {
+    flex: 1,
+    marginStart: E_SPACING.S,
   },
   addButton: {
-    marginTop: 16,
+    marginTop: E_SPACING.L,
   },
   errorText: {
     color: E_COLORS.ERROR,
-    fontSize: 14,
+    fontSize: E_FONT_SIZE.S,
     textAlign: "center",
-    marginBottom: 16,
+    marginBottom: E_SPACING.L,
     fontWeight: 500,
   },
 });

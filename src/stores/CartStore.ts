@@ -2,6 +2,12 @@ import { CartItem } from "../types/cartItem";
 import { computed, observable, runInAction } from "mobx";
 import { localStorageStore } from "./LocalStorageStore";
 import { E_STORAGE_KEY } from "../enums/StorageKeys";
+import { E_CART_ERROR } from "../enums/cartErrors";
+import {
+  isValidItemName,
+  isValidPrice,
+  isValidQuantity,
+} from "../helpers/validator";
 export class CartStore {
   cart = observable.map<number, CartItem>();
   itemName = observable.box<string>("");
@@ -74,11 +80,15 @@ export class CartStore {
         return;
       }
 
-      if (item.quantity > 0 && item.price > 0) {
+      if (
+        isValidItemName(item.name) &&
+        isValidPrice(item.price) &&
+        isValidQuantity(item.quantity)
+      ) {
         this.cart.set(item.id, item);
         this.storeCart();
       } else {
-        this.setError("Price and quantity must be greater than zero.");
+        this.setError(E_CART_ERROR.INVALID_PRICE_QUANTITY);
       }
     });
   }
@@ -123,13 +133,23 @@ export class CartStore {
     const price = Number(this.itemPrice.get());
     const quantity = Number(this.itemQuantity.get());
 
-    if (!name || !price || !quantity) {
-      this.setError("All values required.");
+    if (!name || !this.itemPrice.get() || !this.itemQuantity.get()) {
+      this.setError(E_CART_ERROR.ALL_VALUES_REQUIRED);
       return;
     }
 
-    if (price <= 0 || quantity <= 0) {
-      this.setError("Price and quantity must be greater than zero.");
+    if (!isValidItemName(name)) {
+      this.setError(E_CART_ERROR.NAME_TOO_LONG);
+      return;
+    }
+
+    if (!isValidPrice(price)) {
+      this.setError(E_CART_ERROR.PRICE_EXCEEDS_MAX);
+      return;
+    }
+
+    if (!isValidQuantity(quantity)) {
+      this.setError(E_CART_ERROR.QUANTITY_EXCEEDS_MAX);
       return;
     }
 

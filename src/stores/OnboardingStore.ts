@@ -1,4 +1,10 @@
 import { observable, runInAction } from "mobx";
+import { E_LOG_ERROR } from "../enums/strings";
+
+const MOCK_ITEMS = [
+  { id: 1, name: "Item1" },
+  { id: 2, name: "Item2" },
+];
 
 export class OnboardingStore {
   loading = observable.box(false);
@@ -39,10 +45,7 @@ export class OnboardingStore {
   updateItems = async () => {
     this.setLoading(true);
     try {
-      const data = await Promise.resolve([
-        { id: 1, name: "Item1" },
-        { id: 2, name: "Item2" },
-      ]);
+      const data = await Promise.resolve(MOCK_ITEMS);
 
       runInAction(() => {
         data.forEach((item) => {
@@ -51,7 +54,7 @@ export class OnboardingStore {
       });
     } catch (error) {
       runInAction(() => {
-        console.error("Failed to fetch items", error);
+        console.error(E_LOG_ERROR.FETCH_ITEMS, error);
       });
     }
     this.setLoading(false);

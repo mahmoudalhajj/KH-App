@@ -8,6 +8,10 @@ import { AuthScreen } from "./src/screens/AuthScreen";
 import { cartStore } from "./src/stores/CartStore";
 import { authStore } from "./src/stores/AuthStore";
 import { observer } from "mobx-react-lite";
+import { E_ROUTE } from "./src/enums/routes";
+import { E_NAV_OPTION } from "./src/enums/navigation";
+import { E_APP } from "./src/enums/strings";
+
 const Stack = createNativeStackNavigator();
 
 const App = observer(() => {
@@ -18,25 +22,30 @@ const App = observer(() => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        screenOptions={{ headerShown: E_NAV_OPTION.HIDDEN }}
+      >
         {!authStore.getIsLoggedIn() ? (
-          <Stack.Screen name="Auth" component={AuthScreen} />
+          <Stack.Screen name={E_ROUTE.AUTH} component={AuthScreen} />
         ) : (
           <>
             <Stack.Screen
-              name="Home"
+              name={E_ROUTE.HOME}
               component={HomeScreen}
-              options={{ headerShown: true, title: "Khattabat" }}
+              options={{
+                headerShown: E_NAV_OPTION.SHOWN,
+                title: E_APP.NAME,
+              }}
             />
             <Stack.Screen
-              name="Cart"
+              name={E_ROUTE.CART}
               component={CartScreen}
-              options={{ headerShown: true }}
+              options={{ headerShown: E_NAV_OPTION.SHOWN }}
             />
             <Stack.Screen
-              name="Chat"
+              name={E_ROUTE.CHAT}
               component={ChatScreen}
-              options={{ headerShown: true }}
+              options={{ headerShown: E_NAV_OPTION.SHOWN }}
             />
           </>
         )}

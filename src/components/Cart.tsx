@@ -9,6 +9,7 @@ import { CartStats } from "./cart/CartStats";
 import { CartForm } from "./cart/CartForm";
 import { CartFooter } from "./cart/CartFooter";
 import { E_COLORS } from "../enums/color";
+import { E_FONT_SIZE, E_FONT_WEIGHT, E_SPACING } from "../enums/designTokens";
 
 const CartSummary = observer(() => {
   return (
@@ -32,12 +33,12 @@ const CartSummary = observer(() => {
 const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
-    paddingHorizontal: 24,
-    paddingVertical: 32,
+    paddingHorizontal: E_SPACING.XXL,
+    paddingVertical: E_SPACING.XXXL,
   },
   header: {
-    fontSize: 22,
-    fontWeight: "bold",
+    fontSize: E_FONT_SIZE.XL,
+    fontWeight: E_FONT_WEIGHT.BOLD,
     color: E_COLORS.TEXT_PRIMARY,
   },
 });

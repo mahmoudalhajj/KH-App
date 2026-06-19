@@ -8,6 +8,7 @@ import { TranslationKey } from "../../i18n/translationKeys";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
 import { themeStore } from "../../stores/ThemeStore";
+import { E_FONT_SIZE, E_FONT_WEIGHT, E_SPACING, E_BORDER_RADIUS } from "../../enums/designTokens";
 
 export const CartStats = observer(() => {
   return (
@@ -35,18 +36,18 @@ export const CartStats = observer(() => {
 const styles = StyleSheet.create({
   statsRow: {
     justifyContent: "space-around",
-    marginBottom: 40,
+    marginBottom: E_SPACING.XXXXL,
     backgroundColor: E_COLORS.SURFACE,
-    padding: 20,
-    borderRadius: 20,
+    padding: E_SPACING.XL,
+    borderRadius: E_BORDER_RADIUS.XL,
   },
   statItem: {
     alignItems: "center",
-    paddingVertical: 10,
+    paddingVertical: E_SPACING.M - 2,
   },
   statValue: {
-    fontSize: 24,
-    fontWeight: "800",
+    fontSize: E_FONT_SIZE.XL,
+    fontWeight: E_FONT_WEIGHT.EXTRA_BOLD,
     color: E_COLORS.BUTTON,
   },
 });

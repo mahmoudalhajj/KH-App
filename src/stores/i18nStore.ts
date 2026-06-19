@@ -1,20 +1,22 @@
 import { observable, runInAction } from "mobx";
 import { translations, Language } from "../i18n/translations";
 import { TranslationKey } from "../i18n/translationKeys";
+import { E_TEXT_DIRECTION } from "../enums/direction";
+import { DEFAULT_LANGUAGE } from "../enums/language";
 
 export class I18nStore {
-  currentLanguage = observable.box<Language>("en");
+  currentLanguage = observable.box<Language>(DEFAULT_LANGUAGE);
 
   getLanguage = () => {
     return this.currentLanguage.get();
   };
 
   getDirection = () => {
-    return translations.direction[this.getLanguage()] || "ltr";
+    return translations.direction[this.getLanguage()] || E_TEXT_DIRECTION.LTR;
   };
 
   getIsRTL = (): boolean => {
-    return this.getDirection() === "rtl";
+    return this.getDirection() === E_TEXT_DIRECTION.RTL;
   };
 
   setLanguage = (lang: Language) => {

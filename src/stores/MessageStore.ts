@@ -3,6 +3,7 @@ import { message } from "../types/message";
 import { E_MESSAGE_SENDER } from "../enums/MessageSender";
 import { localStorageStore } from "./LocalStorageStore";
 import { E_STORAGE_KEY } from "../enums/StorageKeys";
+import { E_DATE_FORMAT } from "../enums/language";
 
 export class MessageStore {
   messages = observable.map<number, message>();
@@ -32,10 +33,10 @@ export class MessageStore {
 
   formatCreatedAt(createdAt: Date | string) {
     const date = new Date(createdAt);
-    return date.toLocaleString("en-US", {
-      weekday: "short",
-      hour: "2-digit",
-      minute: "2-digit",
+    return date.toLocaleString(E_DATE_FORMAT.LOCALE, {
+      weekday: E_DATE_FORMAT.WEEKDAY as "short",
+      hour: E_DATE_FORMAT.TIME,
+      minute: E_DATE_FORMAT.TIME,
     });
   }
 

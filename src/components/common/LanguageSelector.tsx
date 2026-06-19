@@ -8,14 +8,23 @@ import { Language } from "../../i18n/translations";
 import { DynamicView } from "./DynamicView";
 import { DynamicText } from "./DynamicText";
 import { themeStore } from "../../stores/ThemeStore";
+import { E_LANGUAGE_LABELS } from "../../enums/language";
+import {
+  E_FONT_SIZE,
+  E_FONT_WEIGHT,
+  E_SPACING,
+  E_BORDER_RADIUS,
+  E_BORDER_WIDTH,
+  E_UI,
+} from "../../enums/designTokens";
+
+const languages: { key: Language; value: string }[] = [
+  { key: "en", value: E_LANGUAGE_LABELS.EN },
+  { key: "ar", value: E_LANGUAGE_LABELS.AR },
+  { key: "fr", value: E_LANGUAGE_LABELS.FR },
+];
 
 const LanguageSelector = observer(() => {
-  const languages: { key: Language; value: string }[] = [
-    { key: "en", value: "English" },
-    { key: "ar", value: "العربية" },
-    { key: "fr", value: "Français" },
-  ];
-
   const currentLang = i18nStore.getLanguage();
 
   return (
@@ -49,18 +58,18 @@ const LanguageSelector = observer(() => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 16,
+    marginTop: E_SPACING.L,
   },
   item: {
-    borderRadius: 12,
-    marginBottom: 8,
+    borderRadius: E_BORDER_RADIUS.M,
+    marginBottom: E_SPACING.S,
     backgroundColor: E_COLORS.SURFACE,
-    borderWidth: 1,
+    borderWidth: E_BORDER_WIDTH.DEFAULT,
     borderColor: E_COLORS.BORDER,
   },
   itemContent: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
+    paddingVertical: E_SPACING.M,
+    paddingHorizontal: E_SPACING.L,
     alignItems: "center",
     justifyContent: "space-between",
   },
@@ -68,17 +77,17 @@ const styles = StyleSheet.create({
     borderColor: E_COLORS.BUTTON,
   },
   text: {
-    fontSize: 16,
+    fontSize: E_FONT_SIZE.M,
     color: E_COLORS.TEXT_PRIMARY,
   },
   activeText: {
     color: E_COLORS.BUTTON,
-    fontWeight: "bold",
+    fontWeight: E_FONT_WEIGHT.BOLD,
   },
   checkmark: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
+    width: E_UI.CHECKMARK_SIZE,
+    height: E_UI.CHECKMARK_SIZE,
+    borderRadius: E_UI.CHECKMARK_RADIUS,
     backgroundColor: E_COLORS.BUTTON,
   },
 });

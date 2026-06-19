@@ -1,0 +1,85 @@
+export enum E_AUTH_CONSTRAINTS {
+  MAX_EMAIL_LENGTH = 254,
+  MIN_PASSWORD_LENGTH = 6,
+  MAX_PASSWORD_LENGTH = 128,
+  MAX_NAME_LENGTH = 100,
+}
+
+export enum E_CART_CONSTRAINTS {
+  MAX_NAME_LENGTH = 50,
+  MAX_PRICE = 999999,
+  MAX_QUANTITY = 999,
+}
+
+export enum E_FONT_SIZE {
+  XS = 11,
+  S = 14,
+  M = 16,
+  L = 17,
+  XL = 22,
+  XXL = 28,
+}
+
+export enum E_FONT_WEIGHT {
+  NORMAL = "normal",
+  MEDIUM = "500",
+  SEMI_BOLD = "600",
+  BOLD = "700",
+  EXTRA_BOLD = "800",
+}
+
+export enum E_SPACING {
+  XS = 4,
+  S = 8,
+  M = 12,
+  L = 16,
+  XL = 20,
+  XXL = 24,
+  XXXL = 32,
+  XXXXL = 40,
+  XXXXXL = 48,
+}
+
+export enum E_BORDER_RADIUS {
+  S = 10,
+  M = 12,
+  L = 14,
+  XL = 20,
+  XXL = 24,
+  XXXL = 32,
+}
+
+export enum E_BORDER_WIDTH {
+  DEFAULT = 1,
+}
+
+export enum E_ELEVATION {
+  DEFAULT = 5,
+}
+
+export enum E_SHADOW {
+  OFFSET_X = 0,
+  OFFSET_Y = 2,
+  OPACITY_LIGHT = 0.05,
+  OPACITY_DEFAULT = 0.1,
+  RADIUS_SM = 8,
+  RADIUS_MD = 10,
+}
+
+export enum E_UI {
+  CARD_WIDTH_PERCENT = "46%",
+  ICON_CIRCLE_SIZE = 50,
+  ICON_CIRCLE_RADIUS = 25,
+  AVATAR_SIZE = 40,
+  AVATAR_RADIUS = 20,
+  CHECKMARK_SIZE = 10,
+  CHECKMARK_RADIUS = 5,
+  BADGE_MIN_WIDTH = 24,
+  BADGE_HEIGHT = 24,
+  BADGE_PADDING_X = 6,
+  BADGE_BORDER_WIDTH = 2,
+  CHAT_INPUT_MAX_HEIGHT = 120,
+  SEND_BUTTON_MIN_WIDTH = 90,
+  BUBBLE_MAX_WIDTH_PERCENT = "85%",
+  LINE_HEIGHT = 20,
+}
