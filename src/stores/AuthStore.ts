@@ -9,6 +9,7 @@ import {
   isValidEmail,
   isValidPassword,
   isValidUsername,
+  isValidUser,
 } from "../helpers/validator";
 
 let nextUserId = 1;
@@ -122,9 +123,12 @@ export class AuthStore {
     return this.user.get()?.id ?? null;
   };
 
-  storeUser() {
-    localStorageStore.storageSet(E_STORAGE_KEY.USER, this.user.get());
-  }
+  storeUser = () => {
+    const user = this.user.get();
+    if (user && isValidUser(user)) {
+      localStorageStore.storageSet(E_STORAGE_KEY.USER, user);
+    }
+  };
 
   loadStoredUser() {
     if (this.getIsLoggedIn()) return;
@@ -132,8 +136,13 @@ export class AuthStore {
     const stored = localStorageStore.storageGet(E_STORAGE_KEY.USER);
     if (!stored) return;
 
+    if (!isValidUser(stored)) {
+      localStorageStore.storageClear();
+      return;
+    }
+
     runInAction(() => {
-      this.user.set(stored as User);
+      this.user.set(stored);
       this.status.set(E_AUTH_STATUS.LOGGED_IN);
     });
   }
