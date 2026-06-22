@@ -6,6 +6,9 @@ import { localStorageStore } from "./LocalStorageStore";
 import { E_STORAGE_KEY } from "../enums/StorageKeys";
 import { E_DATE_FORMAT, LANGUAGE_LOCALE } from "../enums/language";
 import { i18nStore } from "./i18nStore";
+
+let nextMessageId = 1;
+
 export class MessageStore {
   storageKey: string = E_STORAGE_KEY.MESSAGES;
   messages = observable.map<number, message>();
@@ -17,7 +20,7 @@ export class MessageStore {
 
     runInAction(() => {
       const message: message = {
-        id: Date.now() * Math.random(),
+        id: nextMessageId++,
         text: trimmedText,
         sender: E_MESSAGE_SENDER.CLIENT,
         createdAt: new Date(),
@@ -65,21 +68,26 @@ export class MessageStore {
   };
 
   storeMessages() {
-    localStorageStore.storageSet(E_STORAGE_KEY.MESSAGES, this.getAllMessages());
+    localStorageStore.storageSet(this.storageKey, this.getAllMessages());
   }
 
   loadStoredMessages() {
-    const stored = localStorageStore.storageGet(E_STORAGE_KEY.MESSAGES);
+    const stored = localStorageStore.storageGet(this.storageKey);
     if (!stored) return;
     runInAction(() => {
       stored.forEach((message: message) => {
         this.messages.set(message.id, message);
+        if (message.id >= nextMessageId) {
+          nextMessageId = message.id + 1;
+        }
       });
     });
   }
 
-  setUserId(userId: number | null) {
-    this.storageKey = `${E_STORAGE_KEY.MESSAGES}_${userId}`;
-  }
+  setUserId = (userId: number | null) => {
+    this.storageKey = userId
+      ? `${E_STORAGE_KEY.MESSAGES}_${userId}`
+      : E_STORAGE_KEY.MESSAGES;
+  };
 }
 export const messageStore = new MessageStore();

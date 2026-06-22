@@ -11,6 +11,8 @@ import {
   isValidUsername,
 } from "../helpers/validator";
 
+let nextUserId = 1;
+
 export class AuthStore {
   user = observable.box<User | null>(null);
   status = observable.box<E_AUTH_STATUS>(E_AUTH_STATUS.LOGGED_OUT);
@@ -48,7 +50,7 @@ export class AuthStore {
 
     runInAction(() => {
       const user: User = {
-        id: Date.now() * Math.random(),
+        id: nextUserId++,
         name: this.name.get() || E_APP.DEFAULT_USER_NAME,
         email: email,
       };
@@ -88,7 +90,7 @@ export class AuthStore {
 
     runInAction(() => {
       const user: User = {
-        id: Date.now() * Math.random(),
+        id: nextUserId++,
         name: trimmedName,
         email: trimmedEmail,
       };

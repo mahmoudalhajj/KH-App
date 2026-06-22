@@ -3,11 +3,14 @@ import { computed, observable, runInAction } from "mobx";
 import { localStorageStore } from "./LocalStorageStore";
 import { E_STORAGE_KEY } from "../enums/StorageKeys";
 import { E_CART_ERROR } from "../enums/cartErrors";
+import { E_CART_CONSTRAINTS } from "../enums/designTokens";
 import {
   isValidItemName,
   isValidPrice,
   isValidQuantity,
 } from "../helpers/validator";
+
+let nextCartId = 1;
 
 export class CartStore {
   storageKey: string = E_STORAGE_KEY.CART;
@@ -59,10 +62,17 @@ export class CartStore {
     });
   };
 
-  setCartItemQuantity = (item: CartItem, amount: number) => {
-    runInAction(() => {
-      item.quantity += amount;
-    });
+  setCartItemQuantity = (itemId: number, amount: number): boolean => {
+    const item = this.cart.get(itemId);
+    if (!item) return false;
+
+    const newQuantity = item.quantity + amount;
+    if (newQuantity < 1 || newQuantity > E_CART_CONSTRAINTS.MAX_QUANTITY) {
+      return false;
+    }
+
+    item.quantity = newQuantity;
+    return true;
   };
 
   setCartItem = (item: CartItem) => {
@@ -70,8 +80,11 @@ export class CartStore {
       const existingItem = this.cart.get(item.id);
 
       if (existingItem) {
-        this.setCartItemQuantity(existingItem, item.quantity);
-        this.storeCart();
+        if (this.setCartItemQuantity(existingItem.id, item.quantity)) {
+          this.storeCart();
+        } else {
+          this.setError(E_CART_ERROR.QUANTITY_EXCEEDS_MAX);
+        }
         return;
       }
 
@@ -110,7 +123,7 @@ export class CartStore {
     const name = this.itemName.get().trim();
     const price = Number(this.itemPrice.get());
     const quantity = Number(this.itemQuantity.get());
-    const id = Date.now() * Math.random();
+    const id = nextCartId++;
 
     if (!name || !this.itemPrice.get() || !this.itemQuantity.get()) {
       this.setError(E_CART_ERROR.ALL_VALUES_REQUIRED);
@@ -138,7 +151,9 @@ export class CartStore {
         .find((item) => item.name === name);
 
       if (existingItem) {
-        this.setCartItemQuantity(existingItem, quantity);
+        if (!this.setCartItemQuantity(existingItem.id, quantity)) {
+          this.setError(E_CART_ERROR.QUANTITY_EXCEEDS_MAX);
+        }
       } else {
         this.cart.set(id, {
           id: id,
@@ -170,6 +185,9 @@ export class CartStore {
     runInAction(() => {
       stored.forEach((entry) => {
         this.cart.set(entry.id, entry);
+        if (entry.id >= nextCartId) {
+          nextCartId = entry.id + 1;
+        }
       });
     });
   };
