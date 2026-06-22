@@ -1,6 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
-import { View, FlatList, StyleSheet } from "react-native";
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  Platform,
+  KeyboardAvoidingView,
+} from "react-native";
+import { useHeaderHeight } from "@react-navigation/elements";
 
 import { messageStore } from "../stores/MessageStore";
 import { message } from "../types/message";
@@ -16,6 +23,7 @@ import ScreenContainer from "./common/ScreenContainer";
 const Chatting = observer(() => {
   const messages = messageStore.getAllMessages();
   const flatListRef = useRef<FlatList<message>>(null);
+  const headerHeight = useHeaderHeight();
 
   useEffect(() => {
     messageStore.loadStoredMessages();
@@ -23,17 +31,23 @@ const Chatting = observer(() => {
 
   return (
     <ScreenContainer style={styles.container}>
-      <ChatHeader />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: E_LAYOUT.FLEX_1 }}
+        keyboardVerticalOffset={Platform.OS === "ios" ? headerHeight : 0}
+      >
+        <ChatHeader />
 
-      <View style={styles.listWrapper}>
-        {messages.length === 0 ? (
-          <ChatEmptyState />
-        ) : (
-          <ChatList listRef={flatListRef} />
-        )}
-      </View>
+        <View style={styles.listWrapper}>
+          {messages.length === 0 ? (
+            <ChatEmptyState />
+          ) : (
+            <ChatList listRef={flatListRef} />
+          )}
+        </View>
 
-      <ChatInput />
+        <ChatInput />
+      </KeyboardAvoidingView>
     </ScreenContainer>
   );
 });

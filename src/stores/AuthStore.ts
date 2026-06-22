@@ -48,7 +48,7 @@ export class AuthStore {
 
     runInAction(() => {
       const user: User = {
-        id: Date.now(),
+        id: Date.now() * Math.random(),
         name: this.name.get() || E_APP.DEFAULT_USER_NAME,
         email: email,
       };
@@ -88,7 +88,7 @@ export class AuthStore {
 
     runInAction(() => {
       const user: User = {
-        id: Date.now(),
+        id: Date.now() * Math.random(),
         name: trimmedName,
         email: trimmedEmail,
       };

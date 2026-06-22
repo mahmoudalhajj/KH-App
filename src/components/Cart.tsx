@@ -1,10 +1,10 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import {
-  KeyboardAvoidingView,
   Platform,
   ScrollView,
   StyleSheet,
+  KeyboardAvoidingView,
 } from "react-native";
 import { i18nStore } from "../stores/i18nStore";
 import ScreenContainer from "./common/ScreenContainer";
@@ -14,7 +14,12 @@ import { CartStats } from "./cart/CartStats";
 import { CartForm } from "./cart/CartForm";
 import { CartFooter } from "./cart/CartFooter";
 import { E_COLORS } from "../enums/color";
-import { E_FONT_SIZE, E_FONT_WEIGHT, E_SPACING, E_LAYOUT } from "../enums/designTokens";
+import {
+  E_FONT_SIZE,
+  E_FONT_WEIGHT,
+  E_SPACING,
+  E_LAYOUT,
+} from "../enums/designTokens";
 
 const CartSummary = observer(() => {
   return (

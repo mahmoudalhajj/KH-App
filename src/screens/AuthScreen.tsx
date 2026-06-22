@@ -5,7 +5,6 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   ScrollView,
-  SafeAreaView,
   TouchableOpacity,
   Platform,
 } from "react-native";
@@ -27,6 +26,7 @@ import {
   E_ELEVATION,
   E_LAYOUT,
 } from "../enums/designTokens";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export const AuthScreen = observer(() => {
   const isRegistering = authStore.isRegistering.get();

@@ -132,6 +132,7 @@ export class CartStore {
     const name = this.itemName.get().trim();
     const price = Number(this.itemPrice.get());
     const quantity = Number(this.itemQuantity.get());
+    const id = Date.now() * Math.random();
 
     if (!name || !this.itemPrice.get() || !this.itemQuantity.get()) {
       this.setError(E_CART_ERROR.ALL_VALUES_REQUIRED);
@@ -161,8 +162,8 @@ export class CartStore {
       if (existingItem) {
         existingItem.quantity += quantity;
       } else {
-        this.cart.set(Date.now(), {
-          id: Date.now(),
+        this.cart.set(id, {
+          id: id,
           name,
           price,
           quantity,
