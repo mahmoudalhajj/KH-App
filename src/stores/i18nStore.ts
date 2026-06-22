@@ -3,6 +3,8 @@ import { translations, Language } from "../i18n/translations";
 import { TranslationKey } from "../i18n/translationKeys";
 import { E_TEXT_DIRECTION } from "../enums/direction";
 import { DEFAULT_LANGUAGE } from "../enums/language";
+import { E_STORAGE_KEY } from "../enums/StorageKeys";
+import { localStorageStore } from "./LocalStorageStore";
 
 export class I18nStore {
   currentLanguage = observable.box<Language>(DEFAULT_LANGUAGE);
@@ -23,6 +25,7 @@ export class I18nStore {
     runInAction(() => {
       this.currentLanguage.set(lang);
     });
+    localStorageStore.storageSet(E_STORAGE_KEY.LANGUAGE, lang);
   };
 
   translate = (key: TranslationKey) => {

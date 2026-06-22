@@ -9,6 +9,8 @@ import {
   isValidQuantity,
 } from "../helpers/validator";
 export class CartStore {
+  storageKey: string = E_STORAGE_KEY.CART;
+
   cart = observable.map<number, CartItem>();
   itemName = observable.box<string>("");
   itemPrice = observable.box<string>("");
@@ -65,7 +67,7 @@ export class CartStore {
 
   storeCart() {
     localStorageStore.storageSet(
-      E_STORAGE_KEY.CART,
+      this.storageKey,
       Array.from(this.cart.values()),
     );
   }
@@ -116,7 +118,7 @@ export class CartStore {
   };
 
   loadStoredCart = () => {
-    const stored = localStorageStore.storageGet(E_STORAGE_KEY.CART);
+    const stored = localStorageStore.storageGet(this.storageKey);
     if (!Array.isArray(stored)) {
       return;
     }
@@ -178,4 +180,7 @@ export class CartStore {
       this.storeCart();
     });
   };
+  setUserId(userId: number | null) {
+    this.storageKey = `${E_STORAGE_KEY.CART}_${userId}`;
+  }
 }

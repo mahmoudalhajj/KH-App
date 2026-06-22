@@ -8,6 +8,7 @@ import { E_DATE_FORMAT, LANGUAGE_LOCALE } from "../enums/language";
 import { i18nStore } from "./i18nStore";
 
 export class MessageStore {
+  storageKey: string = E_STORAGE_KEY.MESSAGES;
   messages = observable.map<number, message>();
   draft = observable.box<string>("");
 
@@ -76,6 +77,10 @@ export class MessageStore {
         this.messages.set(message.id, message);
       });
     });
+  }
+
+  setUserId(userId: number | null) {
+    this.storageKey = `${E_STORAGE_KEY.MESSAGES}_${userId}`;
   }
 }
 export const messageStore = new MessageStore();

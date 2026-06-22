@@ -100,6 +100,7 @@ export class AuthStore {
   };
 
   logout = () => {
+    const userId = this.user.get()?.id ?? null;
     runInAction(() => {
       this.user.set(null);
       this.status.set(E_AUTH_STATUS.LOGGED_OUT);
@@ -108,7 +109,7 @@ export class AuthStore {
       this.password.set("");
       this.name.set("");
     });
-    localStorageStore.storageClear();
+    localStorageStore.storageClearForUser(userId);
   };
 
   getIsLoggedIn = () => {
@@ -130,7 +131,7 @@ export class AuthStore {
     if (!stored) return;
 
     runInAction(() => {
-      this.user.set(stored);
+      this.user.set(stored as User);
       this.status.set(E_AUTH_STATUS.LOGGED_IN);
     });
   }

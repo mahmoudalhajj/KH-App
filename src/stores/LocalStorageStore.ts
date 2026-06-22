@@ -27,6 +27,16 @@ class LocalStorageStore {
       storage.clearAll();
     } catch {}
   };
+
+  storageClearForUser = (userId: number | null): void => {
+    try {
+      const Id = `_${userId}`;
+      const keysToDelete = storage.getAllKeys().filter((key) => {
+        return key.endsWith(Id);
+      });
+      keysToDelete.forEach((key) => storage.remove(key));
+    } catch {}
+  };
 }
 
 export const localStorageStore = new LocalStorageStore();

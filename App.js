@@ -6,7 +6,9 @@ import { CartScreen } from "./src/screens/CartScreen";
 import { ChatScreen } from "./src/screens/ChatScreen";
 import { AuthScreen } from "./src/screens/AuthScreen";
 import { getCartStore } from "./src/stores/getCartStore";
+import { messageStore } from "./src/stores/MessageStore";
 import { authStore } from "./src/stores/AuthStore";
+import { i18nStore } from "./src/stores/i18nStore";
 import { observer } from "mobx-react-lite";
 import { E_ROUTE } from "./src/enums/routes";
 import { E_NAV_OPTION } from "./src/enums/navigation";
@@ -17,15 +19,17 @@ const Stack = createNativeStackNavigator();
 const App = observer(() => {
   useEffect(() => {
     authStore.loadStoredUser();
-    const cartStore = getCartStore(authStore.getUserId());
+    const userId = authStore.getUserId();
+    const cartStore = getCartStore(userId);
     cartStore.loadStoredCart();
+    messageStore.setUserId(userId);
+    messageStore.loadStoredMessages();
+    i18nStore.loadStoredLanguage();
   }, []);
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{ headerShown: E_NAV_OPTION.HIDDEN === "true" }}
-      >
+      <Stack.Navigator screenOptions={{ headerShown: E_NAV_OPTION.HIDDEN }}>
         {!authStore.getIsLoggedIn() ? (
           <Stack.Screen name={E_ROUTE.AUTH} component={AuthScreen} />
         ) : (
@@ -34,19 +38,19 @@ const App = observer(() => {
               name={E_ROUTE.HOME}
               component={HomeScreen}
               options={{
-                headerShown: E_NAV_OPTION.SHOWN === "true",
+                headerShown: E_NAV_OPTION.SHOWN,
                 title: E_APP.NAME,
               }}
             />
             <Stack.Screen
               name={E_ROUTE.CART}
               component={CartScreen}
-              options={{ headerShown: E_NAV_OPTION.SHOWN === "true" }}
+              options={{ headerShown: E_NAV_OPTION.SHOWN }}
             />
             <Stack.Screen
               name={E_ROUTE.CHAT}
               component={ChatScreen}
-              options={{ headerShown: E_NAV_OPTION.SHOWN === "true" }}
+              options={{ headerShown: E_NAV_OPTION.SHOWN }}
             />
           </>
         )}
