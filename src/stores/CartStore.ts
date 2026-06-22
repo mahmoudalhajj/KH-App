@@ -123,7 +123,6 @@ export class CartStore {
     const name = this.itemName.get().trim();
     const price = Number(this.itemPrice.get());
     const quantity = Number(this.itemQuantity.get());
-    const id = nextCartId++;
 
     if (!name || !this.itemPrice.get() || !this.itemQuantity.get()) {
       this.setError(E_CART_ERROR.ALL_VALUES_REQUIRED);
@@ -155,8 +154,9 @@ export class CartStore {
           this.setError(E_CART_ERROR.QUANTITY_EXCEEDS_MAX);
         }
       } else {
+        const id = nextCartId++;
         this.cart.set(id, {
-          id: id,
+          id,
           name,
           price,
           quantity,
@@ -173,7 +173,10 @@ export class CartStore {
   };
 
   storeCart = () => {
-    localStorageStore.storageSet(this.storageKey, Array.from(this.cart.values()));
+    localStorageStore.storageSet(
+      this.storageKey,
+      Array.from(this.cart.values()),
+    );
   };
 
   loadStoredCart = () => {

@@ -1,5 +1,6 @@
 import { E_AUTH_CONSTRAINTS, E_CART_CONSTRAINTS } from "../enums/designTokens";
 import { User } from "../types/user";
+import { message } from "../types/message";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_REGEX =
@@ -60,14 +61,22 @@ export const isValidQuantity = (quantity: number): boolean => {
   }
   return quantity <= E_CART_CONSTRAINTS.MAX_QUANTITY;
 };
-
-export const isValidUser = (data: unknown) => {
-  const UserData = data as User;
+export const isValidUser = (data: User) => {
   return (
-    typeof UserData === "object" &&
-    UserData !== null &&
-    typeof UserData.id === "number" &&
-    typeof UserData.name === "string" &&
-    typeof UserData.email === "string"
+    typeof data === "object" &&
+    data !== null &&
+    typeof data.id === "number" &&
+    typeof data.name === "string" &&
+    typeof data.email === "string"
+  );
+};
+
+export const isValidMessage = (data: message) => {
+  return (
+    typeof data === "object" &&
+    data !== null &&
+    typeof data.id === "number" &&
+    typeof data.text === "string" &&
+    typeof data.sender === "string"
   );
 };

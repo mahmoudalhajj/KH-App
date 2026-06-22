@@ -6,6 +6,7 @@ import { localStorageStore } from "./LocalStorageStore";
 import { E_STORAGE_KEY } from "../enums/StorageKeys";
 import { E_DATE_FORMAT, LANGUAGE_LOCALE } from "../enums/language";
 import { i18nStore } from "./i18nStore";
+import { isValidMessage } from "../helpers/validator";
 
 let nextMessageId = 1;
 
@@ -71,18 +72,19 @@ export class MessageStore {
     localStorageStore.storageSet(this.storageKey, this.getAllMessages());
   }
 
-  loadStoredMessages() {
+  loadStoredMessages = () => {
     const stored = localStorageStore.storageGet(this.storageKey);
-    if (!stored) return;
+    if (!Array.isArray(stored)) return;
+
     runInAction(() => {
-      stored.forEach((message: message) => {
-        this.messages.set(message.id, message);
-        if (message.id >= nextMessageId) {
-          nextMessageId = message.id + 1;
+      stored.filter(isValidMessage).forEach((validatedMessage) => {
+        this.messages.set(validatedMessage.id, validatedMessage);
+        if (validatedMessage.id >= nextMessageId) {
+          nextMessageId = validatedMessage.id + 1;
         }
       });
     });
-  }
+  };
 
   setUserId = (userId: number | null) => {
     this.storageKey = userId

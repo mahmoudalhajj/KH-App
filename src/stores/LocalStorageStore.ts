@@ -30,6 +30,9 @@ class LocalStorageStore {
 
   storageClearForUser = (userId: number | null): void => {
     try {
+      if (userId === null) {
+        return;
+      }
       const Id = `_${userId}`;
       const keysToDelete = storage.getAllKeys().filter((key) => {
         return key.endsWith(Id);

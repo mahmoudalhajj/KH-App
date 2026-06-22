@@ -11,6 +11,7 @@ import {
   isValidUsername,
   isValidUser,
 } from "../helpers/validator";
+import { getCartStore } from "./getCartStore";
 
 let nextUserId = 1;
 
@@ -113,6 +114,7 @@ export class AuthStore {
       this.name.set("");
     });
     localStorageStore.storageClearForUser(userId);
+    getCartStore.cache.clear?.();
   };
 
   getIsLoggedIn = () => {
