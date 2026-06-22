@@ -1,7 +1,7 @@
 import { createMMKV } from "react-native-mmkv";
 import { E_LOG_ERROR } from "../enums/strings";
 
-export const storage = createMMKV();
+const storage = createMMKV();
 
 class LocalStorageStore {
   storageGet = (key: string) => {
