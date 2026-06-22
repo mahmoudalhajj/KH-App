@@ -8,23 +8,17 @@ import {
   isValidPrice,
   isValidQuantity,
 } from "../helpers/validator";
+
 export class CartStore {
   storageKey: string = E_STORAGE_KEY.CART;
-
   cart = observable.map<number, CartItem>();
   itemName = observable.box<string>("");
   itemPrice = observable.box<string>("");
   itemQuantity = observable.box<string>("");
   error = observable.box<string>("");
 
-  setError = (value: string) => {
-    runInAction(() => {
-      this.error.set(value);
-    });
-  };
-
   getTotalPrice = computed(() => {
-    const CartValues = Array.from(this.cart.values());
+    const CartValues = this.cart.values();
     const reducedValues = CartValues.reduce(
       (total, item) => total + item.price * item.quantity,
       0,
@@ -40,6 +34,12 @@ export class CartStore {
     );
     return reducedValues;
   });
+
+  setError = (value: string) => {
+    runInAction(() => {
+      this.error.set(value);
+    });
+  };
 
   setItemPrice = (price: string) => {
     runInAction(() => {
@@ -65,14 +65,7 @@ export class CartStore {
     });
   };
 
-  storeCart() {
-    localStorageStore.storageSet(
-      this.storageKey,
-      Array.from(this.cart.values()),
-    );
-  }
-
-  setCartItem(item: CartItem) {
+  setCartItem = (item: CartItem) => {
     runInAction(() => {
       const existingItem = this.cart.get(item.id);
 
@@ -93,7 +86,7 @@ export class CartStore {
         this.setError(E_CART_ERROR.INVALID_PRICE_QUANTITY);
       }
     });
-  }
+  };
 
   removeItem = (itemId: number) => {
     runInAction(() => {
@@ -115,19 +108,6 @@ export class CartStore {
 
   showAllItems = () => {
     return Array.from(this.cart.values());
-  };
-
-  loadStoredCart = () => {
-    const stored = localStorageStore.storageGet(this.storageKey);
-    if (!Array.isArray(stored)) {
-      return;
-    }
-
-    runInAction(() => {
-      stored.forEach((entry) => {
-        this.cart.set(entry.id, entry);
-      });
-    });
   };
 
   addItem = () => {
@@ -180,7 +160,25 @@ export class CartStore {
       this.storeCart();
     });
   };
-  setUserId(userId: number | null) {
+
+  storeCart = () => {
+    localStorageStore.storageSet(this.storageKey, this.cart);
+  };
+
+  loadStoredCart = () => {
+    const stored = localStorageStore.storageGet(this.storageKey);
+    if (!Array.isArray(stored)) {
+      return;
+    }
+
+    runInAction(() => {
+      stored.forEach((entry) => {
+        this.cart.set(entry.id, entry);
+      });
+    });
+  };
+
+  setUserId = (userId: number | null) => {
     this.storageKey = `${E_STORAGE_KEY.CART}_${userId}`;
-  }
+  };
 }

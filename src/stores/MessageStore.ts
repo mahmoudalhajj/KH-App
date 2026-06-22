@@ -1,4 +1,4 @@
-import { observable, runInAction } from "mobx";
+import { observable, runInAction, computed } from "mobx";
 import { Keyboard } from "react-native";
 import { message } from "../types/message";
 import { E_MESSAGE_SENDER } from "../enums/MessageSender";
@@ -6,7 +6,6 @@ import { localStorageStore } from "./LocalStorageStore";
 import { E_STORAGE_KEY } from "../enums/StorageKeys";
 import { E_DATE_FORMAT, LANGUAGE_LOCALE } from "../enums/language";
 import { i18nStore } from "./i18nStore";
-
 export class MessageStore {
   storageKey: string = E_STORAGE_KEY.MESSAGES;
   messages = observable.map<number, message>();
@@ -33,7 +32,7 @@ export class MessageStore {
   };
 
   getAllMessages = () => {
-    return Array.from(this.messages.values());
+    return this.messages;
   };
 
   formatCreatedAt = (createdAt: Date | string) => {
