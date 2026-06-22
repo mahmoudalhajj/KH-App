@@ -35,7 +35,7 @@ export class MessageStore {
   };
 
   getAllMessages = () => {
-    return this.messages;
+    return Array.from(this.messages.values());
   };
 
   formatCreatedAt = (createdAt: Date | string) => {

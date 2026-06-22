@@ -173,7 +173,7 @@ export class CartStore {
   };
 
   storeCart = () => {
-    localStorageStore.storageSet(this.storageKey, this.cart);
+    localStorageStore.storageSet(this.storageKey, Array.from(this.cart.values()));
   };
 
   loadStoredCart = () => {
@@ -194,7 +194,7 @@ export class CartStore {
 
   setUserId = (userId: number | null) => {
     this.storageKey = userId
-      ? `${E_STORAGE_KEY.MESSAGES}_${userId}`
-      : E_STORAGE_KEY.MESSAGES;
+      ? `${E_STORAGE_KEY.CART}_${userId}`
+      : E_STORAGE_KEY.CART;
   };
 }
