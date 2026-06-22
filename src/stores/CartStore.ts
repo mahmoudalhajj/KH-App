@@ -193,6 +193,8 @@ export class CartStore {
   };
 
   setUserId = (userId: number | null) => {
-    this.storageKey = `${E_STORAGE_KEY.CART}_${userId}`;
+    this.storageKey = userId
+      ? `${E_STORAGE_KEY.MESSAGES}_${userId}`
+      : E_STORAGE_KEY.MESSAGES;
   };
 }
