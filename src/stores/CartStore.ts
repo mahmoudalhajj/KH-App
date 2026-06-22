@@ -27,7 +27,7 @@ export class CartStore {
   });
 
   getTotalItems = computed(() => {
-    const CartValues = Array.from(this.cart.values());
+    const CartValues = this.cart.values();
     const reducedValues = CartValues.reduce(
       (total, item) => total + item.quantity,
       0,
@@ -106,10 +106,6 @@ export class CartStore {
     });
   };
 
-  showAllItems = () => {
-    return Array.from(this.cart.values());
-  };
-
   addItem = () => {
     const name = this.itemName.get().trim();
     const price = Number(this.itemPrice.get());
@@ -137,12 +133,12 @@ export class CartStore {
     }
 
     runInAction(() => {
-      const existingItem = Array.from(this.cart.values()).find(
-        (item) => item.name === name,
-      );
+      const existingItem = this.cart
+        .values()
+        .find((item) => item.name === name);
 
       if (existingItem) {
-        existingItem.quantity += quantity;
+        this.setCartItemQuantity(existingItem, quantity);
       } else {
         this.cart.set(id, {
           id: id,
@@ -155,7 +151,7 @@ export class CartStore {
       this.itemName.set("");
       this.itemPrice.set("");
       this.itemQuantity.set("");
-      this.error.set("");
+      this.setError("");
 
       this.storeCart();
     });
