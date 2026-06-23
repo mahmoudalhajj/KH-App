@@ -111,6 +111,5 @@ export const E_LAYOUT = {
 } as const;
 
 export const E_KEYBOARD = {
-  BEHAVIOR_IOS: "padding" as const,
-  BEHAVIOR_ANDROID: "height" as const,
+  BEHAVIOR: "padding" as const,
 } as const;

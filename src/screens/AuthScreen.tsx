@@ -3,11 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
-  KeyboardAvoidingView,
   ScrollView,
   TouchableOpacity,
   Platform,
 } from "react-native";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { observer } from "mobx-react-lite";
 import { authStore } from "../stores/AuthStore";
 import { E_COLORS } from "../enums/color";

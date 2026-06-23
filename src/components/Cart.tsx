@@ -1,11 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import {
-  Platform,
-  ScrollView,
-  StyleSheet,
-  KeyboardAvoidingView,
-} from "react-native";
+import { Platform, ScrollView, StyleSheet } from "react-native";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { i18nStore } from "../stores/i18nStore";
 import ScreenContainer from "./common/ScreenContainer";
 import { TranslationKey } from "../i18n/translationKeys";

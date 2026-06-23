@@ -1,13 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
-import {
-  View,
-  FlatList,
-  StyleSheet,
-  Platform,
-  KeyboardAvoidingView,
-} from "react-native";
-import { useHeaderHeight } from "@react-navigation/elements";
+import { View, FlatList, StyleSheet } from "react-native";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 
 import { messageStore } from "../stores/MessageStore";
 import { message } from "../types/message";
@@ -17,27 +11,24 @@ import ChatEmptyState from "../components/chatting/ChatEmptyState";
 import ChatInput from "../components/chatting/ChatInput";
 import ChatList from "../components/chatting/ChatList";
 import { E_COLORS } from "../enums/color";
-import { E_LAYOUT } from "../enums/designTokens";
-import ScreenContainer from "./common/ScreenContainer";
+import { E_LAYOUT, E_KEYBOARD, E_UI } from "../enums/designTokens";
 
 const Chatting = observer(() => {
   const messages = messageStore.getAllMessages();
   const flatListRef = useRef<FlatList<message>>(null);
-  const headerHeight = useHeaderHeight();
 
   useEffect(() => {
     messageStore.loadStoredMessages();
   }, []);
 
   return (
-    <ScreenContainer style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: E_LAYOUT.FLEX_1 }}
-        keyboardVerticalOffset={Platform.OS === "ios" ? headerHeight : 0}
-      >
+    <KeyboardAvoidingView
+      behavior={E_KEYBOARD.BEHAVIOR}
+      style={styles.keyboardView}
+      keyboardVerticalOffset={E_UI.KEYBOARD_VERTICAL_OFFSET}
+    >
+      <View style={styles.container}>
         <ChatHeader />
-
         <View style={styles.listWrapper}>
           {messages.length === 0 ? (
             <ChatEmptyState />
@@ -45,15 +36,18 @@ const Chatting = observer(() => {
             <ChatList listRef={flatListRef} />
           )}
         </View>
-
         <ChatInput />
-      </KeyboardAvoidingView>
-    </ScreenContainer>
+      </View>
+    </KeyboardAvoidingView>
   );
 });
 
 const styles = StyleSheet.create({
+  keyboardView: {
+    flex: E_LAYOUT.FLEX_1,
+  },
   container: {
+    flex: E_LAYOUT.FLEX_1,
     backgroundColor: E_COLORS.BACKGROUND,
   },
   listWrapper: {

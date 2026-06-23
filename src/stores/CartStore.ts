@@ -21,7 +21,7 @@ export class CartStore {
   error = observable.box<string>("");
 
   getTotalPrice = computed(() => {
-    const CartValues = this.cart.values();
+    const CartValues = Array.from(this.cart.values());
     const reducedValues = CartValues.reduce(
       (total, item) => total + item.price * item.quantity,
       0,
@@ -30,7 +30,7 @@ export class CartStore {
   });
 
   getTotalItems = computed(() => {
-    const CartValues = this.cart.values();
+    const CartValues = Array.from(this.cart.values());
     const reducedValues = CartValues.reduce(
       (total, item) => total + item.quantity,
       0,

@@ -31,8 +31,6 @@ export class MessageStore {
       this.storeMessages();
       this.draft.set("");
     });
-
-    Keyboard.dismiss();
   };
 
   getAllMessages = () => {
