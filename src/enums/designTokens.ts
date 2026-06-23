@@ -14,6 +14,7 @@ export enum E_CART_CONSTRAINTS {
 export enum E_FONT_SIZE {
   XS = 11,
   S = 14,
+  SEND = 15,
   M = 16,
   L = 17,
   XL = 22,
@@ -80,11 +81,18 @@ export enum E_UI {
   CHAT_INPUT_MAX_HEIGHT = 120,
   SEND_BUTTON_MIN_WIDTH = 90,
   LINE_HEIGHT = 20,
+  INPUT_PADDING_V = 14,
+  INPUT_PADDING_H = 18,
+  COMPACT_PADDING = 10,
+  TIGHT_PADDING_V = 6,
+  SEND_BUTTON_PADDING_H = 22,
+  KEYBOARD_VERTICAL_OFFSET = 0,
 }
 
 export const E_UI_STRING = {
   CARD_WIDTH_PERCENT: "46%",
   BUBBLE_MAX_WIDTH_PERCENT: "85%",
+  FULL_WIDTH: "100%",
 } as const;
 
 export const E_LAYOUT = {
@@ -99,4 +107,10 @@ export const E_LAYOUT = {
   STRETCH: "stretch",
   RELATIVE: "relative",
   ABSOLUTE: "absolute",
+  AUTO: "auto",
+} as const;
+
+export const E_KEYBOARD = {
+  BEHAVIOR_IOS: "padding" as const,
+  BEHAVIOR_ANDROID: "height" as const,
 } as const;
