@@ -9,7 +9,8 @@ import { TranslationKey } from "../../i18n/translationKeys";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
 import { themeStore } from "../../stores/ThemeStore";
-import { E_FONT_SIZE, E_FONT_WEIGHT, E_SPACING, E_BORDER_RADIUS, E_LAYOUT } from "../../enums/designTokens";
+import { E_FONT_SIZE, E_FONT_WEIGHT, E_SPACING, E_BORDER_RADIUS, E_LAYOUT, E_UI } from "../../enums/designTokens";
+import { E_APP } from "../../enums/strings";
 
 export const CartStats = observer(() => {
   const cartStore = getCartStore(authStore.getUserId());
@@ -29,7 +30,7 @@ export const CartStats = observer(() => {
           {i18nStore.translate(TranslationKey.TOTAL_PRICE)}
         </DynamicText>
         <DynamicText style={styles.statValue}>
-          ${cartStore.getTotalPrice.get()}
+          {E_APP.CURRENCY_SYMBOL}{cartStore.getTotalPrice.get()}
         </DynamicText>
       </DynamicView>
     </DynamicView>
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   },
   statItem: {
     alignItems: E_LAYOUT.CENTER,
-    paddingVertical: E_SPACING.M - 2,
+    paddingVertical: E_UI.COMPACT_PADDING,
   },
   statValue: {
     fontSize: E_FONT_SIZE.XL,

@@ -81,9 +81,9 @@ const styles = StyleSheet.create({
     fontSize: E_FONT_SIZE.XS,
   },
   clearButton: {
-    marginLeft: "auto",
+    marginLeft: E_LAYOUT.AUTO,
     paddingHorizontal: E_SPACING.M,
-    paddingVertical: E_SPACING.XS + 2,
+    paddingVertical: E_UI.TIGHT_PADDING_V,
   },
   clearButtonText: {
     color: E_COLORS.ON_DARK,

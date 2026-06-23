@@ -8,6 +8,7 @@ import {
   E_SPACING,
   E_BORDER_RADIUS,
   E_BORDER_WIDTH,
+  E_UI_STRING,
 } from "../../enums/designTokens";
 
 interface AppTextInputProps extends TextInputProps {}
@@ -29,7 +30,7 @@ const AppTextInput = observer((props: AppTextInputProps) => {
 
 const styles = StyleSheet.create({
   input: {
-    width: "100%",
+    width: E_UI_STRING.FULL_WIDTH,
     backgroundColor: E_COLORS.BACKGROUND,
     borderRadius: E_BORDER_RADIUS.L,
     paddingVertical: E_SPACING.S + 6,

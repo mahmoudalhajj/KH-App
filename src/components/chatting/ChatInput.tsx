@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     alignItems: E_LAYOUT.CENTER,
     gap: E_SPACING.M,
     paddingHorizontal: E_SPACING.L,
-    paddingVertical: E_SPACING.S + 2,
+    paddingVertical: E_UI.COMPACT_PADDING,
     borderTopWidth: E_BORDER_WIDTH.DEFAULT,
     borderTopColor: E_COLORS.CHAT_INPUT,
     backgroundColor: E_COLORS.BACKGROUND,
@@ -63,14 +63,14 @@ const styles = StyleSheet.create({
     borderColor: E_COLORS.BORDER,
     borderRadius: E_BORDER_RADIUS.XXL,
     paddingHorizontal: E_SPACING.L,
-    paddingVertical: E_SPACING.M - 2,
+    paddingVertical: E_UI.COMPACT_PADDING,
     fontSize: E_FONT_SIZE.M,
     backgroundColor: E_COLORS.INPUT_FILL,
     maxHeight: E_UI.CHAT_INPUT_MAX_HEIGHT,
   },
   sendButton: {
     backgroundColor: E_COLORS.SECONDARY,
-    paddingHorizontal: E_SPACING.XL + 2,
+    paddingHorizontal: E_UI.SEND_BUTTON_PADDING_H,
     paddingVertical: E_SPACING.M,
     borderRadius: E_BORDER_RADIUS.XL,
     minWidth: E_UI.SEND_BUTTON_MIN_WIDTH,
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   sendButtonText: {
     color: E_COLORS.BACKGROUND,
     fontWeight: E_FONT_WEIGHT.BOLD,
-    fontSize: E_FONT_SIZE.M - 1,
+    fontSize: E_FONT_SIZE.SEND,
   },
 });
 

@@ -35,26 +35,14 @@ export class I18nStore {
   };
   loadStoredLanguage = () => {
     try {
-      return localStorageStore.storageGet(this.storageKey);
+      const stored = localStorageStore.storageGet(this.storageKey);
+      if (!stored) {
+        return;
+      }
+      return stored;
     } catch {
       return DEFAULT_LANGUAGE;
     }
   };
-
-  //  const stored = localStorageStore.storageGet(this.storageKey);
-  //     if (!Array.isArray(stored)) {
-  //       return;
-  //     }
-
-  //     runInAction(() => {
-  //       stored.forEach((entry) => {
-  //         this.cart.set(entry.id, entry);
-  //         if (entry.id >= nextCartId) {
-  //           nextCartId = entry.id + 1;
-  //         }
-  //       });
-  //     });
-  //   };
 }
-
 export const i18nStore = new I18nStore();

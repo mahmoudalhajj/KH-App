@@ -42,7 +42,7 @@ const MessageBubble = observer(
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: "100%",
+    width: E_UI_STRING.FULL_WIDTH,
     marginBottom: E_SPACING.M,
   },
   bubble: {

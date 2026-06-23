@@ -2,6 +2,7 @@ export enum E_APP {
   NAME = "Khattabat",
   DEFAULT_USER_NAME = "User",
   CHAT_AVATAR_INITIAL = "C",
+  CURRENCY_SYMBOL = "$",
 }
 
 export enum E_ICON {
