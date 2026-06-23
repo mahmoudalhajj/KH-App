@@ -7,6 +7,7 @@ import { E_STORAGE_KEY } from "../enums/StorageKeys";
 import { localStorageStore } from "./LocalStorageStore";
 
 export class I18nStore {
+  storageKey: string = E_STORAGE_KEY.LANGUAGE;
   currentLanguage = observable.box<Language>(DEFAULT_LANGUAGE);
 
   getLanguage = () => {
@@ -32,6 +33,28 @@ export class I18nStore {
     const lang = this.getLanguage();
     return translations[key]?.[lang] ?? translations[key].en;
   };
+  loadStoredLanguage = () => {
+    try {
+      return localStorageStore.storageGet(this.storageKey);
+    } catch {
+      return DEFAULT_LANGUAGE;
+    }
+  };
+
+  //  const stored = localStorageStore.storageGet(this.storageKey);
+  //     if (!Array.isArray(stored)) {
+  //       return;
+  //     }
+
+  //     runInAction(() => {
+  //       stored.forEach((entry) => {
+  //         this.cart.set(entry.id, entry);
+  //         if (entry.id >= nextCartId) {
+  //           nextCartId = entry.id + 1;
+  //         }
+  //       });
+  //     });
+  //   };
 }
 
 export const i18nStore = new I18nStore();
