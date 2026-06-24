@@ -219,6 +219,11 @@ export const translations = {
     fr: "Email/Mot de passe invalide",
     ar: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
   },
+  [TranslationKey.ERROR_NO_CREDENTIALS]: {
+    en: "email and password are required.",
+    fr: "L’adresse e-mail et le mot de passe sont obligatoires.",
+    ar: "البريد الإلكتروني وكلمة المرور مطلوبان.",
+  },
 
   [TranslationKey.ERROR_ALL_FIELDS_REQUIRED]: {
     en: "All fields are required.",

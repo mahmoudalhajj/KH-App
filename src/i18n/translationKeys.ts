@@ -34,6 +34,7 @@ export enum TranslationKey {
   CLEAR_CART_CONFIRM = "clear_cart_confirm",
   CANCEL = "cancel",
   ERROR_INVALID_CREDENTIALS = "error_invalid_credentials",
+  ERROR_NO_CREDENTIALS = "error_no_credentials",
   ERROR_ALL_FIELDS_REQUIRED = "error_all_fields_required",
   ERROR_AUTH_EMAIL_TOO_LONG = "error_auth_email_too_long",
   ERROR_AUTH_INVALID_EMAIL = "error_auth_invalid_email",

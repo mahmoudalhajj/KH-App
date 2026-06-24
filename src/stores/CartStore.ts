@@ -134,17 +134,27 @@ export class CartStore {
     }
 
     const nameError = validateItemName(name);
-    if (nameError) { this.setError(nameError); return; }
+    if (nameError) {
+      this.setError(nameError);
+      return;
+    }
 
     const priceError = validatePrice(price);
-    if (priceError) { this.setError(priceError); return; }
+    if (priceError) {
+      this.setError(priceError);
+      return;
+    }
 
     const quantityError = validateQuantity(quantity);
-    if (quantityError) { this.setError(quantityError); return; }
+    if (quantityError) {
+      this.setError(quantityError);
+      return;
+    }
 
     runInAction(() => {
-      const existingItem = Array.from(this.cart.values())
-        .find((item) => item.name === name);
+      const existingItem = Array.from(this.cart.values()).find(
+        (item) => item.name === name,
+      );
 
       if (existingItem) {
         if (!this.setCartItemQuantity(existingItem.id, quantity)) {

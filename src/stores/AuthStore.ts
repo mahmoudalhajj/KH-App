@@ -46,7 +46,7 @@ export class AuthStore {
 
     if (!email || !password) {
       runInAction(() => {
-        this.error.set(TranslationKey.ERROR_INVALID_CREDENTIALS);
+        this.error.set(TranslationKey.ERROR_NO_CREDENTIALS);
       });
       return;
     }
@@ -88,13 +88,22 @@ export class AuthStore {
     }
 
     const nameError = validateUsername(trimmedName);
-    if (nameError) { runInAction(() => this.error.set(nameError)); return; }
+    if (nameError) {
+      runInAction(() => this.error.set(nameError));
+      return;
+    }
 
     const emailError = validateEmail(trimmedEmail);
-    if (emailError) { runInAction(() => this.error.set(emailError)); return; }
+    if (emailError) {
+      runInAction(() => this.error.set(emailError));
+      return;
+    }
 
     const passwordError = validatePassword(trimmedPassword);
-    if (passwordError) { runInAction(() => this.error.set(passwordError)); return; }
+    if (passwordError) {
+      runInAction(() => this.error.set(passwordError));
+      return;
+    }
 
     runInAction(() => {
       const user: User = {
