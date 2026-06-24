@@ -86,7 +86,7 @@ export enum E_UI {
   COMPACT_PADDING = 10,
   TIGHT_PADDING_V = 6,
   SEND_BUTTON_PADDING_H = 22,
-  KEYBOARD_VERTICAL_OFFSET = 0,
+  KEYBOARD_VERTICAL_OFFSET = 99,
 }
 
 export const E_UI_STRING = {
@@ -111,5 +111,6 @@ export const E_LAYOUT = {
 } as const;
 
 export const E_KEYBOARD = {
-  BEHAVIOR: "padding" as const,
+  BEHAVIOR_IOS: "padding",
+  BEHAVIOR_ANDROID: "height",
 } as const;

@@ -1,6 +1,7 @@
 import { E_AUTH_CONSTRAINTS, E_CART_CONSTRAINTS } from "../enums/designTokens";
 import { User } from "../types/user";
 import { message } from "../types/message";
+import { CartItem } from "../types/cartItem";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_REGEX =
@@ -68,6 +69,21 @@ export const isValidUser = (data: User) => {
     typeof data.id === "number" &&
     typeof data.name === "string" &&
     typeof data.email === "string"
+  );
+};
+
+export const isValidCartItem = (data: CartItem): boolean => {
+  return (
+    typeof data === "object" &&
+    data !== null &&
+    typeof data.id === "number" &&
+    typeof data.name === "string" &&
+    typeof data.price === "number" &&
+    !isNaN(data.price) &&
+    data.price > 0 &&
+    typeof data.quantity === "number" &&
+    Number.isInteger(data.quantity) &&
+    data.quantity > 0
   );
 };
 

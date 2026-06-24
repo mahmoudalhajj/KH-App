@@ -1,9 +1,8 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { Platform, ScrollView, StyleSheet } from "react-native";
-import { KeyboardAvoidingView } from "react-native-keyboard-controller";
+import { ScrollView, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { i18nStore } from "../stores/i18nStore";
-import ScreenContainer from "./common/ScreenContainer";
 import { TranslationKey } from "../i18n/translationKeys";
 import { DynamicText } from "./common/DynamicText";
 import { CartStats } from "./cart/CartStats";
@@ -19,31 +18,31 @@ import {
 
 const CartSummary = observer(() => {
   return (
-    <ScreenContainer>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: E_LAYOUT.FLEX_1 }}
+    <SafeAreaView style={styles.container} edges={["bottom"]}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+        automaticallyAdjustKeyboardInsets={true}
       >
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          keyboardShouldPersistTaps="handled"
-        >
-          <DynamicText style={styles.header}>
-            {i18nStore.translate(TranslationKey.CART_SUMMARY)}
-          </DynamicText>
+        <DynamicText style={styles.header}>
+          {i18nStore.translate(TranslationKey.CART_SUMMARY)}
+        </DynamicText>
 
-          <CartStats />
-          <CartForm />
-          <CartFooter />
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </ScreenContainer>
+        <CartStats />
+        <CartForm />
+        <CartFooter />
+      </ScrollView>
+    </SafeAreaView>
   );
 });
 
 const styles = StyleSheet.create({
-  scrollContent: {
+  container: {
     flex: E_LAYOUT.FLEX_1,
+    backgroundColor: E_COLORS.BACKGROUND,
+  },
+  scrollContent: {
+    flexGrow: E_LAYOUT.FLEX_1,
     paddingHorizontal: E_SPACING.XXL,
     paddingVertical: E_SPACING.XXXL,
   },

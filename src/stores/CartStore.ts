@@ -8,6 +8,7 @@ import {
   isValidItemName,
   isValidPrice,
   isValidQuantity,
+  isValidCartItem,
 } from "../helpers/validator";
 
 let nextCartId = 1;
@@ -152,6 +153,7 @@ export class CartStore {
       if (existingItem) {
         if (!this.setCartItemQuantity(existingItem.id, quantity)) {
           this.setError(E_CART_ERROR.QUANTITY_EXCEEDS_MAX);
+          return;
         }
       } else {
         const id = nextCartId++;
@@ -186,7 +188,7 @@ export class CartStore {
     }
 
     runInAction(() => {
-      stored.forEach((entry) => {
+      stored.filter(isValidCartItem).forEach((entry) => {
         this.cart.set(entry.id, entry);
         if (entry.id >= nextCartId) {
           nextCartId = entry.id + 1;

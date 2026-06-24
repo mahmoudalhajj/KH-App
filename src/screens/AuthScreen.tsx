@@ -6,8 +6,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Platform,
+  KeyboardAvoidingView,
 } from "react-native";
-import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { observer } from "mobx-react-lite";
 import { authStore } from "../stores/AuthStore";
 import { E_COLORS } from "../enums/color";
@@ -25,8 +25,10 @@ import {
   E_SHADOW,
   E_ELEVATION,
   E_LAYOUT,
+  E_KEYBOARD,
 } from "../enums/designTokens";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { E_PLATFORMS } from "../enums/platforms";
 
 export const AuthScreen = observer(() => {
   const isRegistering = authStore.isRegistering.get();
@@ -35,7 +37,11 @@ export const AuthScreen = observer(() => {
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         style={styles.keyboardView}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior={
+          Platform.OS === E_PLATFORMS.IOS
+            ? E_KEYBOARD.BEHAVIOR_IOS
+            : E_KEYBOARD.BEHAVIOR_ANDROID
+        }
       >
         <ScrollView
           contentContainerStyle={styles.scrollContent}

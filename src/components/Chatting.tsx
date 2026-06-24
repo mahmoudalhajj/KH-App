@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
 import { View, FlatList, StyleSheet } from "react-native";
-import { KeyboardAvoidingView } from "react-native-keyboard-controller";
+import { KeyboardAvoidingView } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { messageStore } from "../stores/MessageStore";
 import { message } from "../types/message";
@@ -16,6 +17,7 @@ import { E_LAYOUT, E_KEYBOARD, E_UI } from "../enums/designTokens";
 const Chatting = observer(() => {
   const messages = messageStore.getAllMessages();
   const flatListRef = useRef<FlatList<message>>(null);
+  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     messageStore.loadStoredMessages();
@@ -23,11 +25,11 @@ const Chatting = observer(() => {
 
   return (
     <KeyboardAvoidingView
-      behavior={E_KEYBOARD.BEHAVIOR}
+      behavior={E_KEYBOARD.BEHAVIOR_IOS}
       style={styles.keyboardView}
       keyboardVerticalOffset={E_UI.KEYBOARD_VERTICAL_OFFSET}
     >
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingBottom: insets.bottom }]}>
         <ChatHeader />
         <View style={styles.listWrapper}>
           {messages.length === 0 ? (
