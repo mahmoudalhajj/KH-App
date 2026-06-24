@@ -53,7 +53,7 @@ export const CartForm = observer(() => {
 
       {cartStore.error.get() && (
         <DynamicText style={styles.errorText}>
-          {cartStore.error.get()}
+          {i18nStore.translate(cartStore.error.get() as TranslationKey)}
         </DynamicText>
       )}
 

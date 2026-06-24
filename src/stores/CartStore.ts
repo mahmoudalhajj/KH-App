@@ -2,8 +2,8 @@ import { CartItem } from "../types/cartItem";
 import { computed, observable, runInAction } from "mobx";
 import { localStorageStore } from "./LocalStorageStore";
 import { E_STORAGE_KEY } from "../enums/StorageKeys";
-import { E_CART_ERROR } from "../enums/cartErrors";
 import { E_CART_CONSTRAINTS } from "../enums/designTokens";
+import { TranslationKey } from "../i18n/translationKeys";
 import {
   isValidItemName,
   isValidPrice,
@@ -19,7 +19,7 @@ export class CartStore {
   itemName = observable.box<string>("");
   itemPrice = observable.box<string>("");
   itemQuantity = observable.box<string>("");
-  error = observable.box<string>("");
+  error = observable.box<TranslationKey | "">("");
 
   getTotalPrice = computed(() => {
     const CartValues = Array.from(this.cart.values());
@@ -39,7 +39,7 @@ export class CartStore {
     return reducedValues;
   });
 
-  setError = (value: string) => {
+  setError = (value: TranslationKey | "") => {
     runInAction(() => {
       this.error.set(value);
     });
@@ -84,7 +84,7 @@ export class CartStore {
         if (this.setCartItemQuantity(existingItem.id, item.quantity)) {
           this.storeCart();
         } else {
-          this.setError(E_CART_ERROR.QUANTITY_EXCEEDS_MAX);
+          this.setError(TranslationKey.ERROR_CART_QUANTITY_EXCEEDS_MAX);
         }
         return;
       }
@@ -97,7 +97,7 @@ export class CartStore {
         this.cart.set(item.id, item);
         this.storeCart();
       } else {
-        this.setError(E_CART_ERROR.INVALID_PRICE_QUANTITY);
+        this.setError(TranslationKey.ERROR_CART_INVALID_PRICE_QUANTITY);
       }
     });
   };
@@ -126,22 +126,22 @@ export class CartStore {
     const quantity = Number(this.itemQuantity.get());
 
     if (!name || !this.itemPrice.get() || !this.itemQuantity.get()) {
-      this.setError(E_CART_ERROR.ALL_VALUES_REQUIRED);
+      this.setError(TranslationKey.ERROR_CART_ALL_VALUES_REQUIRED);
       return;
     }
 
     if (!isValidItemName(name)) {
-      this.setError(E_CART_ERROR.NAME_TOO_LONG);
+      this.setError(TranslationKey.ERROR_CART_NAME_TOO_LONG);
       return;
     }
 
     if (!isValidPrice(price)) {
-      this.setError(E_CART_ERROR.PRICE_EXCEEDS_MAX);
+      this.setError(TranslationKey.ERROR_CART_PRICE_EXCEEDS_MAX);
       return;
     }
 
     if (!isValidQuantity(quantity)) {
-      this.setError(E_CART_ERROR.QUANTITY_EXCEEDS_MAX);
+      this.setError(TranslationKey.ERROR_CART_QUANTITY_EXCEEDS_MAX);
       return;
     }
 
@@ -152,7 +152,7 @@ export class CartStore {
 
       if (existingItem) {
         if (!this.setCartItemQuantity(existingItem.id, quantity)) {
-          this.setError(E_CART_ERROR.QUANTITY_EXCEEDS_MAX);
+          this.setError(TranslationKey.ERROR_CART_QUANTITY_EXCEEDS_MAX);
           return;
         }
       } else {

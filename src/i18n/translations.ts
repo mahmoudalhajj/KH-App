@@ -212,4 +212,64 @@ export const translations = {
     fr: "Annuler",
     ar: "إلغاء",
   },
+
+  [TranslationKey.ERROR_INVALID_CREDENTIALS]: {
+    en: "Invalid Email/Password",
+    fr: "Email/Mot de passe invalide",
+    ar: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+  },
+
+  [TranslationKey.ERROR_ALL_FIELDS_REQUIRED]: {
+    en: "All fields are required.",
+    fr: "Tous les champs sont obligatoires.",
+    ar: "جميع الحقول مطلوبة.",
+  },
+
+  [TranslationKey.ERROR_INVALID_EMAIL]: {
+    en: "Please enter a valid email address.",
+    fr: "Veuillez entrer une adresse e-mail valide.",
+    ar: "يرجى إدخال بريد إلكتروني صحيح.",
+  },
+
+  [TranslationKey.ERROR_PASSWORD_TOO_SHORT]: {
+    en: "Password must be at least 6 characters.",
+    fr: "Le mot de passe doit contenir au moins 6 caractères.",
+    ar: "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
+  },
+
+  [TranslationKey.ERROR_CART_ALL_VALUES_REQUIRED]: {
+    en: "All values required.",
+    fr: "Toutes les valeurs sont requises.",
+    ar: "جميع القيم مطلوبة.",
+  },
+
+  [TranslationKey.ERROR_CART_INVALID_PRICE_QUANTITY]: {
+    en: "Price and quantity must be greater than zero.",
+    fr: "Le prix et la quantité doivent être supérieurs à zéro.",
+    ar: "يجب أن يكون السعر والكمية أكبر من صفر.",
+  },
+
+  [TranslationKey.ERROR_CART_NAME_TOO_LONG]: {
+    en: "Item name must be 50 characters or fewer.",
+    fr: "Le nom de l'article doit contenir 50 caractères ou moins.",
+    ar: "يجب ألا يتجاوز اسم العنصر 50 حرفاً.",
+  },
+
+  [TranslationKey.ERROR_CART_PRICE_EXCEEDS_MAX]: {
+    en: "Price cannot exceed 999,999.",
+    fr: "Le prix ne peut pas dépasser 999 999.",
+    ar: "لا يمكن أن يتجاوز السعر 999,999.",
+  },
+
+  [TranslationKey.ERROR_CART_QUANTITY_EXCEEDS_MAX]: {
+    en: "Quantity cannot exceed 99.",
+    fr: "La quantité ne peut pas dépasser 99.",
+    ar: "لا يمكن أن تتجاوز الكمية 99.",
+  },
+
+  [TranslationKey.ERROR_CART_QUANTITY_MIN]: {
+    en: "Quantity must be at least 1.",
+    fr: "La quantité doit être d'au moins 1.",
+    ar: "يجب أن تكون الكمية 1 على الأقل.",
+  },
 };

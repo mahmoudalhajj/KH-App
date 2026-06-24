@@ -110,7 +110,9 @@ export const AuthScreen = observer(() => {
             </View>
 
             {!!authStore.error.get() && (
-              <Text style={styles.errorText}>{authStore.error.get()}</Text>
+              <Text style={styles.errorText}>
+                {i18nStore.translate(authStore.error.get() as TranslationKey)}
+              </Text>
             )}
 
             <AppButton
@@ -120,6 +122,7 @@ export const AuthScreen = observer(() => {
                   : i18nStore.translate(TranslationKey.LOGIN)
               }
               onPress={authStore.handleAuth}
+              disabled={authStore.isLoading.get()}
               style={styles.mainButton}
             />
 

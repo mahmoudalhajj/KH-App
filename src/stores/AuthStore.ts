@@ -3,8 +3,8 @@ import { User } from "../types/user";
 import { localStorageStore } from "./LocalStorageStore";
 import { E_AUTH_STATUS } from "../enums/authStatus";
 import { E_STORAGE_KEY } from "../enums/StorageKeys";
-import { E_AUTH_ERROR } from "../enums/authErrors";
 import { E_APP } from "../enums/strings";
+import { TranslationKey } from "../i18n/translationKeys";
 import {
   isValidEmail,
   isValidPassword,
@@ -18,18 +18,24 @@ let nextUserId = 1;
 export class AuthStore {
   user = observable.box<User | null>(null);
   status = observable.box<E_AUTH_STATUS>(E_AUTH_STATUS.LOGGED_OUT);
-  error = observable.box<string>("");
+  error = observable.box<TranslationKey | "">("");
   email = observable.box<string>("");
   password = observable.box<string>("");
   name = observable.box<string>("");
   isRegistering = observable.box<boolean>(false);
+  isLoading = observable.box<boolean>(false);
 
   handleAuth = () => {
+    if (this.isLoading.get()) return;
+    runInAction(() => this.isLoading.set(true));
+
     if (this.isRegistering.get()) {
       this.register();
     } else {
       this.login();
     }
+
+    runInAction(() => this.isLoading.set(false));
   };
 
   login = () => {
@@ -38,14 +44,14 @@ export class AuthStore {
 
     if (!email || !password) {
       runInAction(() => {
-        this.error.set(E_AUTH_ERROR.INVALID_CREDENTIALS);
+        this.error.set(TranslationKey.ERROR_INVALID_CREDENTIALS);
       });
       return;
     }
 
     if (!isValidEmail(email) || !isValidPassword(password)) {
       runInAction(() => {
-        this.error.set(E_AUTH_ERROR.INVALID_CREDENTIALS);
+        this.error.set(TranslationKey.ERROR_INVALID_CREDENTIALS);
       });
       return;
     }
@@ -74,21 +80,21 @@ export class AuthStore {
 
     if (!isValidUsername(trimmedName)) {
       runInAction(() => {
-        this.error.set(E_AUTH_ERROR.ALL_FIELDS_REQUIRED);
+        this.error.set(TranslationKey.ERROR_ALL_FIELDS_REQUIRED);
       });
       return;
     }
 
     if (!isValidEmail(trimmedEmail)) {
       runInAction(() => {
-        this.error.set(E_AUTH_ERROR.INVALID_EMAIL);
+        this.error.set(TranslationKey.ERROR_INVALID_EMAIL);
       });
       return;
     }
 
     if (!isValidPassword(trimmedPassword)) {
       runInAction(() => {
-        this.error.set(E_AUTH_ERROR.PASSWORD_TOO_SHORT);
+        this.error.set(TranslationKey.ERROR_PASSWORD_TOO_SHORT);
       });
       return;
     }
@@ -145,7 +151,6 @@ export class AuthStore {
     if (!stored) return;
 
     if (!isValidUser(stored)) {
-      localStorageStore.storageClear();
       return;
     }
 
