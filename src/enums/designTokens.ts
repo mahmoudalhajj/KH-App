@@ -119,6 +119,6 @@ export const E_LAYOUT = {
 export const E_KEYBOARD = {
   BEHAVIOR_IOS: "padding",
   BEHAVIOR_ANDROID: "height",
-  VERTICAL_OFFSET: 110,
+  VERTICAL_OFFSET: 107,
   PERSIST_TAPS: "handled",
 } as const;
