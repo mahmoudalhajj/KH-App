@@ -33,8 +33,8 @@ export class AuthStore {
   };
 
   login = () => {
-    const email = this.email.get();
-    const password = this.password.get();
+    const email = this.email.get().trim();
+    const password = this.password.get().trim();
 
     if (!email || !password) {
       runInAction(() => {
@@ -60,6 +60,9 @@ export class AuthStore {
       this.user.set(user);
       this.status.set(E_AUTH_STATUS.LOGGED_IN);
       this.error.set("");
+      this.email.set("");
+      this.password.set("");
+      this.name.set("");
       this.storeUser();
     });
   };

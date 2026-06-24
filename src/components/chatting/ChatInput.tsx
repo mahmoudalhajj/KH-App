@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import { TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
 import { DynamicView } from "../common/DynamicView";
@@ -20,9 +16,11 @@ import {
   E_BORDER_WIDTH,
   E_UI,
   E_LAYOUT,
+  E_OPACITY,
 } from "../../enums/designTokens";
 
 const ChatInput = observer(() => {
+  const isEmptyInput = messageStore.getDraft().trim().length === 0;
   return (
     <DynamicView row style={styles.inputRow}>
       <TextInput
@@ -36,8 +34,9 @@ const ChatInput = observer(() => {
       />
 
       <TouchableOpacity
-        style={styles.sendButton}
+        style={[styles.sendButton, { opacity: isEmptyInput ? E_OPACITY.DISABLED : E_OPACITY.FULL }]}
         onPress={messageStore.sendMessages}
+        disabled={isEmptyInput}
       >
         <DynamicText style={styles.sendButtonText}>
           {i18nStore.translate(TranslationKey.CHAT_SEND)}

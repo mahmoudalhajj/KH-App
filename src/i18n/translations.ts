@@ -194,4 +194,22 @@ export const translations = {
     fr: "Mot de passe",
     ar: "كلمة المرور",
   },
+
+  [TranslationKey.CLEAR_CART_TITLE]: {
+    en: "Clear Cart",
+    fr: "Vider le panier",
+    ar: "إفراغ السلة",
+  },
+
+  [TranslationKey.CLEAR_CART_CONFIRM]: {
+    en: "Are you sure? This will remove all items.",
+    fr: "Êtes-vous sûr ? Cela supprimera tous les articles.",
+    ar: "هل أنت متأكد؟ سيتم حذف جميع العناصر.",
+  },
+
+  [TranslationKey.CANCEL]: {
+    en: "Cancel",
+    fr: "Annuler",
+    ar: "إلغاء",
+  },
 };

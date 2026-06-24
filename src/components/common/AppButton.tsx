@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { E_COLORS } from "../../enums/color";
-import { E_FONT_SIZE, E_FONT_WEIGHT, E_SPACING, E_BORDER_RADIUS, E_LAYOUT, E_UI } from "../../enums/designTokens";
+import { E_FONT_SIZE, E_FONT_WEIGHT, E_SPACING, E_BORDER_RADIUS, E_LAYOUT, E_UI, E_OPACITY } from "../../enums/designTokens";
 
 interface AppButtonProps {
   title: string;
@@ -47,10 +47,10 @@ const styles = StyleSheet.create({
     fontSize: E_FONT_SIZE.L,
   },
   disabled: {
-    opacity: 0.5,
+    opacity: E_OPACITY.DISABLED,
   },
   disabledText: {
-    opacity: 0.7,
+    opacity: E_OPACITY.DISABLED_TEXT,
   },
 });
 export default AppButton;

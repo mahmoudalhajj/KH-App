@@ -30,4 +30,7 @@ export enum TranslationKey {
   FULL_NAME = "full_name",
   EMAIL_ADDRESS = "email_address",
   PASSWORD_LABEL = "password_label",
+  CLEAR_CART_TITLE = "clear_cart_title",
+  CLEAR_CART_CONFIRM = "clear_cart_confirm",
+  CANCEL = "cancel",
 }

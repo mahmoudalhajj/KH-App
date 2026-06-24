@@ -1,3 +1,9 @@
+export enum E_OPACITY {
+  FULL = 1,
+  DISABLED = 0.5,
+  DISABLED_TEXT = 0.7,
+}
+
 export enum E_AUTH_CONSTRAINTS {
   MAX_EMAIL_LENGTH = 254,
   MIN_PASSWORD_LENGTH = 6,
