@@ -1,10 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { StyleSheet } from "react-native";
-import {
-  KeyboardAwareScrollView,
-  KeyboardStickyView,
-} from "react-native-keyboard-controller";
+import { ScrollView, StyleSheet, Platform } from "react-native";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { i18nStore } from "../stores/i18nStore";
 import { TranslationKey } from "../i18n/translationKeys";
@@ -20,26 +17,34 @@ import {
   E_LAYOUT,
   E_KEYBOARD,
 } from "../enums/designTokens";
+import { E_PLATFORMS } from "../enums/platforms";
 
 const CartSummary = observer(() => {
   return (
     <SafeAreaView style={styles.container} edges={["bottom"]}>
-      <KeyboardAwareScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps={E_KEYBOARD.PERSIST_TAPS}
-        bottomOffset={E_KEYBOARD.BOTTOM_OFFSET}
+      <KeyboardAvoidingView
+        behavior={
+          Platform.OS === E_PLATFORMS.IOS
+            ? E_KEYBOARD.BEHAVIOR_IOS
+            : E_KEYBOARD.BEHAVIOR_ANDROID
+        }
+        keyboardVerticalOffset={E_KEYBOARD.VERTICAL_OFFSET}
+        style={styles.keyboardView}
       >
-        <DynamicText style={styles.header}>
-          {i18nStore.translate(TranslationKey.CART_SUMMARY)}
-        </DynamicText>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps={E_KEYBOARD.PERSIST_TAPS}
+        >
+          <DynamicText style={styles.header}>
+            {i18nStore.translate(TranslationKey.CART_SUMMARY)}
+          </DynamicText>
 
-        <CartStats />
-        <CartForm />
-      </KeyboardAwareScrollView>
+          <CartStats />
+          <CartForm />
+        </ScrollView>
 
-      <KeyboardStickyView>
         <CartActions />
-      </KeyboardStickyView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 });
@@ -48,6 +53,9 @@ const styles = StyleSheet.create({
   container: {
     flex: E_LAYOUT.FLEX_1,
     backgroundColor: E_COLORS.BACKGROUND,
+  },
+  keyboardView: {
+    flex: E_LAYOUT.FLEX_1,
   },
   scrollContent: {
     flexGrow: E_LAYOUT.FLEX_1,
