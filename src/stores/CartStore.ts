@@ -9,6 +9,9 @@ import {
   isValidPrice,
   isValidQuantity,
   isValidCartItem,
+  validateItemName,
+  validatePrice,
+  validateQuantity,
 } from "../helpers/validator";
 
 let nextCartId = 1;
@@ -84,7 +87,7 @@ export class CartStore {
         if (this.setCartItemQuantity(existingItem.id, item.quantity)) {
           this.storeCart();
         } else {
-          this.setError(TranslationKey.ERROR_CART_QUANTITY_EXCEEDS_MAX);
+          this.setError(TranslationKey.ERROR_CART_QUANTITY_TOO_HIGH);
         }
         return;
       }
@@ -130,46 +133,33 @@ export class CartStore {
       return;
     }
 
-    if (!isValidItemName(name)) {
-      this.setError(TranslationKey.ERROR_CART_NAME_TOO_LONG);
-      return;
-    }
+    const nameError = validateItemName(name);
+    if (nameError) { this.setError(nameError); return; }
 
-    if (!isValidPrice(price)) {
-      this.setError(TranslationKey.ERROR_CART_PRICE_EXCEEDS_MAX);
-      return;
-    }
+    const priceError = validatePrice(price);
+    if (priceError) { this.setError(priceError); return; }
 
-    if (!isValidQuantity(quantity)) {
-      this.setError(TranslationKey.ERROR_CART_QUANTITY_EXCEEDS_MAX);
-      return;
-    }
+    const quantityError = validateQuantity(quantity);
+    if (quantityError) { this.setError(quantityError); return; }
 
     runInAction(() => {
-      const existingItem = this.cart
-        .values()
+      const existingItem = Array.from(this.cart.values())
         .find((item) => item.name === name);
 
       if (existingItem) {
         if (!this.setCartItemQuantity(existingItem.id, quantity)) {
-          this.setError(TranslationKey.ERROR_CART_QUANTITY_EXCEEDS_MAX);
+          this.setError(TranslationKey.ERROR_CART_QUANTITY_TOO_HIGH);
           return;
         }
       } else {
         const id = nextCartId++;
-        this.cart.set(id, {
-          id,
-          name,
-          price,
-          quantity,
-        });
+        this.cart.set(id, { id, name, price, quantity });
       }
 
       this.itemName.set("");
       this.itemPrice.set("");
       this.itemQuantity.set("");
       this.setError("");
-
       this.storeCart();
     });
   };

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
 import { View, FlatList, StyleSheet, Platform } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 
 import { messageStore } from "../stores/MessageStore";
@@ -23,7 +24,7 @@ const Chatting = observer(() => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={["bottom"]}>
       <ChatHeader />
       <KeyboardAvoidingView
         behavior={
@@ -43,7 +44,7 @@ const Chatting = observer(() => {
           <ChatInput />
         </View>
       </KeyboardAvoidingView>
-    </View>
+    </SafeAreaView>
   );
 });
 

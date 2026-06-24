@@ -8,8 +8,10 @@ import { TranslationKey } from "../i18n/translationKeys";
 import {
   isValidEmail,
   isValidPassword,
-  isValidUsername,
   isValidUser,
+  validateEmail,
+  validatePassword,
+  validateUsername,
 } from "../helpers/validator";
 import { getCartStore } from "./getCartStore";
 
@@ -78,26 +80,21 @@ export class AuthStore {
     const trimmedEmail = this.email.get().trim();
     const trimmedPassword = this.password.get().trim();
 
-    if (!isValidUsername(trimmedName)) {
+    if (!trimmedName || !trimmedEmail || !trimmedPassword) {
       runInAction(() => {
         this.error.set(TranslationKey.ERROR_ALL_FIELDS_REQUIRED);
       });
       return;
     }
 
-    if (!isValidEmail(trimmedEmail)) {
-      runInAction(() => {
-        this.error.set(TranslationKey.ERROR_INVALID_EMAIL);
-      });
-      return;
-    }
+    const nameError = validateUsername(trimmedName);
+    if (nameError) { runInAction(() => this.error.set(nameError)); return; }
 
-    if (!isValidPassword(trimmedPassword)) {
-      runInAction(() => {
-        this.error.set(TranslationKey.ERROR_PASSWORD_TOO_SHORT);
-      });
-      return;
-    }
+    const emailError = validateEmail(trimmedEmail);
+    if (emailError) { runInAction(() => this.error.set(emailError)); return; }
+
+    const passwordError = validatePassword(trimmedPassword);
+    if (passwordError) { runInAction(() => this.error.set(passwordError)); return; }
 
     runInAction(() => {
       const user: User = {

@@ -123,6 +123,7 @@ export const translations = {
     fr: "Discuter",
     ar: "المحادثة",
   },
+
   [TranslationKey.HOME_DESCRIPTION]: {
     en: "Use the navigation bar to access the cart, chat.",
     fr: "Naviguez à l'aide de la barre de navigation pour consulter le panier, le chat.",
@@ -225,16 +226,34 @@ export const translations = {
     ar: "جميع الحقول مطلوبة.",
   },
 
-  [TranslationKey.ERROR_INVALID_EMAIL]: {
+  [TranslationKey.ERROR_AUTH_EMAIL_TOO_LONG]: {
+    en: "Email address is too long.",
+    fr: "L'adresse e-mail est trop longue.",
+    ar: "البريد الإلكتروني طويل جداً.",
+  },
+
+  [TranslationKey.ERROR_AUTH_INVALID_EMAIL]: {
     en: "Please enter a valid email address.",
     fr: "Veuillez entrer une adresse e-mail valide.",
     ar: "يرجى إدخال بريد إلكتروني صحيح.",
   },
 
-  [TranslationKey.ERROR_PASSWORD_TOO_SHORT]: {
+  [TranslationKey.ERROR_AUTH_PASSWORD_TOO_LONG]: {
+    en: "Password is too long.",
+    fr: "Le mot de passe est trop long.",
+    ar: "كلمة المرور طويلة جداً.",
+  },
+
+  [TranslationKey.ERROR_AUTH_PASSWORD_TOO_SHORT]: {
     en: "Password must be at least 6 characters.",
     fr: "Le mot de passe doit contenir au moins 6 caractères.",
     ar: "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
+  },
+
+  [TranslationKey.ERROR_AUTH_NAME_TOO_LONG]: {
+    en: "Name must be 100 characters or fewer.",
+    fr: "Le nom doit contenir 100 caractères ou moins.",
+    ar: "يجب ألا يتجاوز الاسم 100 حرف.",
   },
 
   [TranslationKey.ERROR_CART_ALL_VALUES_REQUIRED]: {
@@ -249,19 +268,25 @@ export const translations = {
     ar: "يجب أن يكون السعر والكمية أكبر من صفر.",
   },
 
+  [TranslationKey.ERROR_CART_INVALID_VALUE]: {
+    en: "Please enter a valid value.",
+    fr: "Veuillez entrer une valeur valide.",
+    ar: "يرجى إدخال قيمة صحيحة.",
+  },
+
   [TranslationKey.ERROR_CART_NAME_TOO_LONG]: {
     en: "Item name must be 50 characters or fewer.",
     fr: "Le nom de l'article doit contenir 50 caractères ou moins.",
     ar: "يجب ألا يتجاوز اسم العنصر 50 حرفاً.",
   },
 
-  [TranslationKey.ERROR_CART_PRICE_EXCEEDS_MAX]: {
+  [TranslationKey.ERROR_CART_PRICE_TOO_HIGH]: {
     en: "Price cannot exceed 999,999.",
     fr: "Le prix ne peut pas dépasser 999 999.",
     ar: "لا يمكن أن يتجاوز السعر 999,999.",
   },
 
-  [TranslationKey.ERROR_CART_QUANTITY_EXCEEDS_MAX]: {
+  [TranslationKey.ERROR_CART_QUANTITY_TOO_HIGH]: {
     en: "Quantity cannot exceed 99.",
     fr: "La quantité ne peut pas dépasser 99.",
     ar: "لا يمكن أن تتجاوز الكمية 99.",
