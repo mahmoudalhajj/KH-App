@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
-import { View, FlatList, StyleSheet } from "react-native";
-import { KeyboardAvoidingView } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { View, FlatList, StyleSheet, Platform } from "react-native";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 
 import { messageStore } from "../stores/MessageStore";
 import { message } from "../types/message";
@@ -12,47 +11,51 @@ import ChatEmptyState from "../components/chatting/ChatEmptyState";
 import ChatInput from "../components/chatting/ChatInput";
 import ChatList from "../components/chatting/ChatList";
 import { E_COLORS } from "../enums/color";
-import { E_LAYOUT, E_KEYBOARD, E_UI } from "../enums/designTokens";
+import { E_LAYOUT, E_KEYBOARD } from "../enums/designTokens";
+import { E_PLATFORMS } from "../enums/platforms";
 
 const Chatting = observer(() => {
   const messages = messageStore.getAllMessages();
   const flatListRef = useRef<FlatList<message>>(null);
-  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     messageStore.loadStoredMessages();
   }, []);
 
   return (
-    <KeyboardAvoidingView
-      behavior={E_KEYBOARD.BEHAVIOR_IOS}
-      style={styles.keyboardView}
-      keyboardVerticalOffset={E_UI.KEYBOARD_VERTICAL_OFFSET}
-    >
-      <View style={[styles.container, { paddingBottom: insets.bottom }]}>
-        <ChatHeader />
-        <View style={styles.listWrapper}>
+    <View style={styles.container}>
+      <ChatHeader />
+      <KeyboardAvoidingView
+        behavior={
+          Platform.OS === E_PLATFORMS.IOS
+            ? E_KEYBOARD.BEHAVIOR_IOS
+            : E_KEYBOARD.BEHAVIOR_ANDROID
+        }
+        keyboardVerticalOffset={E_KEYBOARD.VERTICAL_OFFSET}
+        style={styles.keyboardView}
+      >
+        <View style={styles.content}>
           {messages.length === 0 ? (
             <ChatEmptyState />
           ) : (
             <ChatList listRef={flatListRef} />
           )}
+          <ChatInput />
         </View>
-        <ChatInput />
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </View>
   );
 });
 
 const styles = StyleSheet.create({
-  keyboardView: {
-    flex: E_LAYOUT.FLEX_1,
-  },
   container: {
     flex: E_LAYOUT.FLEX_1,
     backgroundColor: E_COLORS.BACKGROUND,
   },
-  listWrapper: {
+  keyboardView: {
+    flex: E_LAYOUT.FLEX_1,
+  },
+  content: {
     flex: E_LAYOUT.FLEX_1,
   },
 });

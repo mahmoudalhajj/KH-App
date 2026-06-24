@@ -7,11 +7,15 @@ import { i18nStore } from "../../stores/i18nStore";
 import { E_COLORS } from "../../enums/color";
 import { TranslationKey } from "../../i18n/translationKeys";
 import AppTextInput from "../common/AppTextInput";
-import AppButton from "../common/AppButton";
 import { DynamicView } from "../common/DynamicView";
 import { DynamicText } from "../common/DynamicText";
 import { themeStore } from "../../stores/ThemeStore";
-import { E_FONT_SIZE, E_FONT_WEIGHT, E_SPACING, E_LAYOUT } from "../../enums/designTokens";
+import {
+  E_FONT_SIZE,
+  E_FONT_WEIGHT,
+  E_SPACING,
+  E_LAYOUT,
+} from "../../enums/designTokens";
 import { E_TEXT_ALIGN } from "../../enums/direction";
 
 export const CartForm = observer(() => {
@@ -56,19 +60,13 @@ export const CartForm = observer(() => {
           {i18nStore.translate(cartStore.error.get() as TranslationKey)}
         </DynamicText>
       )}
-
-      <AppButton
-        title={i18nStore.translate(TranslationKey.ADD_TO_CART)}
-        onPress={cartStore.addItem}
-        style={styles.addButton}
-      />
     </View>
   );
 });
 
 const styles = StyleSheet.create({
   form: {
-    marginBottom: E_SPACING.XXXXL,
+    marginBottom: E_SPACING.M,
   },
   inputRow: {
     justifyContent: E_LAYOUT.SPACE_BETWEEN,
@@ -81,9 +79,6 @@ const styles = StyleSheet.create({
   quantityInputWrapper: {
     flex: E_LAYOUT.FLEX_1,
     marginStart: E_SPACING.S,
-  },
-  addButton: {
-    marginTop: E_SPACING.L,
   },
   errorText: {
     color: E_COLORS.ERROR,

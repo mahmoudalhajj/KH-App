@@ -84,6 +84,7 @@ export enum E_UI {
   BADGE_HEIGHT = 24,
   BADGE_PADDING_X = 6,
   BADGE_BORDER_WIDTH = 2,
+  CHAT_HEADER_HEIGHT = 64,
   CHAT_INPUT_MAX_HEIGHT = 120,
   SEND_BUTTON_MIN_WIDTH = 90,
   LINE_HEIGHT = 20,
@@ -92,7 +93,6 @@ export enum E_UI {
   COMPACT_PADDING = 10,
   TIGHT_PADDING_V = 6,
   SEND_BUTTON_PADDING_H = 22,
-  KEYBOARD_VERTICAL_OFFSET = 99,
 }
 
 export const E_UI_STRING = {
@@ -119,4 +119,7 @@ export const E_LAYOUT = {
 export const E_KEYBOARD = {
   BEHAVIOR_IOS: "padding",
   BEHAVIOR_ANDROID: "height",
+  VERTICAL_OFFSET: 110,
+  PERSIST_TAPS: "handled",
+  BOTTOM_OFFSET: 16,
 } as const;

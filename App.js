@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { CartScreen } from "./src/screens/CartScreen";
@@ -28,34 +29,36 @@ const App = observer(() => {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: E_NAV_OPTION.HIDDEN }}>
-        {!authStore.getIsLoggedIn() ? (
-          <Stack.Screen name={E_ROUTE.AUTH} component={AuthScreen} />
-        ) : (
-          <>
-            <Stack.Screen
-              name={E_ROUTE.HOME}
-              component={HomeScreen}
-              options={{
-                headerShown: E_NAV_OPTION.SHOWN,
-                title: E_APP.NAME,
-              }}
-            />
-            <Stack.Screen
-              name={E_ROUTE.CART}
-              component={CartScreen}
-              options={{ headerShown: E_NAV_OPTION.SHOWN }}
-            />
-            <Stack.Screen
-              name={E_ROUTE.CHAT}
-              component={ChatScreen}
-              options={{ headerShown: E_NAV_OPTION.SHOWN }}
-            />
-          </>
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <KeyboardProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: E_NAV_OPTION.HIDDEN }}>
+          {!authStore.getIsLoggedIn() ? (
+            <Stack.Screen name={E_ROUTE.AUTH} component={AuthScreen} />
+          ) : (
+            <>
+              <Stack.Screen
+                name={E_ROUTE.HOME}
+                component={HomeScreen}
+                options={{
+                  headerShown: E_NAV_OPTION.SHOWN,
+                  title: E_APP.NAME,
+                }}
+              />
+              <Stack.Screen
+                name={E_ROUTE.CART}
+                component={CartScreen}
+                options={{ headerShown: E_NAV_OPTION.SHOWN }}
+              />
+              <Stack.Screen
+                name={E_ROUTE.CHAT}
+                component={ChatScreen}
+                options={{ headerShown: E_NAV_OPTION.SHOWN }}
+              />
+            </>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </KeyboardProvider>
   );
 });
 

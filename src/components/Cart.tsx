@@ -1,28 +1,33 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { ScrollView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import {
+  KeyboardAwareScrollView,
+  KeyboardStickyView,
+} from "react-native-keyboard-controller";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { i18nStore } from "../stores/i18nStore";
 import { TranslationKey } from "../i18n/translationKeys";
 import { DynamicText } from "./common/DynamicText";
 import { CartStats } from "./cart/CartStats";
 import { CartForm } from "./cart/CartForm";
-import { CartFooter } from "./cart/CartFooter";
+import { CartActions } from "./cart/CartActions";
 import { E_COLORS } from "../enums/color";
 import {
   E_FONT_SIZE,
   E_FONT_WEIGHT,
   E_SPACING,
   E_LAYOUT,
+  E_KEYBOARD,
 } from "../enums/designTokens";
 
 const CartSummary = observer(() => {
   return (
     <SafeAreaView style={styles.container} edges={["bottom"]}>
-      <ScrollView
+      <KeyboardAwareScrollView
         contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-        automaticallyAdjustKeyboardInsets={true}
+        keyboardShouldPersistTaps={E_KEYBOARD.PERSIST_TAPS}
+        bottomOffset={E_KEYBOARD.BOTTOM_OFFSET}
       >
         <DynamicText style={styles.header}>
           {i18nStore.translate(TranslationKey.CART_SUMMARY)}
@@ -30,8 +35,11 @@ const CartSummary = observer(() => {
 
         <CartStats />
         <CartForm />
-        <CartFooter />
-      </ScrollView>
+      </KeyboardAwareScrollView>
+
+      <KeyboardStickyView>
+        <CartActions />
+      </KeyboardStickyView>
     </SafeAreaView>
   );
 });

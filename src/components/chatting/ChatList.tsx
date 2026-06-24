@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { message } from "../../types/message";
 import { messageStore } from "../../stores/MessageStore";
 import MessageBubble from "./ChatMessageBubble";
-import { E_SPACING } from "../../enums/designTokens";
+import { E_SPACING, E_LAYOUT } from "../../enums/designTokens";
 
 interface ChatListProps {
   listRef: React.RefObject<FlatList<message> | null>;
@@ -22,7 +22,9 @@ const ChatList = observer(({ listRef }: ChatListProps) => {
       ref={listRef}
       data={messages}
       keyExtractor={(item) => item.id.toString()}
+      style={styles.list}
       contentContainerStyle={styles.messageList}
+      contentInsetAdjustmentBehavior="automatic"
       onContentSizeChange={handleContentSizeChange}
       keyboardShouldPersistTaps="handled"
       renderItem={({ item }) => (
@@ -36,6 +38,9 @@ const ChatList = observer(({ listRef }: ChatListProps) => {
 });
 
 const styles = StyleSheet.create({
+  list: {
+    flex: E_LAYOUT.FLEX_1,
+  },
   messageList: {
     padding: E_SPACING.L,
   },

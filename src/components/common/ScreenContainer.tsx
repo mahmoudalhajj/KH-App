@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, ViewStyle } from "react-native";
-import { KeyboardAvoidingView } from "react-native";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { E_COLORS } from "../../enums/color";
-import { E_LAYOUT, E_KEYBOARD, E_UI } from "../../enums/designTokens";
+import { E_LAYOUT, E_KEYBOARD } from "../../enums/designTokens";
 
 interface ScreenContainerProps {
   children: React.ReactNode;
@@ -15,7 +15,6 @@ const ScreenContainer = ({ children, style }: ScreenContainerProps) => (
     <KeyboardAvoidingView
       behavior={E_KEYBOARD.BEHAVIOR_IOS}
       style={styles.keyboardView}
-      keyboardVerticalOffset={E_UI.KEYBOARD_VERTICAL_OFFSET}
     >
       {children}
     </KeyboardAvoidingView>
