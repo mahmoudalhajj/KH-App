@@ -102,6 +102,9 @@ export class AuthStore {
       this.user.set(user);
       this.status.set(E_AUTH_STATUS.LOGGED_IN);
       this.error.set("");
+      this.email.set("");
+      this.password.set("");
+      this.name.set("");
       this.storeUser();
     });
   };
