@@ -30,14 +30,15 @@ export class AuthStore {
   handleAuth = () => {
     if (this.isLoading.get()) return;
     runInAction(() => this.isLoading.set(true));
-
-    if (this.isRegistering.get()) {
-      this.register();
-    } else {
-      this.login();
+    try {
+      if (this.isRegistering.get()) {
+        this.register();
+      } else {
+        this.login();
+      }
+    } finally {
+      runInAction(() => this.isLoading.set(false));
     }
-
-    runInAction(() => this.isLoading.set(false));
   };
 
   login = () => {
@@ -45,26 +46,26 @@ export class AuthStore {
     const password = this.password.get().trim();
 
     if (!email || !password) {
-      runInAction(() => {
-        this.error.set(TranslationKey.ERROR_NO_CREDENTIALS);
-      });
+      runInAction(() => this.error.set(TranslationKey.ERROR_NO_CREDENTIALS));
       return;
     }
 
     if (!isValidEmail(email) || !isValidPassword(password)) {
-      runInAction(() => {
-        this.error.set(TranslationKey.ERROR_INVALID_CREDENTIALS);
-      });
+      runInAction(() =>
+        this.error.set(TranslationKey.ERROR_INVALID_CREDENTIALS),
+      );
       return;
     }
+
+    const stored = localStorageStore.storageGet(E_STORAGE_KEY.USER);
+    const name = isValidUser(stored) ? stored.name : E_APP.DEFAULT_USER_NAME;
 
     runInAction(() => {
       const user: User = {
         id: nextUserId++,
-        name: this.name.get() || E_APP.DEFAULT_USER_NAME,
-        email: email,
+        name,
+        email,
       };
-
       this.user.set(user);
       this.status.set(E_AUTH_STATUS.LOGGED_IN);
       this.error.set("");

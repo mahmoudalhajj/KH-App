@@ -1,5 +1,6 @@
 import { createMMKV } from "react-native-mmkv";
 import { E_LOG_ERROR } from "../enums/strings";
+import { E_STORAGE_KEY } from "../enums/StorageKeys";
 
 const storage = createMMKV();
 
@@ -28,6 +29,12 @@ class LocalStorageStore {
     } catch {}
   };
 
+  storageRemove = (key: string): void => {
+    try {
+      storage.remove(key);
+    } catch {}
+  };
+
   storageClearForUser = (userId: number | null): void => {
     try {
       if (userId === null) {
@@ -38,6 +45,7 @@ class LocalStorageStore {
         return key.endsWith(Id);
       });
       keysToDelete.forEach((key) => storage.remove(key));
+      this.storageRemove(E_STORAGE_KEY.USER);
     } catch {}
   };
 }

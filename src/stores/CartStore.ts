@@ -74,8 +74,9 @@ export class CartStore {
     if (newQuantity < 1 || newQuantity > E_CART_CONSTRAINTS.MAX_QUANTITY) {
       return false;
     }
-
-    item.quantity = newQuantity;
+    runInAction(() => {
+      item.quantity = newQuantity;
+    });
     return true;
   };
 
@@ -116,9 +117,9 @@ export class CartStore {
     if (this.cart.size === 0) {
       return;
     }
-
     runInAction(() => {
       this.cart.clear();
+      this.setError("");
       this.storeCart();
     });
   };

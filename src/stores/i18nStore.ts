@@ -39,10 +39,9 @@ export class I18nStore {
       if (!stored) {
         return;
       }
-      return stored;
-    } catch {
-      return DEFAULT_LANGUAGE;
-    }
+      this.setLanguage(stored as Language);
+    } catch {}
   };
 }
+
 export const i18nStore = new I18nStore();
