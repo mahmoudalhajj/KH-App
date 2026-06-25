@@ -21,7 +21,7 @@ const AppTextInput = observer(({ ref, ...props }: AppTextInputProps) => {
       {...props}
       style={[styles.input, themeStore.getTextAlign(), props.style]}
       placeholderTextColor={E_COLORS.PLACEHOLDER}
-      autoCapitalize="none"
+      autoCapitalize={props.autoCapitalize ?? "none"}
       returnKeyType={props.returnKeyType ?? "done"}
       textContentType={props.textContentType}
       importantForAutofill={props.importantForAutofill}

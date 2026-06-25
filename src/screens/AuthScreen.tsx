@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
 import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { observer } from "mobx-react-lite";
@@ -30,6 +31,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export const AuthScreen = observer(() => {
   const isRegistering = authStore.isRegistering.get();
+  const PasswordRef = useRef<TextInput>(null);
+  const EmailRef = useRef<TextInput>(null);
 
   return (
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
@@ -66,6 +69,7 @@ export const AuthScreen = observer(() => {
                   autoComplete="name"
                   textContentType="name"
                   importantForAutofill="yes"
+                  onSubmitEditing={() => EmailRef.current?.focus()}
                 />
               </View>
             )}
@@ -83,8 +87,7 @@ export const AuthScreen = observer(() => {
                 autoComplete="email"
                 textContentType="emailAddress"
                 autoCorrect={false}
-                autoCapitalize="none"
-                spellCheck={false}
+                onSubmitEditing={() => PasswordRef.current?.focus()}
               />
             </View>
 

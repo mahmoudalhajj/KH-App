@@ -29,7 +29,7 @@ const ChatInput = observer(() => {
         value={messageStore.getDraft()}
         onChangeText={messageStore.setDraft}
         multiline
-        returnKeyType="send"
+        returnKeyType="default"
         submitBehavior="newline"
       />
 
