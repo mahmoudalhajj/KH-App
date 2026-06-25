@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import { Platform, TextInput, TextInputProps, StyleSheet } from "react-native";
+import { TextInput, TextInputProps, StyleSheet } from "react-native";
 import { E_COLORS } from "../../enums/color";
 import { observer } from "mobx-react-lite";
 import { themeStore } from "../../stores/ThemeStore";
@@ -11,9 +10,14 @@ import {
   E_UI_STRING,
 } from "../../enums/designTokens";
 
-const AppTextInput = observer((props: TextInputProps) => {
+interface AppTextInputProps extends TextInputProps {
+  ref?: React.Ref<TextInput>;
+}
+
+const AppTextInput = observer(({ ref, ...props }: AppTextInputProps) => {
   return (
     <TextInput
+      ref={ref}
       {...props}
       style={[styles.input, themeStore.getTextAlign(), props.style]}
       placeholderTextColor={E_COLORS.PLACEHOLDER}
@@ -25,7 +29,6 @@ const AppTextInput = observer((props: TextInputProps) => {
     />
   );
 });
-
 const styles = StyleSheet.create({
   input: {
     width: E_UI_STRING.FULL_WIDTH,

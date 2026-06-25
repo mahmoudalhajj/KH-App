@@ -20,6 +20,8 @@ import { E_TEXT_ALIGN } from "../../enums/direction";
 
 export const CartForm = observer(() => {
   const cartStore = getCartStore(authStore.getUserId());
+  const priceRef = useRef<TextInput>(null);
+  const quantityRef = useRef<TextInput>(null);
 
   return (
     <View style={styles.form}>
@@ -33,19 +35,23 @@ export const CartForm = observer(() => {
         onChangeText={cartStore.setItemName}
         placeholder={i18nStore.translate(TranslationKey.ITEM_NAME)}
         returnKeyType="next"
+        onSubmitEditing={() => priceRef.current?.focus()}
       />
       <DynamicView row style={styles.inputRow}>
         <View style={styles.priceInputWrapper}>
           <AppTextInput
+            ref={priceRef}
             value={cartStore.itemPrice.get()}
             onChangeText={cartStore.setItemPrice}
             placeholder={i18nStore.translate(TranslationKey.PRICE)}
             keyboardType="numeric"
             returnKeyType="next"
+            onSubmitEditing={() => quantityRef.current?.focus()}
           />
         </View>
         <View style={styles.quantityInputWrapper}>
           <AppTextInput
+            ref={quantityRef}
             value={cartStore.itemQuantity.get()}
             onChangeText={cartStore.setItemQuantity}
             placeholder={i18nStore.translate(TranslationKey.QUANTITY)}
