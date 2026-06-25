@@ -45,6 +45,7 @@ export enum E_SPACING {
   XXXL = 32,
   XXXXL = 40,
   XXXXXL = 48,
+  INPUT_PADDING_V,
 }
 
 export enum E_BORDER_RADIUS {
