@@ -1,5 +1,5 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useRef } from "react";
+import { View, StyleSheet, TextInput } from "react-native";
 import { observer } from "mobx-react-lite";
 import { getCartStore } from "../../stores/getCartStore";
 import { authStore } from "../../stores/AuthStore";

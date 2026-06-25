@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { message } from "../../types/message";
 import { messageStore } from "../../stores/MessageStore";
 import MessageBubble from "./ChatMessageBubble";
-import { E_SPACING, E_LAYOUT } from "../../enums/designTokens";
+import { E_SPACING, E_LAYOUT, E_KEYBOARD } from "../../enums/designTokens";
 
 interface ChatListProps {
   listRef: React.RefObject<FlatList<message> | null>;
@@ -26,7 +26,7 @@ const ChatList = observer(({ listRef }: ChatListProps) => {
       contentContainerStyle={styles.messageList}
       contentInsetAdjustmentBehavior="automatic"
       onContentSizeChange={handleContentSizeChange}
-      keyboardShouldPersistTaps="handled"
+      keyboardShouldPersistTaps={E_KEYBOARD.PERSIST_TAPS}
       renderItem={({ item }) => (
         <MessageBubble
           message={item}

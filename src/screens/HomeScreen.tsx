@@ -23,9 +23,10 @@ import {
   E_UI,
   E_UI_STRING,
   E_LAYOUT,
+  E_OPACITY,
 } from "../enums/designTokens";
 
-const HomeScreenComponent = () => {
+export const HomeScreen = observer(() => {
   const navigation = useNavigation();
   const cartStore = getCartStore(authStore.getUserId());
 
@@ -54,7 +55,7 @@ const HomeScreenComponent = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            activeOpacity={0.7}
+            activeOpacity={E_OPACITY.DISABLED_TEXT}
             style={styles.card}
             onPress={() => navigation.navigate(E_ROUTE.CHAT)}
           >
@@ -82,9 +83,7 @@ const HomeScreenComponent = () => {
       </DynamicView>
     </ScreenContainer>
   );
-};
-
-export const HomeScreen = observer(HomeScreenComponent);
+});
 
 const styles = StyleSheet.create({
   content: {

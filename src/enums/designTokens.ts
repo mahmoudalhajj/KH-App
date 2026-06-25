@@ -121,4 +121,5 @@ export const E_KEYBOARD = {
   BEHAVIOR_ANDROID: "height",
   VERTICAL_OFFSET: 107,
   PERSIST_TAPS: "handled",
+  PERSIST_TAPS_ALWAYS: "always",
 } as const;

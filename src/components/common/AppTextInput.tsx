@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Platform, TextInput, TextInputProps, StyleSheet } from "react-native";
 import { E_COLORS } from "../../enums/color";
 import { observer } from "mobx-react-lite";
@@ -11,9 +11,7 @@ import {
   E_UI_STRING,
 } from "../../enums/designTokens";
 
-interface AppTextInputProps extends TextInputProps {}
-
-const AppTextInput = observer((props: AppTextInputProps) => {
+const AppTextInput = observer((props: TextInputProps) => {
   return (
     <TextInput
       {...props}

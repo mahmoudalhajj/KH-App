@@ -33,7 +33,7 @@ const CartSummary = observer(() => {
       >
         <ScrollView
           contentContainerStyle={styles.scrollContent}
-          keyboardShouldPersistTaps={E_KEYBOARD.PERSIST_TAPS}
+          keyboardShouldPersistTaps={E_KEYBOARD.PERSIST_TAPS_ALWAYS}
         >
           <DynamicText style={styles.header}>
             {i18nStore.translate(TranslationKey.CART_SUMMARY)}

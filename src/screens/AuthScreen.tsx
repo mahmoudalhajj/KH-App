@@ -5,7 +5,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Platform,
 } from "react-native";
 import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { observer } from "mobx-react-lite";
@@ -27,23 +26,16 @@ import {
   E_LAYOUT,
   E_KEYBOARD,
 } from "../enums/designTokens";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-import { E_PLATFORMS } from "../enums/platforms";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export const AuthScreen = observer(() => {
   const isRegistering = authStore.isRegistering.get();
-  const { top } = useSafeAreaInsets();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <KeyboardAvoidingView
         style={styles.keyboardView}
-        behavior={
-          Platform.OS === E_PLATFORMS.IOS
-            ? E_KEYBOARD.BEHAVIOR_IOS
-            : E_KEYBOARD.BEHAVIOR_ANDROID
-        }
-        keyboardVerticalOffset={top}
+        behavior={E_KEYBOARD.BEHAVIOR_IOS}
       >
         <ScrollView
           contentContainerStyle={styles.scrollContent}
@@ -90,8 +82,9 @@ export const AuthScreen = observer(() => {
                 returnKeyType="next"
                 autoComplete="email"
                 textContentType="emailAddress"
-                importantForAutofill="yes"
                 autoCorrect={false}
+                autoCapitalize="none"
+                spellCheck={false}
               />
             </View>
 
@@ -107,7 +100,6 @@ export const AuthScreen = observer(() => {
                 returnKeyType="done"
                 autoComplete="password"
                 textContentType="password"
-                importantForAutofill="yes"
               />
             </View>
 
