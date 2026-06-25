@@ -1,0 +1,49 @@
+import React from "react";
+import { FlatList, StyleSheet } from "react-native";
+import { observer } from "mobx-react-lite";
+import { message } from "../../types/message";
+import { messageStore } from "../../stores/MessageStore";
+import MessageBubble from "./ChatMessageBubble";
+import { E_SPACING, E_LAYOUT, E_KEYBOARD } from "../../enums/designTokens";
+
+interface ChatListProps {
+  listRef: React.RefObject<FlatList<message> | null>;
+}
+
+const ChatList = observer(({ listRef }: ChatListProps) => {
+  const messages = messageStore.getAllMessages();
+
+  const handleContentSizeChange = () => {
+    listRef.current?.scrollToEnd({ animated: true });
+  };
+
+  return (
+    <FlatList
+      ref={listRef}
+      data={messages}
+      keyExtractor={(item) => item.id.toString()}
+      style={styles.list}
+      contentContainerStyle={styles.messageList}
+      contentInsetAdjustmentBehavior="automatic"
+      onContentSizeChange={handleContentSizeChange}
+      keyboardShouldPersistTaps={E_KEYBOARD.PERSIST_TAPS}
+      renderItem={({ item }) => (
+        <MessageBubble
+          message={item}
+          formattedTime={messageStore.formatCreatedAt(item.createdAt)}
+        />
+      )}
+    />
+  );
+});
+
+const styles = StyleSheet.create({
+  list: {
+    flex: E_LAYOUT.FLEX_1,
+  },
+  messageList: {
+    padding: E_SPACING.L,
+  },
+});
+
+export default ChatList;

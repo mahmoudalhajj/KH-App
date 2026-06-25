@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Khattabat_Client_Onboarding",
+    "slug": "Khattabat_Client_Onboarding",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.Khattabat-Client-Onboarding"
+    },
+    "android": {
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.Khattabat_Client_Onboarding"
+    },
+    "web": {}
+  }
+}
