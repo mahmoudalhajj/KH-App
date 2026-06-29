@@ -31,7 +31,7 @@ export class I18nStore {
 
   translate = (key: TranslationKey) => {
     const lang = this.getLanguage();
-    return translations[key]?.[lang] ?? translations[key].en;
+    return translations[key][lang] ?? translations[key].en;
   };
   loadStoredLanguage = () => {
     try {

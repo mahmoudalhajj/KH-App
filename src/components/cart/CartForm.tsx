@@ -25,6 +25,11 @@ export const CartForm = observer(() => {
 
   return (
     <View style={styles.form}>
+      {cartStore.error.get() && (
+        <DynamicText style={styles.errorText}>
+          {i18nStore.translate(cartStore.error.get() as TranslationKey)}
+        </DynamicText>
+      )}
       <DynamicView row>
         <DynamicText style={themeStore.getLabelStyle()}>
           {i18nStore.translate(TranslationKey.ADD_NEW_ITEM)}
@@ -60,12 +65,6 @@ export const CartForm = observer(() => {
           />
         </View>
       </DynamicView>
-
-      {cartStore.error.get() && (
-        <DynamicText style={styles.errorText}>
-          {i18nStore.translate(cartStore.error.get() as TranslationKey)}
-        </DynamicText>
-      )}
     </View>
   );
 });

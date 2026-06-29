@@ -51,11 +51,20 @@ export class AuthStore {
     }
 
     if (!isValidEmail(email) || !isValidPassword(password)) {
-      runInAction(() =>
-        this.error.set(TranslationKey.ERROR_INVALID_CREDENTIALS),
-      );
+      runInAction(() => {
+        this.error.set(TranslationKey.ERROR_INVALID_CREDENTIALS);
+      });
       return;
     }
+
+    // const user = this.user.get();
+    // if (!user) {
+    //   runInAction(() => {
+    //     this.error.set(TranslationKey.ERROR_AUTH_USER_DOESNT_EXIST);
+    //   });
+    //   return;
+    // }
+    // const name = isValidUser(user) ? user.name : E_APP.DEFAULT_USER_NAME;
 
     const stored = localStorageStore.storageGet(E_STORAGE_KEY.USER);
     const name = isValidUser(stored) ? stored.name : E_APP.DEFAULT_USER_NAME;
@@ -79,9 +88,9 @@ export class AuthStore {
   register = () => {
     const trimmedName = this.name.get().trim();
     const trimmedEmail = this.email.get().trim();
-    const trimmedPassword = this.password.get().trim();
+    const Password = this.password.get();
 
-    if (!trimmedName || !trimmedEmail || !trimmedPassword) {
+    if (!trimmedName || !trimmedEmail || !Password) {
       runInAction(() => {
         this.error.set(TranslationKey.ERROR_ALL_FIELDS_REQUIRED);
       });
@@ -100,7 +109,7 @@ export class AuthStore {
       return;
     }
 
-    const passwordError = validatePassword(trimmedPassword);
+    const passwordError = validatePassword(Password);
     if (passwordError) {
       runInAction(() => this.error.set(passwordError));
       return;

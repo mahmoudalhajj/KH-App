@@ -7,6 +7,7 @@ import {
   E_SPACING,
   E_BORDER_RADIUS,
   E_BORDER_WIDTH,
+  E_UI,
   E_UI_STRING,
 } from "../../enums/designTokens";
 
@@ -34,8 +35,8 @@ const styles = StyleSheet.create({
     width: E_UI_STRING.FULL_WIDTH,
     backgroundColor: E_COLORS.BACKGROUND,
     borderRadius: E_BORDER_RADIUS.L,
-    paddingVertical: E_SPACING.INPUT_PADDING_V,
-    paddingHorizontal: E_SPACING.INPUT_PADDING_V,
+    paddingVertical: E_UI.INPUT_PADDING_V,
+    paddingHorizontal: E_UI.INPUT_PADDING_H,
     marginBottom: E_SPACING.M,
     fontSize: E_FONT_SIZE.M,
     color: E_COLORS.TEXT_PRIMARY,

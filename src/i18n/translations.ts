@@ -254,7 +254,6 @@ export const translations = {
     fr: "Le mot de passe doit contenir au moins 6 caractères.",
     ar: "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
   },
-
   [TranslationKey.ERROR_AUTH_NAME_TOO_LONG]: {
     en: "Name must be 100 characters or fewer.",
     fr: "Le nom doit contenir 100 caractères ou moins.",
